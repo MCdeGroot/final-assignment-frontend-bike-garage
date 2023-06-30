@@ -1,5 +1,6 @@
 import React from 'react';
 import './NavBar.css';
+import '../../App.css'
 import {NavLink} from "react-router-dom";
 import logo from "../../assets/bikegaragelogo.png";
 
@@ -7,37 +8,42 @@ import logo from "../../assets/bikegaragelogo.png";
 function NavBar({isAuth}) {
     return (
         <>
-            <div>    {/*outercontainer*/}
-                <nav>
-                    <NavLink to="/"><img src={logo} alt=""/></NavLink>
+            <div className='outer-container navbar'>    {/*outercontainer*/}
+                <nav className='inner-container navbar-items'>
+                    <div className='navbar-logo'>
+                        <NavLink to="/dashboard"><img className='logo' src={logo} alt=""/></NavLink>
+                        <h1>BikeGarage</h1>
+                    </div>
                     {isAuth &&
                         <>
                             <ul>
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/"><h3>Dashboard</h3>
+                                        to="/dashboard"><h2>Dashboard</h2>
                                     </NavLink>
                                 </li>
+                                <li className='separation-line'></li>
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/bikes"><h3>Bikes</h3>
+                                        to="/bikes"><h2>Bikes</h2>
                                     </NavLink>
                                 </li>
+                                <li className='separation-line'></li>
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/parts"><h3>Gear</h3>
+                                        to="/gear"><h2>Gear</h2>
                                     </NavLink>
                                 </li>
                             </ul>
                             <ul>
-                                <NavLink to="/profile"><img src={logo} alt=""/></NavLink>
+                                <NavLink to="/profile"><img className='logo' src={logo} alt=""/></NavLink>
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/"><h3>Uitloggen</h3>
+                                        to="/login"><h2>Uitloggen</h2>
                                     </NavLink>
                                 </li>
                             </ul>
@@ -49,7 +55,7 @@ function NavBar({isAuth}) {
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/"><h3>Registreren</h3>
+                                        to="/signup"><h2>Registreren</h2>
                                     </NavLink>
                                 </li>
                             </ul>
