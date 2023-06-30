@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
+import Footer from "./components/footer/Footer";
 import {Route, Routes, Navigate} from "react-router-dom";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/bikes" element={isAuth ? <Bikes/> : <Navigate to="/login"/>}/>
                 <Route path="/gear" element={isAuth ? <Gear/> : <Navigate to="/login"/>}/>
             </Routes>
+            <Footer></Footer>
         </>
     );
 }
