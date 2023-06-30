@@ -1,38 +1,81 @@
-.App {
-  text-align: center;
+/* ------------------------------- 1. Global Styles -------------------------------- */
+
+/* ------------------------------- fonts -------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* ------------------------------- properties -------------------------------- */
+:root {
+    /*colors*/
+
+    --color-primary-background: hsla(30, 43%, 97%, 1);
+    --color-primary-blue: hsla(194, 75%, 39%, 1);
+    --color-primary-blue-hover: hsla(194, 75%, 39%, 0.75);
+    --color-beforehover-grey: hsla(196, 8%, 28%, 1);
+    --color-primary-delete: hsla(352, 68%, 55%, 1);
+    --color-black: hsl(0, 0%, 16%);
+    --color-white: hsl(0, 0%, 100%);
+
+    --font-body: 'Poppins', sans-serif;
+    --font-header: 'Poppins', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+
+body {
+    font-family: var(--font-body);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-header);
+    font-style: normal;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+    font-size: 2.5rem;
+    color: var(--color-primary-blue);
+    font-style: normal;
+    font-weight: 500;
 }
 
-.App-link {
-  color: #61dafb;
+h2{
+    font-size: 1.25rem;
+    color: var(--color-black);
+    font-weight: 400;
+}
+h3{
+    font-size: 1.25rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+p {
+    font-size: 1rem;
 }
+
+ul {
+     list-style: none;
+ }
+
+.outer-container{
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.inner-container{
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 1200px; /*1200px gepakt volgens deze website https://van-ons.nl/blog/visueel-ontwerp/specificaties-van-een-goed-webdesign/*/
+    padding: 1rem;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
+

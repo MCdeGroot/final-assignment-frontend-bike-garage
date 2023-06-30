@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
+import NavBar from './components/NavBar/NavBar';
+import {Route, Routes, Navigate} from "react-router-dom";
+import Login from "./pages/login/Login";
+import SignUp from "./pages/signup/SignUp";
+import Profile from "./pages/profile/Profile"
+import Dashboard from "./pages/dashboard/Dashboard";
+import Bikes from "./pages/bikes/Bikes";
+import Gear from "./pages/gear/Gear";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    function logClick(){
+        toggleIsAuth(!isAuth);
+        console.log(isAuth);
+        console.log('You clicked!');
+
+    }
+
+    const [isAuth, toggleIsAuth] = useState(true); // Initial state is set to true
+
+    return (
+        <>
+
+            <NavBar isAuth={isAuth}></NavBar>
+            <button type="button" onClick={logClick}> log in </button>
+            <Routes>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/signup" element={<SignUp/>}/>
+                <Route path="/profile" element={isAuth ? <Profile/> : <Navigate to="/login"/>}/>
+                <Route path="/dashboard" element={isAuth ? <Dashboard/> : <Navigate to="/login"/>}/>
+                <Route path="/bikes" element={isAuth ? <Bikes/> : <Navigate to="/login"/>}/>
+                <Route path="/gear" element={isAuth ? <Gear/> : <Navigate to="/login"/>}/>
+            </Routes>
+        </>
+    );
 }
 
 export default App;
