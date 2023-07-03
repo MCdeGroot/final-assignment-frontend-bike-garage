@@ -19,8 +19,6 @@
     --font-header: 'Poppins', sans-serif;
 }
 
-
-
 body {
     font-family: var(--font-body);
 }
@@ -54,6 +52,10 @@ ul {
      list-style: none;
  }
 
+main{
+    height: 80vh;
+}
+
 .outer-container{
     max-width: 100%;
     display: flex;
@@ -64,6 +66,7 @@ ul {
 .inner-container{
     display: flex;
     flex-direction: column;
+    align-items: center;
     flex: 0 1 1200px; /*1200px gepakt volgens deze website https://van-ons.nl/blog/visueel-ontwerp/specificaties-van-een-goed-webdesign/*/
     padding: 1rem;
 }

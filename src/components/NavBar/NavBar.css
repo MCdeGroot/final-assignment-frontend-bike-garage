@@ -1,5 +1,6 @@
 .navbar{
     background-color: var(--color-primary-background);
+    height: 10vh;
 }
 
 .navbar-items {

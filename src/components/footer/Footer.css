@@ -1,5 +1,6 @@
 .footer{
     background-color: var(--color-primary-background);
+    height: 10vh;
 }
 
 .footer-items {

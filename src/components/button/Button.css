@@ -1,0 +1,25 @@
+.signin-button {
+    background-color: var(--color-primary-background);
+    color: var(--color-primary-blue);
+    padding: 1rem 2rem;
+    min-width: 10rem;
+    border: 1px solid var(--color-primary-blue);
+    border-radius: 1.5rem;
+}
+
+.signin-button:hover{
+    background-color: var(--color-primary-blue);
+    color: var(--color-white);
+}
+
+.signin-button:active{
+    background-color: var(--color-primary-blue);
+    color: var(--color-white);
+    box-shadow: 0px 0px 0px 5px rgba(0, 143, 140, 0.25);
+}
+
+.add-button {
+    fill: var(--color-black);
+    /*filter: invert(68%) sepia(56%) saturate(5092%) hue-rotate(2deg) brightness(99%) contrast(103%);*/
+}
+
