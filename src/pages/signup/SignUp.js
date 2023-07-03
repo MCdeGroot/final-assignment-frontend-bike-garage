@@ -6,8 +6,11 @@ import {useForm} from "react-hook-form";
 
 
 function SignUp() {
-    const {register} = useForm();
+    const {register, handleSubmit} = useForm();
 
+    function handleFormSubmit(data){
+        console.log(data)
+    }
 
     return (
         <>
@@ -16,8 +19,20 @@ function SignUp() {
 
                     <article className='form-wrapper'>
                         <h2>Nice to see you again</h2>
-                        <form className='form'>
+                        <form className='form' onSubmit={handleSubmit(handleFormSubmit)}>
 
+                            <FormInputField
+                                name="username"
+                                label="Gebruikersnaam"
+                                type="text"
+                                register={register}
+                            />
+                            <FormInputField
+                                name="email"
+                                label="E-mail"
+                                type="text"
+                                register={register}
+                            />
                             <FormInputField
                                 name="firstname"
                                 label="Voornaam"
@@ -25,7 +40,9 @@ function SignUp() {
                                 register={register}
                             />
 
-                            <Button className='signin-button'>
+
+                            <Button type="submit"
+                                className='signin-button'>
                                 Registreer!
                             </Button>
                         </form>
