@@ -59,10 +59,12 @@ h4 {
 
 h5 {
     font-size: 1.25rem;
+    font-weight: 300;
 }
 
 p {
     font-size: 1rem;
+    font-weight: 300;
 }
 
 ul {
@@ -91,6 +93,7 @@ main {
 .flex-row {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .flex-column {
