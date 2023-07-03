@@ -1,0 +1,20 @@
+.footer{
+    background-color: var(--color-primary-background);
+    height: 10vh;
+}
+
+.footer-items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.separation-line {
+    border: 1px solid var(--color-black);
+    width: 0px;
+    height: 1rem;
+    margin: 0px;
+
+}

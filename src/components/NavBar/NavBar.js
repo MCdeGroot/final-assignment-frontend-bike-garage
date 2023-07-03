@@ -20,21 +20,21 @@ function NavBar({isAuth}) {
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/dashboard"><h2>Dashboard</h2>
+                                        to="/dashboard"><h4>Dashboard</h4>
                                     </NavLink>
                                 </li>
                                 <li className='separation-line'></li>
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/bikes"><h2>Bikes</h2>
+                                        to="/bikes"><h4>Bikes</h4>
                                     </NavLink>
                                 </li>
                                 <li className='separation-line'></li>
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/gear"><h2>Gear</h2>
+                                        to="/gear"><h4>Gear</h4>
                                     </NavLink>
                                 </li>
                             </ul>
@@ -43,7 +43,7 @@ function NavBar({isAuth}) {
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/login"><h2>Uitloggen</h2>
+                                        to="/login"><h4>Uitloggen</h4>
                                     </NavLink>
                                 </li>
                             </ul>
@@ -55,7 +55,7 @@ function NavBar({isAuth}) {
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/signup"><h2>Registreren</h2>
+                                        to="/signup"><h4>Registreren</h4>
                                     </NavLink>
                                 </li>
                             </ul>

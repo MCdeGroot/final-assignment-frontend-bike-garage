@@ -19,8 +19,6 @@
     --font-header: 'Poppins', sans-serif;
 }
 
-
-
 body {
     font-family: var(--font-body);
 }
@@ -37,43 +35,68 @@ h1 {
     font-weight: 500;
 }
 
-h2{
+h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--color-primary-background);
+    font-style: normal;
+    font-weight: 400;
+}
+h3 {
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--color-black);
+    font-style: normal;
+    font-weight: 400;
+}
+
+
+h4 {
     font-size: 1.25rem;
     color: var(--color-black);
     font-weight: 400;
 }
-h3{
+
+h5 {
     font-size: 1.25rem;
+    font-weight: 300;
 }
 
 p {
     font-size: 1rem;
+    font-weight: 300;
 }
 
 ul {
-     list-style: none;
- }
+    list-style: none;
+}
 
-.outer-container{
+main {
+    height: 80vh;
+}
+
+.outer-container {
     max-width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.inner-container{
+.inner-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     flex: 0 1 1200px; /*1200px gepakt volgens deze website https://van-ons.nl/blog/visueel-ontwerp/specificaties-van-een-goed-webdesign/*/
     padding: 1rem;
 }
 
-.flex-row{
+.flex-row {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
-.flex-column{
+.flex-column {
     display: flex;
     flex-direction: column;
 }
