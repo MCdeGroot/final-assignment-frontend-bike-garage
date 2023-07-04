@@ -27,24 +27,28 @@ function SignUp() {
                                     name="username"
                                     label="Username"
                                     type="text"
+                                    placeholder="Username"
                                     register={register}
                                 />
                                 <FormInputField
                                     name="email"
                                     label="E-mail"
                                     type="email"
+                                    placeholder="email@bike-garage.com"
                                     register={register}
                                 />
                                 <FormInputField
                                     name="firstname"
                                     label="First name"
                                     type="text"
+                                    placeholder="Mathieu"
                                     register={register}
                                 />
                                 <FormInputField
                                     name="lastname"
                                     label="Last name"
                                     type="text"
+                                    placeholder="van der Poel"
                                     register={register}
                                 />
                                 <FormInputField
