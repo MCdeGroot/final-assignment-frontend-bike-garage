@@ -3,15 +3,22 @@
     flex-direction: column;
     max-width: 750px;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 
 }
 
 .input-field {
-    border: solid 5px var(--color-primary-blue);
+    border: solid 1px var(--color-primary-blue);
+    background-color: var(--color-black-inputfield-background);
     color: var(--color-black);
     padding: 1rem;
     font-size: 1rem;
     border-radius: 6px;
     min-width: 400px;
+    width: 100%;
+}
+
+.input-field::placeholder {
+    color: var(--color-black-placholder);
+    font-family: var(--font-body);
 }

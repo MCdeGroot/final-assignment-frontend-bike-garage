@@ -8,7 +8,7 @@ import {useForm} from "react-hook-form";
 function SignUp() {
     const {register, handleSubmit} = useForm();
 
-    function handleFormSubmit(data){
+    function handleFormSubmit(data) {
         console.log(data)
     }
 
@@ -16,37 +16,58 @@ function SignUp() {
         <>
             <main className='outer-container'>
                 <div className='inner-container'>
-
-                    <article className='form-wrapper'>
-                        <h2>Nice to see you again</h2>
-                        <form className='form' onSubmit={handleSubmit(handleFormSubmit)}>
-
-                            <FormInputField
-                                name="username"
-                                label="Gebruikersnaam"
-                                type="text"
-                                register={register}
-                            />
-                            <FormInputField
-                                name="email"
-                                label="E-mail"
-                                type="text"
-                                register={register}
-                            />
-                            <FormInputField
-                                name="firstname"
-                                label="Voornaam"
-                                type="text"
-                                register={register}
-                            />
-
-
-                            <Button type="submit"
+                    <form className='form' onSubmit={handleSubmit(handleFormSubmit)}>
+                        <article className='form-wrapper'>
+                            <div className='form-title'>
+                                <h3>Welcome!</h3>
+                                <p>Please fill in the form to register!</p>
+                            </div>
+                            <div className='form-input-items'>
+                                <FormInputField
+                                    name="username"
+                                    label="Username"
+                                    type="text"
+                                    register={register}
+                                />
+                                <FormInputField
+                                    name="email"
+                                    label="E-mail"
+                                    type="email"
+                                    register={register}
+                                />
+                                <FormInputField
+                                    name="firstname"
+                                    label="First name"
+                                    type="text"
+                                    register={register}
+                                />
+                                <FormInputField
+                                    name="lastname"
+                                    label="Last name"
+                                    type="text"
+                                    register={register}
+                                />
+                                <FormInputField
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    register={register}
+                                />
+                                <FormInputField
+                                    name="password-confirm"
+                                    label="Confirm password"
+                                    type="password"
+                                    register={register}
+                                />
+                            </div>
+                        </article>
+                        <Button type="submit"
                                 className='signin-button'>
-                                Registreer!
-                            </Button>
-                        </form>
-                    </article>
+                            Sign up!
+                        </Button>
+                    </form>
+
+
                 </div>
             </main>
         </>

@@ -12,6 +12,8 @@
     --color-primary-blue-hover: hsla(194, 75%, 39%, 0.75);
     --color-beforehover-grey: hsla(196, 8%, 28%, 1);
     --color-primary-delete: hsla(352, 68%, 55%, 1);
+    --color-black-inputfield-background: hsla(0, 0%, 95%, 1);
+    --color-black-placholder: hsla(0, 0%, 50%, 1);
     --color-black: hsl(0, 0%, 16%);
     --color-white: hsl(0, 0%, 100%);
 
