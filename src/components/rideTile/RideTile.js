@@ -21,7 +21,7 @@ function RideTile() {
                         <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>
                     </Button>
                 </section>
-                <div className='separation-line-top'>
+                <div className='ride-separation-line-top'>
                     {/*    scheidingslijn*/}
                 </div>
                 <section className='ridetile-middle-styling'>
@@ -37,12 +37,12 @@ function RideTile() {
                                 <p>35,0km</p>
                                 <h4>Afstand</h4>
                             </div>
-                            <div className='separation-line-middle'></div>
+                            <div className='ride-separation-line-middle'></div>
                             <div>
                                 <p>35,0km</p>
                                 <h4>Tijd</h4>
                             </div>
-                            <div className='separation-line-middle'></div>
+                            <div className='ride-separation-line-middle'></div>
                             <div>
                                 <p>35,0km</p>
                                 <h4>Gem. Vermogen</h4>
@@ -55,9 +55,9 @@ function RideTile() {
                     <h2>BIKENAME</h2>
                     <div className='flex-row'>
                         <Button className='icon-button'><DownloadSimple width='2rem' height='2rem'/></Button>
-                        <div className='separation-line-bottom'></div>
+                        <div className='ride-separation-line-bottom'></div>
                         <Button className='icon-button'><Export width='2rem' height='2rem'/></Button>
-                        <div className='separation-line-bottom'></div>
+                        <div className='ride-separation-line-bottom'></div>
                         <Button className='icon-button'><ChatText width='2rem' height='2rem'/></Button>
                     </div>
 

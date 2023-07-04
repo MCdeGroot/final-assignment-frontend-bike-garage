@@ -79,13 +79,13 @@
     color: var(--color-primary-background);
 }
 
-.separation-line-top{
+.ride-separation-line-top{
     border: 1px solid var(--color-primary-blue);
     width: 550px;
     height: 0px;
 }
 
-.separation-line-middle{
+.ride-separation-line-middle{
     border: 1px solid var(--color-black);
     width: 0px;
     height: 45px;
@@ -93,7 +93,7 @@
     margin-left: 12px;
 }
 
-.separation-line-bottom{
+.ride-separation-line-bottom{
     border: 1px solid var(--color-primary-background);
     width: 0px;
     height: 1.25rem;
