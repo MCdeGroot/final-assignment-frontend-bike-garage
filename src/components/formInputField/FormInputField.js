@@ -1,16 +1,20 @@
 import React from "react";
+import "./FormInputField.css"
 
-function FormInputField({name, label, type, value, register, validationRules}) {
+function FormInputField({name, label, type, placeholder, value, register, validationRules}) {
     return (
         <>
-            <label className='label' htmlFor={`${name}-field`}>{label}</label>
-            <input className='input-field'
-                   name={name}
-                   type={type}
-                   id={`${name}-field`}
-                   value={value}
-                   {...register(name, validationRules)}
-            />
+            <div>
+                <label className='label' htmlFor={`${name}-field`}>{label}</label>
+                <input className='input-field'
+                       name={name}
+                       type={type}
+                       id={`${name}-field`}
+                       placeholder={placeholder}
+                       value={value}
+                       {...register(name, validationRules)}
+                />
+            </div>
         </>
     )
 }
