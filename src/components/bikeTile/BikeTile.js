@@ -12,7 +12,7 @@ function BikeTile() {
                     <div className='biketile-top-name'>
                         <img src="../../assets/roadbike.svg" alt=""/>
                         <h2>BIKENAME</h2>
-                    <Button className='icon-button'>
+                    <Button className='icon-button-bike'>
                         <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>
                     </Button>
                     </div>
@@ -20,11 +20,11 @@ function BikeTile() {
                         {/*    scheidingslijn*/}
                     </div>
                     <div className='bike-data'>
-                        <p>Brand</p>
-                        <p>Model</p>
-                        <p>Model</p>
-                        <p>Model</p>
-                        <p>Model</p>
+                        <p>Brand : </p>
+                        <p>Model : </p>
+                        <p>Nickname : </p>
+                        <p>Total distance driven : </p>
+                        <p>Hours driven : </p>
                     </div>
                 </section>
                 <section className='biketile-bottom-styling'>
