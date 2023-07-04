@@ -1,8 +1,7 @@
 import React from "react";
 import '../../App.css'
+import './AuthPages.css'
 import Button from '../../components/button/Button'
-import addIcon from '../../assets/add.svg';
-import {ChatText} from "@phosphor-icons/react";
 import {useForm} from "react-hook-form";
 import FormInputField from "../../components/formInputField/FormInputField";
 
@@ -16,7 +15,7 @@ function Login() {
     return (
         <>
             <main className='outer-container'>
-                <div className='inner-container'>
+                <div className='inner-container authorization'>
                     <form className='form' onSubmit={handleSubmit(handleFormSubmit)}>
                         <article className='form-wrapper'>
                             <div className='form-title'>

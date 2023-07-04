@@ -3,8 +3,8 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import Footer from "./components/footer/Footer";
 import {Route, Routes, Navigate} from "react-router-dom";
-import Login from "./pages/login/Login";
-import SignUp from "./pages/signup/SignUp";
+import Login from "./pages/auth/Login";
+import SignUp from "./pages/auth/SignUp";
 import Profile from "./pages/profile/Profile"
 import Dashboard from "./pages/dashboard/Dashboard";
 import Bikes from "./pages/bikes/Bikes";

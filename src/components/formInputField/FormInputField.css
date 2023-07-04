@@ -11,6 +11,7 @@
     border: solid 1px var(--color-primary-blue);
     background-color: var(--color-black-inputfield-background);
     color: var(--color-black);
+    font-family: var(--font-body);
     padding: 1rem;
     font-size: 1rem;
     border-radius: 6px;

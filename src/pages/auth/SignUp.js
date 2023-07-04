@@ -1,7 +1,7 @@
 import React from "react";
 import Button from '../../components/button/Button'
 import FormInputField from '../../components/formInputField/FormInputField'
-import './SignUp.css'
+import './AuthPages.css'
 import {useForm} from "react-hook-form";
 
 
@@ -15,7 +15,7 @@ function SignUp() {
     return (
         <>
             <main className='outer-container'>
-                <div className='inner-container'>
+                <div className='inner-container authorization'>
                     <form className='form' onSubmit={handleSubmit(handleFormSubmit)}>
                         <article className='form-wrapper'>
                             <div className='form-title'>
