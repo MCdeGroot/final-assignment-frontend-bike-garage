@@ -1,0 +1,111 @@
+.geartile-outer-wrapper {
+    background-color: var(--color-primary-background);
+    border: 3px solid var(--color-primary-blue);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 650px;
+    width: 100%;
+}
+
+.geartile-top-styling {
+    display: flex;
+    flex-direction: row;
+    padding: 0rem 1rem 0rem 1rem;
+    justify-content: flex-start;
+    gap: 1rem;
+    align-items: center;
+    flex-basis: 75px;
+    width: 100%;
+}
+
+.geartile-top-styling h2 {
+    color: var(--color-primary-blue);
+}
+
+.geartile-top-styling img {
+    height: 50px;
+    width: 50px;
+}
+
+.geartile-middle-styling {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--color-primary-blue);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.geartile-bottom-styling {
+    display: flex;
+    flex-direction: row;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+.gear-separation-line-middle {
+    border: 1px solid var(--color-primary-background);
+    width: 0px;
+    height: 1.25rem;
+    margin-right: 12px;
+    margin-left: 12px;
+}
+
+.gear-item-styling {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+}
+
+.gear-item-separation-line {
+    border: 1px solid var(--color-black);
+    width: 0px;
+    height: 1.25rem;
+    margin-right: 12px;
+    margin-left: 12px;
+}
+
+.gear-icon-button {
+    background: none;
+    border: none;
+    color: var(--color-beforehover-grey);
+}
+
+.gear-icon-button:hover {
+    color: var(--color-primary-blue);
+}
+
+.gear-icon-button-red {
+    background: none;
+    border: none;
+    color: var(--color-beforehover-grey);
+}
+
+.gear-icon-button-red:hover {
+    color: var(--color-primary-delete);
+}
+
+.progress-bar {
+    width: 200px;
+    height: 12px;
+    background-color: var(--color-primary-background);
+    border-radius: 12px;
+    border: 1px solid var(--color-primary-blue);
+}
+
+.progress {
+    height: 100%;
+    background-color: var(--color-primary-blue);
+    border-radius: 12px;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+}
