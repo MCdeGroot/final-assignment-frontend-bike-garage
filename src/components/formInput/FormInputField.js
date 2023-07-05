@@ -1,5 +1,5 @@
 import React from "react";
-import "./FormInputField.css"
+import "./FormInput.css"
 
 function FormInputField({name, label, type, placeholder, value, register, validationRules}) {
     return (

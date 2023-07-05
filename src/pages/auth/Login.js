@@ -3,7 +3,7 @@ import '../../App.css'
 import './AuthPages.css'
 import Button from '../../components/button/Button'
 import {useForm} from "react-hook-form";
-import FormInputField from "../../components/formInputField/FormInputField";
+import FormInputField from "../../components/formInput/FormInputField";
 
 function Login() {
     const {register, handleSubmit} = useForm();

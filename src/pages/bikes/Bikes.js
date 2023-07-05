@@ -12,12 +12,10 @@ function Bikes() {
                 const response = await axios.get('http://localhost:8080/bikes')
                 setBikes(response.data);
                 console.log(response.data)
-
             } catch (error) {
                 console.log(error);
             }
         }
-
         fetchData();
     }, [])
 
