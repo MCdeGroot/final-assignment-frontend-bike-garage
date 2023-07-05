@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from "react";
 import BikeTile from "../../components/bikeTile/BikeTile";
 import axios from "axios";
+import Button from "../../components/button/Button";
+import {NavLink} from "react-router-dom";
+import {PlusCircle} from "@phosphor-icons/react";
 
 function Bikes() {
     const [bikes, setBikes] = useState([]);
@@ -16,6 +19,7 @@ function Bikes() {
                 console.log(error);
             }
         }
+
         fetchData();
     }, [])
 
@@ -37,6 +41,12 @@ function Bikes() {
                         )
                     })
                     }
+                    <NavLink to="/bikes/add">
+                        <Button>
+                            <PlusCircle size="2rem" color="#5f558c" />
+                        </Button>
+                    </NavLink>
+
                 </div>
             </main>
         </>

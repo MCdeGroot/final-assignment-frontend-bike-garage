@@ -10,6 +10,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Bikes from "./pages/bikes/Bikes";
 import Gear from "./pages/gear/Gear";
 import Button from './components/button/Button';
+import AddBike from "./pages/bikes/AddBike";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/profile" element={isAuth ? <Profile/> : <Navigate to="/login"/>}/>
                 <Route path="/dashboard" element={isAuth ? <Dashboard/> : <Navigate to="/login"/>}/>
                 <Route path="/bikes" element={isAuth ? <Bikes/> : <Navigate to="/login"/>}/>
+                <Route path="/bikes/add" element={isAuth ? <AddBike/> : <Navigate to="/login"/>}/>
                 <Route path="/gear" element={isAuth ? <Gear/> : <Navigate to="/login"/>}/>
             </Routes>
             <Footer></Footer>
