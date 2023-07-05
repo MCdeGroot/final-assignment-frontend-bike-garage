@@ -4,14 +4,14 @@ import {DotsThreeOutline} from "@phosphor-icons/react";
 import Button from "../button/Button";
 
 
-function BikeTile() {
+function BikeTile({brand, model, name, totalDistanceDriven, totalHoursDriven, groupSet, gearData}) {
     return (
         <>
             <div className="biketile-outer-wrapper">
                 <section className="biketile-top-styling">
                     <div className='biketile-top-name'>
                         <img src="../../assets/roadbike.svg" alt=""/>
-                        <h2>BIKENAME</h2>
+                        <h2>{brand} {model}</h2>
                     <Button className='icon-button-bike'>
                         <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>
                     </Button>
@@ -20,11 +20,11 @@ function BikeTile() {
                         {/*    scheidingslijn*/}
                     </div>
                     <div className='bike-data'>
-                        <p>Brand : </p>
-                        <p>Model : </p>
-                        <p>Nickname : </p>
-                        <p>Total distance driven : </p>
-                        <p>Hours driven : </p>
+                        <p>Brand : {brand}</p>
+                        <p>Model : {model}</p>
+                        <p>Nickname : {name}</p>
+                        <p>Total distance driven : {totalDistanceDriven}</p>
+                        <p>Hours driven : {totalHoursDriven}</p>
                     </div>
                 </section>
                 <section className='biketile-bottom-styling'>
@@ -33,11 +33,13 @@ function BikeTile() {
                         {/*    scheidingslijn*/}
                     </div>
                     <div className='gear-data'>
-                        <p>Brand</p>
-                        <p>Model</p>
-                        <p>Model</p>
-                        <p>Model</p>
-                        <p>Model</p>
+                        {/*TODO gearData toeveogen als props. evven kijken wat nu handig is. Kan ik pas testen als de kopeling er is.*/}
+                        <p>Groupset : </p>
+                        <p>Chain : </p>
+                        <p>Cassette : </p>
+                        <p>Front Tire : </p>
+                        <p>Rear Tire : </p>
+                        <p>Brakes : </p>
                     </div>
 
                 </section>

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from '../../components/button/Button'
-import FormInputField from '../../components/formInputField/FormInputField'
+import FormInputField from '../../components/formInput/FormInputField'
 import './AuthPages.css'
 import {useForm} from "react-hook-form";
 

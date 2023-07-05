@@ -5,15 +5,14 @@ import Button from "../button/Button";
 import {Icon} from '@iconify/react';
 import {ReactComponent as BikeIcon} from "../../assets/roadbike.svg"
 
-function GearItem() {
+function GearItem({partType}) {
     const [iconChangeEdit, toggleIconChangeEdit] = useState(true);
     const [iconChangeDelete, toggleIconChangeDelete] = useState(true);
     const [iconChangeReset, toggleIconChangeReset] = useState(true);
     const [currentDistanceDriven, setCurrentDistanceDriven] = useState(0);
     const [hoveredDistance, setHoveredDistance] = useState(null);
 
-    const maxDistance = 5000;
-
+const maxDistance = 5000;
     //voor nu even wat defaultwaarden berekenen dit wordt straks uit de database gehaald
     function fetchData() {
         const randomDistance = Math.random() * maxDistance;
@@ -51,34 +50,30 @@ function GearItem() {
         toggleIconChangeReset(true);
     }
 
-    // function handleMouseEnterProgressBar() {
-    //     setHoveredDistance(currentDistanceDriven);
-    // }
-
-    function handleMouseLeaveProgressBar() {
-        setHoveredDistance(null);
-    }
-
     return (
         <>
             <div className='gear-item-styling'>
                 <div className='gear-item-icon'>
                     <BikeIcon/>
-                    <h2>Chain</h2>
+                    <h2>{partType}</h2>
                 </div>
                 <div className='gear-item-separation-line'></div>
                 <div
                     className='progress-bar'
                     // onMouseEnter={handleMouseEnterProgressBar}
-                    onMouseEnter = {()=>{setHoveredDistance(currentDistanceDriven)}}
-                    onMouseLeave={handleMouseLeaveProgressBar}
+                    onMouseEnter={() => {
+                        setHoveredDistance(currentDistanceDriven)
+                    }}
+                    onMouseLeave={() => {
+                        setHoveredDistance(null)
+                    }}
                 >
                     <div className='progress' style={{width: `${progress}%`}}></div>
                     {hoveredDistance !== null && (
                         <>
-                        <div>{`${hoveredDistance.toFixed(
-                            0
-                        )} km`}</div>
+                            <div>{`${hoveredDistance.toFixed(
+                                0
+                            )} km`}</div>
                             <div> {`${maxDistance.toFixed(
                                 0
                             )} km`}</div>

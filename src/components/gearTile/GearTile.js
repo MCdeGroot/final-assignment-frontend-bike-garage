@@ -4,7 +4,7 @@ import GearItem from "./GearItem";
 
 /*TODO mijn plaatjes laden niet*/
 
-function BikeTile() {
+function GearTile() {
     return (
         <>
             <div className="geartile-outer-wrapper">
@@ -26,4 +26,4 @@ function BikeTile() {
     )
 }
 
-export default BikeTile;
+export default GearTile;
