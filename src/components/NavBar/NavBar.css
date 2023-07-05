@@ -50,6 +50,10 @@ a:hover {
 
 .active-nav-link {
     text-decoration: none;
+}
+.active-nav-link h4{
+    text-decoration: none;
     color: var(--color-primary-blue);
-    font-weight: bolder;
+    font-style: normal;
+    font-weight: 600;
 }
