@@ -51,14 +51,6 @@ function GearItem() {
         toggleIconChangeReset(true);
     }
 
-    // function handleMouseEnterProgressBar() {
-    //     setHoveredDistance(currentDistanceDriven);
-    // }
-
-    function handleMouseLeaveProgressBar() {
-        setHoveredDistance(null);
-    }
-
     return (
         <>
             <div className='gear-item-styling'>
@@ -71,7 +63,7 @@ function GearItem() {
                     className='progress-bar'
                     // onMouseEnter={handleMouseEnterProgressBar}
                     onMouseEnter = {()=>{setHoveredDistance(currentDistanceDriven)}}
-                    onMouseLeave={handleMouseLeaveProgressBar}
+                    onMouseLeave={()=>{setHoveredDistance(null)}}
                 >
                     <div className='progress' style={{width: `${progress}%`}}></div>
                     {hoveredDistance !== null && (
