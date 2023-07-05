@@ -8,6 +8,7 @@ import logo from "../../assets/bikegaragelogo.png";
 function NavBar({isAuth}) {
     return (
         <>
+            {/*TODO mijn styling van isActive werkt niet*/}
             <div className='outer-container navbar'>    {/*outercontainer*/}
                 <nav className='inner-container navbar-items'>
                     <div className='navbar-logo'>

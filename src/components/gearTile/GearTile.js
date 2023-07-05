@@ -2,6 +2,7 @@ import React from "react";
 import "./GearTile.css"
 import GearItem from "./GearItem";
 
+/*TODO mijn plaatjes laden niet*/
 
 function BikeTile() {
     return (

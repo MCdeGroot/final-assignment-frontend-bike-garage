@@ -65,6 +65,9 @@
     width: 100%;
 
 }
+.gear-item-styling h2{
+ color: var(--color-primary-blue);
+}
 
 .gear-item-separation-line {
     border: 1px solid var(--color-black);
@@ -78,6 +81,10 @@
     background: none;
     border: none;
     color: var(--color-beforehover-grey);
+}
+
+.gear-item-icon{
+
 }
 
 .gear-icon-button:hover {
