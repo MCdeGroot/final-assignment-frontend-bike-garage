@@ -1,15 +1,29 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import '../../App.css'
 import './AuthPages.css'
 import Button from '../../components/button/Button'
 import {useForm} from "react-hook-form";
 import FormInputField from "../../components/formInput/FormInputField";
+import axios from "axios";
+import {AuthContext} from "../../context/AuthContext";
 
 function Login() {
     const {register, handleSubmit} = useForm();
+    const {login} = useContext(AuthContext);
 
-    function handleFormSubmit(data) {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+async function handleFormSubmit(data) {
         console.log(data)
+        try {
+            const response = await axios.post('http://localhost:8080/authenticate', data);
+            console.log(response);
+            login(response.data.jwt, "auth");
+        } catch (error){
+            console.error("Onjuist email en wachtwoord combinatie ⛔", error)
+            console.log(username, password)
+        }
     }
 
     return (
@@ -23,10 +37,10 @@ function Login() {
                             </div>
                             <div className='form-input-items'>
                                 <FormInputField
-                                    name="email"
+                                    name="username"
                                     label="Login"
-                                    type="email"
-                                    placeholder="Email"
+                                    type="text"
+                                    placeholder="Fill in your username"
                                     register={register}
                                 />
 
