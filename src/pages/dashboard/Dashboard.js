@@ -8,7 +8,9 @@ function Dashboard() {
             <main className='outer-container'>
                 <div className='inner-container'>
                         <h1>Hier is het Dashboard</h1>
-                    <RideTile></RideTile>
+                    <RideTile>
+
+                    </RideTile>
                 </div>
             </main>
         </>

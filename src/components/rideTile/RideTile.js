@@ -15,7 +15,7 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                     <img src="../../assets/roadbike.svg" alt=""/>
                     <div>
                         <h5>{user} </h5>
-                        <p>datum {date}</p>
+                        <p>Date {date}</p>
                     </div>
                     <Button className='icon-button'>
                         <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>

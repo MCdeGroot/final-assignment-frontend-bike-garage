@@ -7,7 +7,7 @@ import {PlusCircle} from "@phosphor-icons/react";
 import {AuthContext} from "../../context/AuthContext";
 
 function Bikes() {
-    const {username, logout } = useContext(AuthContext);
+    const {isAuth, user, logout } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [bikes, setBikes] = useState([]);
@@ -28,7 +28,7 @@ function Bikes() {
                     }
                 })
                 setBikes(response.data);
-                console.log(bikes)
+                console.log(response.data)
             } catch (error) {
                 console.error(error)
             }
@@ -56,9 +56,9 @@ function Bikes() {
                     })
                     }
                     <NavLink to="/bikes/add">
-                        <Button>
+                        {user.authority === 'ROLE_USER' && < Button>
                             <PlusCircle size="2rem" color="#5f558c" />
-                        </Button>
+                        </Button> }
                     </NavLink>
 
                 </div>

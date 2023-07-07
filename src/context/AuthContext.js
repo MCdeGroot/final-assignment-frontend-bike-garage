@@ -9,8 +9,7 @@ export const AuthContext = createContext({});
 function AuthContextProvider({children}) {
     const [authState, setAuthState] = useState({
         isAuth: false,
-        username: null,
-        authority: null,
+        user: null,
         status: "pending"
     });
 
@@ -31,10 +30,15 @@ function AuthContextProvider({children}) {
         if (storedToken && validateToken(storedToken)) {
             console.log("Looks like there is a valid token in the local storage")
             void login(storedToken)
+
         } else {
             void logout();
         }
     }, [])
+
+    useEffect( ()=>{
+        console.log(authState);
+    },[authState])
 
     async function login(jwt_token, redirect) {
         console.log(jwt_token);
@@ -51,7 +55,10 @@ function AuthContextProvider({children}) {
             setAuthState({
                 ...authState,
                 isAuth: true,
-                username: response.data.username,
+                user: {
+                    name: response.data.name,
+                    authority: response.data.authorities[0].authority
+                },
                 status: "done"
             })
             console.log('De gebruiker is ingelogd 🔓')
@@ -61,6 +68,7 @@ function AuthContextProvider({children}) {
         } catch (error) {
             console.error(error)
         }
+
     }
 
 
@@ -73,13 +81,13 @@ function AuthContextProvider({children}) {
             status: "done"
         })
         console.log('De gebruiker is uitgelogd 🔒')
+        console.log(authState)
         navigate('/login')
     }
 
     const data = {
         isAuth: authState.isAuth,
-        username: authState.username,
-        authority: authState.authority,
+        user: authState.user,
         logout: logout,
         login: login
     }
