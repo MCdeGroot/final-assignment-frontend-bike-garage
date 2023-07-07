@@ -1,15 +1,38 @@
-import React from "react";
+import React, {useState} from "react";
 import Button from '../../components/button/Button'
 import FormInputField from '../../components/formInput/FormInputField'
 import './AuthPages.css'
 import {useForm} from "react-hook-form";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 
 function SignUp() {
     const {register, handleSubmit} = useForm();
 
-    function handleFormSubmit(data) {
-        console.log(data)
+    // state voor functionaliteit
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+    const navigate = useNavigate();
+
+   async function handleFormSubmit(data) {
+        try {
+            const response = await axios.post('http://localhost:8080/users', {
+                username: data.username,
+                email: data.email,
+                password: data.password
+            } );
+            console.log(response);
+            console.log("user signed up!");
+            navigate("/login");
+
+        } catch (error)
+        {
+            console.error(error);
+            toggleError(true);
+        }
+        toggleLoading(false);
+
     }
 
     return (
@@ -57,6 +80,7 @@ function SignUp() {
                                     type="password"
                                     register={register}
                                 />
+                                {/*TODO een funcite schrijven dat deze per se moet worden ingevoerd bij registreren*/}
                                 <FormInputField
                                     name="password-confirm"
                                     label="Confirm password"
@@ -66,7 +90,8 @@ function SignUp() {
                             </div>
                         </article>
                         <Button type="submit"
-                                className='signin-button'>
+                                className='signin-button'
+                               >
                             Sign up!
                         </Button>
                     </form>

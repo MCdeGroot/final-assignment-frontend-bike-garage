@@ -7,8 +7,7 @@ import FormInputSelect from "../../components/formInput/FormInputSelect";
 
 function AddBike() {
     const {register, handleSubmit} = useForm();
-
-    function handleFormSubmit(data) {
+    async function handleFormSubmit(data){
         console.log(data)
     }
 

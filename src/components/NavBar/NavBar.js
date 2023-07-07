@@ -8,7 +8,6 @@ import logo from "../../assets/bikegaragelogo.png";
 function NavBar({isAuth}) {
     return (
         <>
-            {/*TODO mijn styling van isActive werkt niet*/}
             <div className='outer-container navbar'>    {/*outercontainer*/}
                 <nav className='inner-container navbar-items'>
                     <div className='navbar-logo'>
@@ -21,7 +20,7 @@ function NavBar({isAuth}) {
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
-                                        to="/dashboard"><h4>Dashboard</h4>
+                                        to="/rides"><h4>Dashboard</h4>
                                     </NavLink>
                                 </li>
                                 <li className='separation-line'></li>
