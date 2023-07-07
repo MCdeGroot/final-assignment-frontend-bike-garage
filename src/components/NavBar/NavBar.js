@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './NavBar.css';
 import '../../App.css'
 import {NavLink} from "react-router-dom";
 import logo from "../../assets/bikegaragelogo.png";
+import {AuthContext} from "../../context/AuthContext";
 
 
-function NavBar({isAuth}) {
+function NavBar() {
+    const {isAuth, logout} = useContext(AuthContext);
+
     return (
         <>
             <div className='outer-container navbar'>    {/*outercontainer*/}
@@ -43,6 +46,7 @@ function NavBar({isAuth}) {
                                 <li>
                                     <NavLink
                                         className={({isActive}) => isActive ? 'active-nav-link' : 'default-nav-link'}
+                                        onClick={logout}
                                         to="/login"><h4>Uitloggen</h4>
                                     </NavLink>
                                 </li>

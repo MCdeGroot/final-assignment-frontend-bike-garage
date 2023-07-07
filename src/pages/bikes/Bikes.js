@@ -1,22 +1,36 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import BikeTile from "../../components/bikeTile/BikeTile";
 import axios from "axios";
 import Button from "../../components/button/Button";
 import {NavLink} from "react-router-dom";
 import {PlusCircle} from "@phosphor-icons/react";
+import {AuthContext} from "../../context/AuthContext";
 
 function Bikes() {
+    const {username, logout } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const [bikes, setBikes] = useState([]);
 
     //data ophalen van de bikes
     useEffect(() => {
+        const controller = new AbortController();
         async function fetchData() {
+            const storedToken = localStorage.getItem('token');
+            setLoading(true)
             try {
-                const response = await axios.get('http://localhost:8080/bikes')
+                setError(false);
+                const response = await axios.get('http://localhost:8080/bikes', {
+                    signal: controller.signal,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${storedToken}`
+                    }
+                })
                 setBikes(response.data);
-                console.log(response.data)
+                console.log(bikes)
             } catch (error) {
-                console.log(error);
+                console.error(error)
             }
         }
 
