@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import '../../App.css'
 import './AuthPages.css'
 import Button from '../../components/button/Button'
@@ -11,18 +11,19 @@ function Login() {
     const {register, handleSubmit} = useForm();
     const {login} = useContext(AuthContext);
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
 
 async function handleFormSubmit(data) {
-        console.log(data)
+    console.log(data)
         try {
-            const response = await axios.post('http://localhost:8080/authenticate', data);
+            const response = await axios.post('http://localhost:8080/authenticate', {
+                username: data.username,
+                password: data.password
+            });
             console.log(response);
-            login(response.data.jwt, "auth");
+            login(response.data.jwt, "/rides");
         } catch (error){
             console.error("Onjuist email en wachtwoord combinatie ⛔", error)
-            console.log(username, password)
+            console.log(data.username, data.password)
         }
     }
 

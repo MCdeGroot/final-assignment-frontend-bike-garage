@@ -9,8 +9,9 @@ export const AuthContext = createContext({});
 function AuthContextProvider({children}) {
     const [authState, setAuthState] = useState({
         isAuth: false,
-        user: null,
-        status: 'pending'
+        username: null,
+        authority: null,
+        status: "pending"
     });
 
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ function AuthContextProvider({children}) {
     }, [])
 
     async function login(jwt_token, redirect) {
+        console.log(jwt_token);
         const decodedToken = jwt_decode(jwt_token);
         localStorage.setItem('token', jwt_token);
         console.log(decodedToken);
@@ -49,11 +51,8 @@ function AuthContextProvider({children}) {
             setAuthState({
                 ...authState,
                 isAuth: true,
-                user: {
-                    username: response.data.username,
-                    email: response.data.email,
-                    id: response.data.id
-                }, status: "done"
+                username: response.data.username,
+                status: "done"
             })
             console.log('De gebruiker is ingelogd 🔓')
             if (redirect) {
@@ -79,7 +78,8 @@ function AuthContextProvider({children}) {
 
     const data = {
         isAuth: authState.isAuth,
-        user: authState.user,
+        username: authState.username,
+        authority: authState.authority,
         logout: logout,
         login: login
     }
@@ -89,5 +89,6 @@ function AuthContextProvider({children}) {
         </AuthContext.Provider>
     );
 }
+export default AuthContextProvider;
 
 
