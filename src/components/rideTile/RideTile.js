@@ -7,15 +7,15 @@ import {Export} from "@phosphor-icons/react";
 import {DotsThreeOutline} from "@phosphor-icons/react";
 
 
-function RideTile() {
+function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, user}) {
     return (
         <>
             <div className="ridetile-outer-wrapper">
                 <section className="ridetile-top-styling">
                     <img src="../../assets/roadbike.svg" alt=""/>
                     <div>
-                        <h5>Mathijs de Groot</h5>
-                        <p>datum 01-05-2023</p>
+                        <h5>{user} </h5>
+                        <p>Date {date}</p>
                     </div>
                     <Button className='icon-button'>
                         <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>
@@ -28,23 +28,23 @@ function RideTile() {
                     <div className='ride-data'>
                         <div>
                             {/*    Mathday*/}
-                            <h4>Title</h4>
-                            <p>eventjes vlammen!</p>
+                            <h4>{titleRide}</h4>
+                            <p>{subTitleRide}</p>
                         </div>
                         <div className='ride-data-items'>
 
                             <div>
-                                <p>35,0km</p>
+                                <p>{distance} km</p>
                                 <h4>Afstand</h4>
                             </div>
                             <div className='ride-separation-line-middle'></div>
                             <div>
-                                <p>35,0km</p>
+                                <p>{timeRide} uur</p>
                                 <h4>Tijd</h4>
                             </div>
                             <div className='ride-separation-line-middle'></div>
                             <div>
-                                <p>35,0km</p>
+                                <p>{averagePower} Watt</p>
                                 <h4>Gem. Vermogen</h4>
                             </div>
                         </div>
@@ -52,7 +52,7 @@ function RideTile() {
                     <img src="../../assets/foto-test.jpg" alt="foto" width="150px" heigth="150px"/>
                 </section>
                 <section className='ridetile-bottom-styling flex-row'>
-                    <h2>BIKENAME</h2>
+                    <h2>{bike}</h2>
                     <div className='flex-row'>
                         <Button className='icon-button'><DownloadSimple width='2rem' height='2rem'/></Button>
                         <div className='ride-separation-line-bottom'></div>

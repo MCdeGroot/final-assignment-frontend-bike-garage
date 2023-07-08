@@ -13,7 +13,6 @@ function Login() {
 
 
 async function handleFormSubmit(data) {
-    console.log(data)
         try {
             const response = await axios.post('http://localhost:8080/authenticate', {
                 username: data.username,
