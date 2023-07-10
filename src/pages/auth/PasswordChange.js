@@ -6,6 +6,7 @@ import {useForm} from "react-hook-form";
 import FormInputField from "../../components/formInput/FormInputField";
 import axios from "axios";
 
+// TODO reset function HookForm uitzoeken
 function PasswordChange(){
     const {register, handleSubmit, reset} = useForm();
 
@@ -14,8 +15,7 @@ function PasswordChange(){
         console.log(storedToken);
         console.log(data);
         try {
-            const response = await axios.put(`http://localhost:8080/updatepassword/${data.username}`, {
-                username: data.username,
+            const response = await axios.put(`http://localhost:8080/users/updatepassword/${data.username}`, {
                 newPassword: data.newPassword
             }, {
                 headers: {
