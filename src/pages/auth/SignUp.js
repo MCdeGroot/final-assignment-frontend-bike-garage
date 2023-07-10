@@ -16,11 +16,14 @@ function SignUp() {
     const navigate = useNavigate();
 
     async function handleFormSubmit(data) {
+        console.log(data)
         try {
             const response = await axios.post('http://localhost:8080/users', {
                 username: data.username,
                 email: data.email,
-                password: data.password
+                password: data.password,
+                firstName: data.firstName,
+                lastName: data.lastName
             });
             console.log(response);
             console.log("user signed up!");
@@ -77,7 +80,7 @@ function SignUp() {
                                     errors={errors}
                                 />
                                 <FormInputField
-                                    name="firstname"
+                                    name="firstName"
                                     label="First name"
                                     type="text"
                                     placeholder="Mathieu"
@@ -93,7 +96,7 @@ function SignUp() {
                                     errors={errors}
                                 />
                                 <FormInputField
-                                    name="lastname"
+                                    name="lastName"
                                     label="Last name"
                                     type="text"
                                     placeholder="van der Poel"

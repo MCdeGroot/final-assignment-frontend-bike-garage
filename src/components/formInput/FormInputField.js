@@ -1,7 +1,8 @@
 import React from "react";
 import "./FormInput.css"
 
-function FormInputField({name, label, type, placeholder, value, register, validationRules, errors}) {
+function FormInputField({name, label, type, placeholder, value, register, validationRules, errors, onChange}) {
+
     return (
         <>
             <div>
@@ -11,8 +12,9 @@ function FormInputField({name, label, type, placeholder, value, register, valida
                        type={type}
                        id={`${name}-field`}
                        placeholder={placeholder}
-                       value={value}
+                       value={value !== null ? value : ""}
                        {...register(name, validationRules)}
+                       onChange={onChange}
                 />
                     {errors[name] && <p className="error">{errors[name].message}</p>}
             </div>

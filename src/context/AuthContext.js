@@ -56,7 +56,7 @@ function AuthContextProvider({children}) {
                 ...authState,
                 isAuth: true,
                 user: {
-                    name: response.data.name,
+                    username: response.data.name,
                     authority: response.data.authorities[0].authority
                 },
                 status: "done"
