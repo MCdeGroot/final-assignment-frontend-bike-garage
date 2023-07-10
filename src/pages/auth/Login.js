@@ -8,7 +8,7 @@ import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 
 function Login() {
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
     const {login} = useContext(AuthContext);
 
 
@@ -42,6 +42,7 @@ async function handleFormSubmit(data) {
                                     type="text"
                                     placeholder="Fill in your username"
                                     register={register}
+                                    errors = {errors}
                                 />
 
                                 <FormInputField
@@ -50,6 +51,7 @@ async function handleFormSubmit(data) {
                                     type="password"
                                     placeholder="Enter password"
                                     register={register}
+                                    errors = {errors}
                                 />
                             </div>
                         </article>

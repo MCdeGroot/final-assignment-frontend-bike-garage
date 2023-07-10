@@ -1,7 +1,7 @@
 import React from "react";
 import "./FormInput.css"
 
-function FormInputField({name, label, type, placeholder, value, register, validationRules}) {
+function FormInputField({name, label, type, placeholder, value, register, validationRules, errors}) {
     return (
         <>
             <div>
@@ -14,7 +14,9 @@ function FormInputField({name, label, type, placeholder, value, register, valida
                        value={value}
                        {...register(name, validationRules)}
                 />
+                    {errors[name] && <p>{errors[name].message}</p>}
             </div>
+
         </>
     )
 }
