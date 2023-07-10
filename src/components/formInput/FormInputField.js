@@ -14,7 +14,7 @@ function FormInputField({name, label, type, placeholder, value, register, valida
                        value={value}
                        {...register(name, validationRules)}
                 />
-                    {errors[name] && <p>{errors[name].message}</p>}
+                    {errors[name] && <p className="error">{errors[name].message}</p>}
             </div>
 
         </>
