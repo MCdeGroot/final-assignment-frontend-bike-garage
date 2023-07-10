@@ -47,13 +47,18 @@ function Profile() {
     }, [])
 
     async function handleFormSubmit(data) {
+        const storedToken = localStorage.getItem('token');
+        toggleLoading(true)
         try {
-            const response = await axios.put(`http://localhost:8080/users/${data.username}`, {
+            const response = await axios.put(`http://localhost:8080/users/${userData.username}`, {
                 email: data.email,
                 firstName: data.firstName,
                 lastName: data.lastName,
                 dateOfBirth: data.dateOfBirth
-            });
+            }, {headers: {
+                'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`
+            }});
             console.log(response);
 
         } catch (error) {
@@ -227,13 +232,20 @@ function Profile() {
 
                             </div>
                         }
+                        {editProfile &&
+
+                        <Button className="signin-button" type="submit"> Save changes </Button>
+                        }
 
                     </form>
+                    {!editProfile &&
 
+                    <Button className="signin-button" onClick={()=>{setEditProfile(true)}}>
+                        Edit profile!
+                    </Button>
+                    }
                 </div>
-                <Button onClick={()=>{setEditProfile(true)}}>
-                blabla
-            </Button>
+
             </main>
 
 
