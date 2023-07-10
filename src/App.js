@@ -9,7 +9,7 @@ import Profile from "./pages/profile/Profile"
 import Dashboard from "./pages/dashboard/Dashboard";
 import Bikes from "./pages/bikes/Bikes";
 import Gear from "./pages/gear/Gear";
-import Button from './components/button/Button';
+import PasswordChange from "./pages/auth/PasswordChange";
 import AddBike from "./pages/bikes/AddBike";
 import {AuthContext} from "./context/AuthContext";
 
@@ -23,6 +23,7 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<SignUp/>}/>
+                <Route path="/passwordchange" element={<PasswordChange/>}/>
                 <Route path="/profile" element={isAuth ? <Profile/> : <Navigate to="/login"/>}/>
                 <Route path="/rides" element={isAuth ? <Dashboard/> : <Navigate to="/login"/>}/>
                 <Route path="/bikes" element={isAuth ? <Bikes/> : <Navigate to="/login"/>}/>

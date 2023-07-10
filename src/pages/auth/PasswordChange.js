@@ -5,24 +5,28 @@ import Button from '../../components/button/Button'
 import {useForm} from "react-hook-form";
 import FormInputField from "../../components/formInput/FormInputField";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
 
-function Login() {
-    const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
-    const {login} = useContext(AuthContext);
+// TODO reset function HookForm uitzoeken
+function PasswordChange(){
+    const {register, handleSubmit, reset} = useForm();
 
-
-async function handleFormSubmit(data) {
+    async function handleFormSubmit(data){
+        const storedToken = localStorage.getItem('token');
+        console.log(storedToken);
+        console.log(data);
         try {
-            const response = await axios.post('http://localhost:8080/authenticate', {
-                username: data.username,
-                password: data.password
+            const response = await axios.put(`http://localhost:8080/users/updatepassword/${data.username}`, {
+                newPassword: data.newPassword
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`
+                }
+
             });
             console.log(response);
-            login(response.data.jwt, "/rides");
-        } catch (error){
-            console.error("Onjuist email en wachtwoord combinatie ⛔", error)
-            console.log(data.username, data.password)
+        } catch (error) {
+            console.error(error)
         }
     }
 
@@ -33,7 +37,7 @@ async function handleFormSubmit(data) {
                     <form className='form' onSubmit={handleSubmit(handleFormSubmit)}>
                         <article className='form-wrapper'>
                             <div className='form-title'>
-                                <h3>Nice to see you again!</h3>
+                                <h3>Ready to change your password?</h3>
                             </div>
                             <div className='form-input-items'>
                                 <FormInputField
@@ -42,22 +46,20 @@ async function handleFormSubmit(data) {
                                     type="text"
                                     placeholder="Fill in your username"
                                     register={register}
-                                    errors = {errors}
                                 />
 
                                 <FormInputField
-                                    name="password"
-                                    label="Password"
+                                    name="newPassword"
+                                    label="New Password"
                                     type="password"
-                                    placeholder="Enter password"
+                                    placeholder="Enter new password"
                                     register={register}
-                                    errors = {errors}
                                 />
                             </div>
                         </article>
                         <Button type="submit"
                                 className='signin-button'>
-                            Log in!
+                            Reset!
                         </Button>
                     </form>
 
@@ -66,7 +68,9 @@ async function handleFormSubmit(data) {
             </main>
         </>
     );
+
+
+
 }
 
-export default Login;
-
+export default PasswordChange;

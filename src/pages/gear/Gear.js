@@ -1,5 +1,5 @@
 import GearTile from "../../components/gearTile/GearTile";
-import BikeTile from "../../components/bikeTile/BikeTile";
+
 import React from "react";
 
 function Gear() {

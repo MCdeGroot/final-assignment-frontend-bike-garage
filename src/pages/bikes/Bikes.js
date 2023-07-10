@@ -28,7 +28,7 @@ function Bikes() {
                     }
                 })
                 setBikes(response.data);
-                console.log(response.data)
+                console.log(response.data) /// dit nog weghalen
             } catch (error) {
                 console.error(error)
             }
@@ -47,6 +47,7 @@ function Bikes() {
                         return (
                             <BikeTile
                                 key={bike.id}
+                                bikeType={bike.bikeType}
                                 brand={bike.brand}
                                 model={bike.model}
                                 name={bike.name}

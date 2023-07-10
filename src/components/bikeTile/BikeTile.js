@@ -2,15 +2,32 @@ import React from "react";
 import "./BikeTile.css"
 import {DotsThreeOutline} from "@phosphor-icons/react";
 import Button from "../button/Button";
+import {ReactComponent as TimeTrialBike} from "../../assets/timetrial.svg"
+import {ReactComponent as RoadBike} from "../../assets/roadbike.svg"
+import {ReactComponent as MountainBike} from "../../assets/mtb.svg"
 
 
-function BikeTile({brand, model, name, totalDistanceDriven, totalHoursDriven, groupSet, gearData}) {
+function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHoursDriven, groupSet, gearData}) {
+
+    let bikeIcon;
+    switch (bikeType) {
+        case "TIMETRIAL":
+            bikeIcon = <TimeTrialBike />;
+            break;
+        case "ROAD":
+            bikeIcon = <RoadBike/>;
+            break;
+        case "MOUNTAIN":
+            bikeIcon = <MountainBike />;
+            break;
+    }
+
     return (
         <>
             <div className="biketile-outer-wrapper">
                 <section className="biketile-top-styling">
                     <div className='biketile-top-name'>
-                        <img src="../../assets/roadbike.svg" alt=""/>
+                        {bikeIcon}
                         <h2>{brand} {model}</h2>
                     <Button className='icon-button-bike'>
                         <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>

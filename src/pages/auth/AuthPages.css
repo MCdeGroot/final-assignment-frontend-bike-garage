@@ -39,3 +39,9 @@
     gap: 0.5rem;
     padding: 1rem 3rem 3rem 3rem;
 }
+
+.error {
+    color: var(--color-primary-delete);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+}

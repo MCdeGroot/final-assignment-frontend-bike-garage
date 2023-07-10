@@ -3,8 +3,9 @@ import "./GearTile.css";
 
 import Button from "../button/Button";
 import {Icon} from '@iconify/react';
-import {ReactComponent as BikeIcon} from "../../assets/roadbike.svg"
-
+import {ReactComponent as Chain} from "../../assets/chain.svg"
+import {ReactComponent as Brake} from "../../assets/break.svg"
+import {ReactComponent as Cassette} from "../../assets/cassette.svg"
 function GearItem({partType}) {
     const [iconChangeEdit, toggleIconChangeEdit] = useState(true);
     const [iconChangeDelete, toggleIconChangeDelete] = useState(true);
@@ -50,12 +51,28 @@ const maxDistance = 5000;
         toggleIconChangeReset(true);
     }
 
+    let icon;
+    switch (partType) {
+        case "CHAIN":
+            icon = <Chain/>;
+            break;
+        case "BRAKE":
+            icon = <Brake/>;
+            break;
+        case "CASSETTE":
+            icon = <Cassette/>;
+            break;
+        default:
+            icon = null;
+    }
+
     return (
         <>
             <div className='gear-item-styling'>
                 <div className='gear-item-icon'>
-                    <BikeIcon/>
+                    {icon}
                     <h2>{partType}</h2>
+
                 </div>
                 <div className='gear-item-separation-line'></div>
                 <div
