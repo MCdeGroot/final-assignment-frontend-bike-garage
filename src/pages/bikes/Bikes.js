@@ -47,6 +47,7 @@ function Bikes() {
                         return (
                             <BikeTile
                                 key={bike.id}
+                                bikeType={bike.bikeType}
                                 brand={bike.brand}
                                 model={bike.model}
                                 name={bike.name}

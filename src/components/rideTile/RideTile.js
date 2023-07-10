@@ -22,12 +22,12 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                     </Button>
                 </section>
                 <div className='ride-separation-line-top'>
-                    {/*    scheidingslijn*/}
+
                 </div>
                 <section className='ridetile-middle-styling'>
                     <div className='ride-data'>
                         <div>
-                            {/*    Mathday*/}
+
                             <h4>{titleRide}</h4>
                             <p>{subTitleRide}</p>
                         </div>
