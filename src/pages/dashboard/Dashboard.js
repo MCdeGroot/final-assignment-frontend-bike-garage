@@ -57,8 +57,10 @@ function Dashboard() {
                                     timeRide={ride.timeRide}
                                     bike={`${ride.bike.brand} ${ride.bike.model}`}
                                     user={`${ride.user.firstName} ${ride.user.lastName}`}
-                                />
+                                /> {ride.reviewRating &&
+
                                 <RideReview review={ride.reviewRating}/>
+                            }
                             </div>
                         )
                     })
