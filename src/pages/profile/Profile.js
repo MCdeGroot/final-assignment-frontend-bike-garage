@@ -234,13 +234,13 @@ function Profile() {
                         }
                         {editProfile &&
 
-                        <Button className="signin-button" type="submit"> Save changes </Button>
+                        <Button className="signin-button" type="submit" onClick={()=>{setEditProfile(false)}}> Save changes </Button>
                         }
 
                     </form>
                     {!editProfile &&
 
-                    <Button className="signin-button" onClick={()=>{setEditProfile(true)}}>
+                    <Button className="signin-button" onClick={()=>{setEditProfile(!editProfile)}}>
                         Edit profile!
                     </Button>
                     }
