@@ -1,8 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
 import RideTile from "../../components/rideTile/RideTile";
+import "./DashBoard.css"
 import axios from "axios";
 import {PlusCircle} from "@phosphor-icons/react";
 import {AuthContext} from "../../context/AuthContext";
+import RideReview from "../../components/review/RideReview";
 
 
 function Dashboard() {
@@ -45,17 +47,21 @@ function Dashboard() {
                     <h1>Hier is het Dashboard</h1>
                     {ridesData.map((ride) => {
                         return (
-                            <RideTile
-                                titleRide={ride.titleRide}
-                                subTitleRide={ride.subTitleRide}
-                                distance={ride.distance}
-                                date = {ride.date}
-                                averagePower = {ride.averagePower}
-                                timeRide={ride.timeRide}
-                                bike = {`${ride.bike.brand} ${ride.bike.model}`}
-                                user={`${ride.user.firstName} ${ride.user.lastName}`}
-                                date
-                            ></RideTile>
+                            <div key={ride.id} className="ride-tile-wrapper">
+                                <RideTile
+                                    titleRide={ride.titleRide}
+                                    subTitleRide={ride.subTitleRide}
+                                    distance={ride.distance}
+                                    date={ride.date}
+                                    averagePower={ride.averagePower}
+                                    timeRide={ride.timeRide}
+                                    bike={`${ride.bike.brand} ${ride.bike.model}`}
+                                    user={`${ride.user.firstName} ${ride.user.lastName}`}
+                                /> {ride.reviewRating &&
+
+                                <RideReview review={ride.reviewRating}/>
+                            }
+                            </div>
                         )
                     })
                     }

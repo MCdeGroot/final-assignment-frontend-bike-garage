@@ -1,0 +1,54 @@
+.ride-review-wrapper {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 50px;
+    height: 50px;
+    border:3px solid var(--color-primary-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: var(--color-primary-background);
+}
+
+.review-color-1 {
+    color: rgb(255, 0, 0);
+}
+
+.review-color-2 {
+    color: rgb(230, 26, 0);
+}
+
+.review-color-3 {
+    color: rgb(204, 51, 0);
+}
+
+.review-color-4 {
+    color: rgb(179, 77, 0);
+}
+
+.review-color-5 {
+    color: rgb(153, 102, 0);
+}
+
+.review-color-6 {
+    color: rgb(128, 128, 0);
+}
+
+.review-color-7 {
+    color: rgb(102, 153, 0);
+}
+
+.review-color-8 {
+    color: rgb(77, 179, 0);
+}
+
+.review-color-9 {
+    color: rgb(51, 204, 0);
+}
+
+.review-color-10 {
+    color: rgb(26, 230, 0);
+}

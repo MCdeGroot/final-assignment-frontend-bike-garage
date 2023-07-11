@@ -4,7 +4,7 @@ import GearItem from "./GearItem";
 
 /*TODO mijn plaatjes laden niet*/
 
-function GearTile() {
+function GearTile( {children} ) {
     return (
         <>
             <div className="geartile-outer-wrapper">
@@ -19,7 +19,7 @@ function GearTile() {
                     <div className='gear-separation-line-middle'></div>
                 </section>
                 <section className='geartile-bottom-styling'>
-                    <GearItem></GearItem>
+                    {children}
                 </section>
             </div>
         </>
