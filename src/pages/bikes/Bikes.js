@@ -7,7 +7,7 @@ import {PlusCircle} from "@phosphor-icons/react";
 import {AuthContext} from "../../context/AuthContext";
 
 function Bikes() {
-    const {isAuth, user, logout } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [bikes, setBikes] = useState([]);
