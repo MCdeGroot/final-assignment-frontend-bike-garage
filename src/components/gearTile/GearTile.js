@@ -19,7 +19,7 @@ function GearTile( {children} ) {
                     <div className='gear-separation-line-middle'></div>
                 </section>
                 <section className='geartile-bottom-styling'>
-                    {children}
+                    <GearItem></GearItem>
                 </section>
             </div>
         </>

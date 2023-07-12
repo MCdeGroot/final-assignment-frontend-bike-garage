@@ -5,9 +5,10 @@ import {ChatText} from "@phosphor-icons/react";
 import {DownloadSimple} from "@phosphor-icons/react";
 import {Export} from "@phosphor-icons/react";
 import {DotsThreeOutline} from "@phosphor-icons/react";
+import {convertTimeCode} from "../../helper/convertTimeCode";
 
 
-function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, user}) {
+function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, user, onClick}) {
     return (
         <>
             <div className="ridetile-outer-wrapper">
@@ -39,7 +40,7 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                             </div>
                             <div className='ride-separation-line-middle'></div>
                             <div>
-                                <p>{timeRide} uur</p>
+                                <p>{convertTimeCode(timeRide)}</p>
                                 <h4>Tijd</h4>
                             </div>
                             <div className='ride-separation-line-middle'></div>
@@ -58,7 +59,7 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                         <div className='ride-separation-line-bottom'></div>
                         <Button className='icon-button'><Export width='2rem' height='2rem'/></Button>
                         <div className='ride-separation-line-bottom'></div>
-                        <Button className='icon-button'><ChatText width='2rem' height='2rem'/></Button>
+                        <Button className='icon-button' type="submit" onClick={onClick}><ChatText width='2rem' height='2rem'/></Button>
                     </div>
 
                 </section>

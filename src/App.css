@@ -86,15 +86,28 @@ main {
 
 .inner-container {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     flex: 0 1 1200px; /*1200px gepakt volgens deze website https://van-ons.nl/blog/visueel-ontwerp/specificaties-van-een-goed-webdesign/*/
     padding: 1rem;
-    height: 100%
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-blue);
+}
+.inner-container::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary-blue);
+    border-radius: 5px; /* Optioneel: voeg afgeronde hoeken toe aan de thumb */
+
+}
+
+.inner-container::-webkit-scrollbar-track {
+    background-color: var(--color-primary-blue);
 }
 
 .flex-row {
     display: flex;
+    position: relative;
     flex-direction: row;
     align-items: center;
 }
