@@ -1,8 +1,9 @@
 import React from "react";
 import FormInputField from "./FormInputField";
 import Button from "../button/Button";
+import FormInputSelect from "./FormInputSelect";
 
-function AddRide({onSubmit, register, errors, closeModal}) {
+function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
 
     const isBefore = (date) => {
         if (!date) {
@@ -13,6 +14,15 @@ function AddRide({onSubmit, register, errors, closeModal}) {
         console.log(date)
         return date > today;
     };
+
+    function generateOptions() {
+        return userBikesData.map((bike) => ({
+            label: `${bike.brand} ${bike.model}`,
+            value: bike.id
+        }));
+    }
+
+    const options = generateOptions();
 
     return (
         <form className='modal-wrapper' onSubmit={onSubmit}>
@@ -76,13 +86,19 @@ function AddRide({onSubmit, register, errors, closeModal}) {
                             }
                         }}
                     />
-                    {/*<FormInputField*/}
-                    {/*    name="timeRide"*/}
-                    {/*    label="Time"*/}
-                    {/*    type="time"*/}
-                    {/*    register={register}*/}
-                    {/*    errors={errors}*/}
-                    {/*/>*/}
+                    <FormInputField
+                        name="timeRide"
+                        label="Time"
+                        type="time"
+                        register={register}
+                        errors={errors}
+                    />
+                    <FormInputSelect
+                        name="bikeType"
+                        label="Bike type"
+                        options={options}
+                        register={register}
+                    />
                 </div>
             </article>
             <Button type="submit"

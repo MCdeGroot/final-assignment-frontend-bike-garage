@@ -58,6 +58,7 @@ function AuthContextProvider({children}) {
                 user: {
                     username: response.data.name,
                     authorities: response.data.authorities.map(authority => authority.authority)
+                    // bikes: response.data.bikes.map(bike => bike.id)
                 },
                 status: "done"
             })

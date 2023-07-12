@@ -19,6 +19,7 @@ function Dashboard() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [ridesData, setRidesData] = useState([]);
+    const [userBikesData, setUserBikesData] = useState([]);
     const [refresh, setRefresh] = useState(false);
     const [icon, toggleIcon] = useState(false);
 
@@ -86,6 +87,25 @@ function Dashboard() {
         fetchRideData();
     }, [refresh])
 
+    async function getBikesData(){
+        const storedToken = localStorage.getItem('token');
+        setLoading(true);
+        try {
+            setError(false);
+            const response = await axios.get(`http://localhost:8080/bikes/${user.username}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`
+                }
+            })
+            setUserBikesData(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
     async function handleFormSubmit(data) {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
@@ -107,12 +127,39 @@ function Dashboard() {
 
         }
         setLoading(false);
-        setRefresh(true);
+        setRefresh(!refresh);
         closeModal();
     }
 
     async function handleFormRideSubmit(data){
+        const storedToken = localStorage.getItem('token');
+        setLoading(true)
+        try {
+            const response = await axios.post(`http://localhost:8080/rides?${user.id}`, {
+                titleRide : data.titleRide,
+                subTitleRide : data.subTitleRide,
+                distance : data.distance,
+                timeRide : data.timeRide,
+                averagePower : data.averagePower,
+                normalizedPower : data.normalizedPower,
+                bike : data.bike,
+                username : user.username
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`
+                }
+            });
+            console.log(response);
 
+        } catch (error) {
+            setError(true);
+            console.error(error);
+
+        }
+        setLoading(false);
+        setRefresh(!refresh);
+        closeModal();
     }
 
     return (
@@ -207,6 +254,7 @@ function Dashboard() {
                                      register={register}
                                      errors={errors}
                                      onClick={closeModal}
+                                     userBikesData={userBikesData}
                             >
                             </AddRide>
                         </Modal>
@@ -217,6 +265,7 @@ function Dashboard() {
                             className='icon-button-add'>
                             <PlusCircle size="4rem" weight={icon ? "fill" : "regular"} onClick={() => {
                                 openModalRide();
+                                getBikesData();
                                 toggleIcon(!icon);
                                 console.log(icon);
                             }}/>
