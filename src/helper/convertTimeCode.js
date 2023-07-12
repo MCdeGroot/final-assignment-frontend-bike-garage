@@ -5,7 +5,6 @@ export function convertTimeCode(timeCode) {
     if (match != null) {
         const hours = parseInt(match[1]);
         const minutes = parseInt(match[2]);
-
         return `${hours}u ${minutes}m`;
         } else {
         const regex2 = /PT(\d+)M/;
