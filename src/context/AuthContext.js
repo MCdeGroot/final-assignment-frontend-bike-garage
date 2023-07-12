@@ -12,7 +12,6 @@ function AuthContextProvider({children}) {
         user: null,
         status: "pending"
     });
-
     const navigate = useNavigate();
 
     // Stap 1: Gebruik useEffect om te checken of er een token in de localstorage zit
@@ -26,6 +25,7 @@ function AuthContextProvider({children}) {
     useEffect(() => {
         // check of er nog een token in Local Storage staat en of deze nog geldig is
         const storedToken = localStorage.getItem('token');
+
 
         if (storedToken && validateToken(storedToken)) {
             console.log("Looks like there is a valid token in the local storage")
@@ -57,7 +57,7 @@ function AuthContextProvider({children}) {
                 isAuth: true,
                 user: {
                     username: response.data.name,
-                    authority: response.data.authorities[0].authority
+                    authorities: response.data.authorities.map(authority => authority.authority)
                 },
                 status: "done"
             })

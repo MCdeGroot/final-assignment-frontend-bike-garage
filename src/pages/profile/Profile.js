@@ -3,14 +3,12 @@ import '../../App.css';
 import axios from "axios";
 import Button from "../../components/button/Button";
 import {AuthContext} from "../../context/AuthContext";
-import BikeTile from "../../components/bikeTile/BikeTile";
-import {NavLink} from "react-router-dom";
-import {PlusCircle} from "@phosphor-icons/react";
 import FormInputField from "../../components/formInput/FormInputField";
 import {useForm} from "react-hook-form";
 
-function Profile() {
 
+function Profile() {
+    const storedToken = localStorage.getItem('token');
     const {user} = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
     const [editProfile, setEditProfile] = useState(false);
@@ -22,10 +20,10 @@ function Profile() {
     useEffect(() => {
         const controller = new AbortController();
 
+
         async function fetchUserData() {
-            const storedToken = localStorage.getItem('token');
             toggleLoading(true)
-            console.log(storedToken);
+
             try {
                 toggleError(false);
                 const response = await axios.get(`http://localhost:8080/users/${user.username}`, {
@@ -36,18 +34,17 @@ function Profile() {
                     }
                 })
                 setUserData(response.data);
-                console.log(response.data); /// dit nog weghalen
-
+                toggleLoading(false);
             } catch (error) {
-                console.error(error)
+                toggleError(true);
+                console.error(error);
             }
         }
 
         fetchUserData();
-    }, [])
+    }, []) //TODO dit gaf Webstorm aan, maar in mijn geval hoeft dit toch helemaal niet?
 
     async function handleFormSubmit(data) {
-        const storedToken = localStorage.getItem('token');
         toggleLoading(true)
         try {
             const response = await axios.put(`http://localhost:8080/users/${userData.username}`, {
@@ -55,20 +52,23 @@ function Profile() {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 dateOfBirth: data.dateOfBirth
-            }, {headers: {
-                'Content-Type': 'application/json',
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
                     Authorization: `Bearer ${storedToken}`
-            }});
+                }
+            });
             console.log(response);
 
         } catch (error) {
-            console.error(error);
             toggleError(true);
+            console.error(error);
+
         }
         toggleLoading(false);
     }
 
-    function handleChange(e){
+    function handleChange(e) {
         const {name, value} = e.target;
         setUserData((previousValue) => ({
             ...previousValue,
@@ -118,7 +118,7 @@ function Profile() {
                                     register={register}
                                     errors={errors}
                                     value={userData.email}
-                                    onChange = {handleChange}
+                                    onChange={handleChange}
                                 />
                                 <FormInputField
                                     name="firstName"
@@ -126,7 +126,8 @@ function Profile() {
                                     type="text"
                                     placeholder="Mathieu"
                                     validationRules={
-                                        {disabled: !editProfile,
+                                        {
+                                            disabled: !editProfile,
                                             required: {
                                                 value: true,
                                                 message: "First name is required!"
@@ -136,7 +137,7 @@ function Profile() {
                                     register={register}
                                     errors={errors}
                                     value={userData.firstName}
-                                    onChange = {handleChange}
+                                    onChange={handleChange}
                                 />
                                 <FormInputField
                                     name="lastName"
@@ -144,7 +145,8 @@ function Profile() {
                                     type="text"
                                     placeholder="van der Poel"
                                     validationRules={
-                                        {disabled: !editProfile,
+                                        {
+                                            disabled: !editProfile,
                                             required: {
                                                 value: true,
                                                 message: "Last name is required!"
@@ -154,7 +156,7 @@ function Profile() {
                                     register={register}
                                     errors={errors}
                                     value={userData.lastName}
-                                    onChange = {handleChange}
+                                    onChange={handleChange}
                                 />
                                 <FormInputField
                                     name="dateOfBirth"
@@ -169,7 +171,7 @@ function Profile() {
                                     register={register}
                                     errors={errors}
                                     value={userData.dateOfBirth}
-                                    onChange = {handleChange}
+                                    onChange={handleChange}
                                 />
                                 <FormInputField
                                     name="role"
@@ -202,8 +204,8 @@ function Profile() {
                                 <FormInputField
                                     name="totalDistanceDriven"
                                     label="Total distance driven"
-                                    type="number"
-                                    placeholder="0"
+                                    type="text"
+                                    placeholder="0 km"
                                     validationRules={
                                         {
                                             disabled: true,
@@ -211,7 +213,7 @@ function Profile() {
                                     }
                                     register={register}
                                     errors={errors}
-                                    value={userData.totalDistanceDriven}
+                                    value={`${Math.round(userData.totalDistanceDriven)} km`}
                                 />
                                 <FormInputField
                                     name="numberOfBikes"
@@ -229,26 +231,23 @@ function Profile() {
                                 />
 
 
-
                             </div>
                         }
-                        {editProfile &&
-
-                        <Button className="signin-button" type="submit" onClick={()=>{setEditProfile(false)}}> Save changes </Button>
-                        }
-
+                        {editProfile && <Button className="signin-button" type="submit" onClick={() => {
+                            setEditProfile(false)
+                        }}> Save changes </Button>}
+                        {error && <p>{error}</p>}
                     </form>
                     {!editProfile &&
 
-                    <Button className="signin-button" onClick={()=>{setEditProfile(!editProfile)}}>
-                        Edit profile!
-                    </Button>
+                        <Button className="signin-button" onClick={() =>
+                            setEditProfile(!editProfile)
+                        }>
+                            {loading ? "Loading" : "Edit profile!"}
+                        </Button>
                     }
                 </div>
-
             </main>
-
-
         </>
     );
 }

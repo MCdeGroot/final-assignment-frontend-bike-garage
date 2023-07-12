@@ -14,8 +14,7 @@ import AddBike from "./pages/bikes/AddBike";
 import {AuthContext} from "./context/AuthContext";
 
 function App() {
-    const {isAuth, authority} = useContext(AuthContext);
-    console.log(isAuth);
+    const {isAuth} = useContext(AuthContext);
 
     return (
         <>
@@ -28,7 +27,7 @@ function App() {
                 <Route path="/rides" element={isAuth ? <Dashboard/> : <Navigate to="/login"/>}/>
                 <Route path="/bikes" element={isAuth ? <Bikes/> : <Navigate to="/login"/>}/>
                 <Route path="/bikes/add" element={isAuth ? <AddBike/> : <Navigate to="/login"/>}/>
-                <Route path="/gear/:id" element={isAuth ? <Gear/> : <Navigate to="/login"/>}/>
+                <Route path="/gear" element={isAuth ? <Gear/> : <Navigate to="/login"/>}/>
             </Routes>
             <Footer></Footer>
         </>

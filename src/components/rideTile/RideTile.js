@@ -5,9 +5,10 @@ import {ChatText} from "@phosphor-icons/react";
 import {DownloadSimple} from "@phosphor-icons/react";
 import {Export} from "@phosphor-icons/react";
 import {DotsThreeOutline} from "@phosphor-icons/react";
+import Modal from "react-modal";
 
 
-function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, user}) {
+function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, user, onClick}) {
     return (
         <>
             <div className="ridetile-outer-wrapper">
@@ -58,7 +59,7 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                         <div className='ride-separation-line-bottom'></div>
                         <Button className='icon-button'><Export width='2rem' height='2rem'/></Button>
                         <div className='ride-separation-line-bottom'></div>
-                        <Button className='icon-button'><ChatText width='2rem' height='2rem'/></Button>
+                        <Button className='icon-button' type="submit" onClick={onClick}><ChatText width='2rem' height='2rem'/></Button>
                     </div>
 
                 </section>

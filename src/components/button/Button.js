@@ -2,7 +2,7 @@ import React from "react";
 import './Button.css';
 
 
-function Button({children, type, onClick, onMouseDown, onMouseUp,className}) {
+function Button({children, type, onClick, onMouseDown, onMouseUp,className, disabled}) {
 
 
     return (
@@ -12,6 +12,7 @@ function Button({children, type, onClick, onMouseDown, onMouseUp,className}) {
             onClick={onClick}
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
+            disabled={disabled}
         >
             {children}
         </button>
