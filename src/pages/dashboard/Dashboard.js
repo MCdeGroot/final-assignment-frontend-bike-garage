@@ -51,6 +51,8 @@ function Dashboard() {
         setIsOpen(false);
     }
 
+    //TODO deze handlesubmit nog goed zetten, want nu doet ie niet updateen na een review
+
     useEffect(() => {
         const controller = new AbortController;
 
@@ -67,14 +69,14 @@ function Dashboard() {
                     }
                 })
                 setRidesData(response.data);
-                console.log(response.data); /// dit nog weghalen
+                console.log(response.data);
             } catch (error) {
                 console.error(error)
             }
         }
 
         fetchRideData();
-    }, [handleFormSubmit])
+    }, [handleSubmit])
 
     async function handleFormSubmit(data) {
         const storedToken = localStorage.getItem('token');
@@ -146,11 +148,14 @@ function Dashboard() {
                         </Modal>}
 
                     <h1>Hier is het Dashboard</h1>
-                    {ridesData.map((ride) => {
+                    {ridesData
+                        .sort((a,b) => new Date(b.date) - new Date(a.date) )
+                        .map((ride) => {
                         return (
                             <div key={ride.id} className="ride-tile-wrapper">
 
                                 <RideTile
+
                                     titleRide={ride.titleRide}
                                     subTitleRide={ride.subTitleRide}
                                     distance={ride.distance}
