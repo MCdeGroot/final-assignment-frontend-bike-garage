@@ -86,6 +86,7 @@ main {
 
 .inner-container {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     flex: 0 1 1200px; /*1200px gepakt volgens deze website https://van-ons.nl/blog/visueel-ontwerp/specificaties-van-een-goed-webdesign/*/
@@ -106,6 +107,7 @@ main {
 
 .flex-row {
     display: flex;
+    position: relative;
     flex-direction: row;
     align-items: center;
 }

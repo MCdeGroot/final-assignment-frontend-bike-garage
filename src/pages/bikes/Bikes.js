@@ -41,7 +41,7 @@ function Bikes() {
     return (
         <>
             <main className='outer-container'>
-                <div className='inner-container'>
+                <div className='inner-container-bikes'>
                     <h1>Hier zijn de bikes</h1>
                     {bikes.map((bike) => {
                         return (
@@ -57,9 +57,9 @@ function Bikes() {
                     })
                     }
                     <NavLink to="/bikes/add">
-                        {user.authority === 'ROLE_USER' && < Button>
+                        <Button>
                             <PlusCircle size="2rem" color="#5f558c" />
-                        </Button> }
+                        </Button>
                     </NavLink>
 
                 </div>
