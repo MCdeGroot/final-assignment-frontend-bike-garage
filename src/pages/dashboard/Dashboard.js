@@ -108,6 +108,11 @@ function Dashboard() {
         }
         setLoading(false);
         setRefresh(true);
+        closeModal();
+    }
+
+    async function handleFormRideSubmit(data){
+
     }
 
     return (
@@ -150,8 +155,7 @@ function Dashboard() {
                                         </div>
                                     </article>
                                     <Button type="submit"
-                                            className='signin-button'
-                                            onClick={closeModal}>
+                                            className='signin-button'>
                                         Add review!
                                     </Button>
                                 </form>
@@ -199,7 +203,7 @@ function Dashboard() {
                             className="icon-button-modal"
                             onClick={closeModal}
                         ><X color="#1989AC" width='2rem' height='2rem'/></Button>
-                            <AddRide onSubmit={handleSubmit(handleFormSubmit)}
+                            <AddRide onSubmit={handleSubmit(handleFormRideSubmit)}
                                      register={register}
                                      errors={errors}
                                      onClick={closeModal}

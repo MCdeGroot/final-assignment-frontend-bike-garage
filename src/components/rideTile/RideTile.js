@@ -5,7 +5,7 @@ import {ChatText} from "@phosphor-icons/react";
 import {DownloadSimple} from "@phosphor-icons/react";
 import {Export} from "@phosphor-icons/react";
 import {DotsThreeOutline} from "@phosphor-icons/react";
-import Modal from "react-modal";
+import {convertTimeCode} from "../../helper/convertTimeCode";
 
 
 function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, user, onClick}) {
@@ -40,7 +40,7 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                             </div>
                             <div className='ride-separation-line-middle'></div>
                             <div>
-                                <p>{timeRide} uur</p>
+                                <p>{convertTimeCode(timeRide)}</p>
                                 <h4>Tijd</h4>
                             </div>
                             <div className='ride-separation-line-middle'></div>
