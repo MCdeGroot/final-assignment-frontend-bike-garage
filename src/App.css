@@ -9,7 +9,7 @@
 
     --color-primary-background: hsla(30, 43%, 97%, 1);
     --color-primary-blue: hsla(194, 75%, 39%, 1);
-    --color-primary-blue-hover: hsla(194, 75%, 39%, 0.75);
+    --color-primary-blue-before-hover: hsla(194, 75%, 39%, 0.75);
     --color-beforehover-grey: hsla(196, 8%, 28%, 1);
     --color-primary-delete: hsla(352, 68%, 55%, 1);
     --color-black-inputfield-background: hsla(0, 0%, 95%, 1);

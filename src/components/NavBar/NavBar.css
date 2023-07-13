@@ -45,7 +45,7 @@ nav a:visited {
 }
 
 a:hover {
-    color: var(--color-primary-blue-hover)
+    color: var(--color-primary-blue-before-hover)
 }
 
 .active-nav-link {
