@@ -44,6 +44,8 @@ function Dashboard() {
 
     const [modalReviewIsOpen, setModalReviewIsOpen] = React.useState(false);
     const [modalRideIsOpen, setModalRideIsOpen] = React.useState(false);
+    const [modalRideEditIsOpen, setModalRideEditIsOpen] = React.useState(false);
+    const [modalRideDeleteIsOpen, setModalRideDeleteIsOpen] = React.useState(false);
     const [selectedRide, setSelectedRide] = useState(null);
 
     function openModalReview(ride) {
@@ -55,10 +57,24 @@ function Dashboard() {
         setModalRideIsOpen(true);
     }
 
+    function openModalRideEdit(ride) {
+        setModalRideEditIsOpen(true);
+        setSelectedRide(ride);
+    }
+    function openModalDeleteRide(){
+        setModalRideDeleteIsOpen(true);
+    }
+
     function closeModal() {
         setModalReviewIsOpen(false);
         setModalRideIsOpen(false);
+        setModalRideEditIsOpen(false);
         toggleIcon(false);
+        closeDeleteModal();
+    }
+
+    function closeDeleteModal(){
+        setModalRideDeleteIsOpen(false);
     }
 
     //TODO deze handlesubmit nog goed zetten, want nu doet ie niet updateen na een review
@@ -105,9 +121,6 @@ function Dashboard() {
         }
     }
 
-
-
-
     async function handleFormSubmit(data) {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
@@ -132,6 +145,8 @@ function Dashboard() {
         setRefresh(!refresh);
         closeModal();
     }
+
+
 
     async function handleFormRideSubmit(data){
         const urlData = data.bikeId;
@@ -165,13 +180,33 @@ function Dashboard() {
         closeModal();
     }
 
+    async function deleteRide(){
+        const storedToken = localStorage.getItem('token');
+        setLoading(true)
+        try {
+            await axios.delete(`http://localhost:8080/rides/${selectedRide.id}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${storedToken}`
+                    }
+                });
+            setRefresh(!refresh);
+            closeModal();
+        }catch (error) {
+            setError(true);
+            console.error(error);
+        }
+        setLoading(false);
+
+    }
+
     return (
         <>
             <main className='outer-container'>
                 <div className='inner-container'>
                     {user.authorities.includes('ROLE_TRAINER') &&
                         <div>
-
                             <Modal
                                 isOpen={modalReviewIsOpen} //if modal is open
                                 onRequestClose={closeModal} //what to do after modal close
@@ -212,6 +247,56 @@ function Dashboard() {
                             </Modal>
                         </div>}
 
+                        <Modal
+                            isOpen={modalRideEditIsOpen} //if modal is open
+                            onRequestClose={closeModal} //what to do after modal close
+                            style={customStyles}
+                            contentLabel=""
+                        ><Button
+                            className="icon-button-modal"
+                            onClick={closeModal}
+                        ><X color="#1989AC" width='2rem' height='2rem'/></Button>
+                            <Button
+                                type="submit"
+                                className='signin-button'
+                                onClick={()=>{
+                                    console.log(selectedRide);
+                                    setModalRideDeleteIsOpen(true);
+                                }
+                            }
+                            >
+                                Delete Ride!
+                            </Button>
+                            <Button
+                                type="submit"
+                                className='signin-button'
+                                // onClick={openModalDeleteRide}
+                            >
+                                Edit Ride!
+                            </Button>
+                        </Modal>
+                    <Modal
+                        isOpen={modalRideDeleteIsOpen} //if modal is open
+                        onRequestClose={closeDeleteModal} //what to do after modal close
+                        style={customStyles}
+                        contentLabel=""
+                    >
+                        <Button
+                            className="icon-button-modal"
+                            onClick={closeDeleteModal}
+                        ><X color="#1989AC" width='2rem' height='2rem'/>
+                        </Button>
+                        <h4>You are sure you want to delete this ride?</h4>
+                        <Button
+                        onClick={deleteRide}>
+                            Yes
+                        </Button>
+                        <Button
+                        onClick={closeDeleteModal}>
+                            No
+                        </Button>
+
+                    </Modal>
                     <h1>Hier is het Dashboard</h1>
                     {ridesData
                         .sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -230,9 +315,14 @@ function Dashboard() {
                                         bike={`${ride.bike.brand} ${ride.bike.model}`}
                                         bikeType={ride.bike.bikeType}
                                         user={`${ride.user.firstName} ${ride.user.lastName}`}
-                                        onClick={() => {
-                                            if (ride.reviewRating === null) {
+                                        onClickReview={() => {
+                                            if (ride.reviewRating === null && ride.user.username != user.username) {
                                                 openModalReview(ride);
+                                            }
+                                        }}
+                                        onClickEditRide={() => {
+                                            if ( ride.user.username === user.username) {
+                                                openModalRideEdit(ride);
                                             }
                                         }}
 

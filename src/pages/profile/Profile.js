@@ -83,7 +83,6 @@ function Profile() {
                 <div className='inner-container'>
                     <h1>Zie hier! Uw profiel pagina!</h1>
                     <form className='form-input-items' onSubmit={handleSubmit(handleFormSubmit)}>
-
                         {userData &&
                             <div>
 
