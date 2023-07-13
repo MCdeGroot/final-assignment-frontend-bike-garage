@@ -10,6 +10,7 @@ import Button from "../../components/button/Button";
 import FormInputField from "../../components/formInput/FormInputField";
 import {useForm} from "react-hook-form";
 import AddRide from "../../components/formInput/AddRide";
+import {convertTimeToString} from "../../helper/convertTimeCode";
 
 
 function Dashboard() {
@@ -83,7 +84,6 @@ function Dashboard() {
                 console.error(error)
             }
         }
-
         fetchRideData();
     }, [refresh])
 
@@ -142,7 +142,8 @@ function Dashboard() {
                 titleRide : data.titleRide,
                 subTitleRide : data.subTitleRide,
                 distance : data.distance,
-                date : "2023-06-15T12:30:00",
+                timeRide : convertTimeToString(data.timeRide),
+                date : data.date,
                 averagePower : data.averagePower,
                 normalizedPower : data.normalizedPower,
                 username : user.username
@@ -275,6 +276,7 @@ function Dashboard() {
                         </Button>
                     </div>
                 </div>
+
             </main>
         </>
     );

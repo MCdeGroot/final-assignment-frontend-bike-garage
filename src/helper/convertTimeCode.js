@@ -20,6 +20,22 @@ export function convertTimeCode(timeCode) {
     return '';
 }
 
+export function convertTimeToString(time) {
+    const timeRegex = /(\d{2}):(\d{2})/; // Reguliere expressie om de tijd te matchen in het formaat "HH:MM"
+    const match = time.match(timeRegex);
+
+    if (match) {
+        const hours = parseInt(match[1]);
+        const minutes = parseInt(match[2]);
+
+        // Bouw de tijdstring in het gewenste formaat "PT2H11M51.3S"
+        return `PT${hours}H${minutes}M`;
+    }
+
+    return ''; // Retourneer een lege string als de invoer niet overeenkomt met het verwachte formaat
+}
+
+
 // export function convertTimeToString(time) {
 //     const timeString = time;
 //

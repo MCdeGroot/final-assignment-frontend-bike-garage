@@ -70,25 +70,25 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
                             }
                         }
                     />
-                    {/*<FormInputField*/}
-                    {/*    name="date"*/}
-                    {/*    label="Date"*/}
-                    {/*    type="date"*/}
-                    {/*    placeholder=""*/}
-                    {/*    register={register}*/}
-                    {/*    errors={errors}*/}
-                    {/*    // validationRules={{*/}
-                    {/*    //     required: {*/}
-                    {/*    //         value: true,*/}
-                    {/*    //         message: "Date is required!"*/}
-                    {/*    //     }*/}
-                    {/*    //     // ,*/}
-                    {/*    //     // validate: {*/}
-                    {/*    //     //     isBefore,*/}
-                    {/*    //     //     message: "Date must be today or in the past"*/}
-                    {/*    //     // }*/}
-                    {/*    // }}*/}
-                    {/*/>*/}
+                    <FormInputField
+                        name="date"
+                        label="Date"
+                        type="datetime-local"
+                        placeholder=""
+                        register={register}
+                        errors={errors}
+                        // validationRules={{
+                        //     required: {
+                        //         value: true,
+                        //         message: "Date is required!"
+                        //     }
+                        //     // ,
+                        //     // validate: {
+                        //     //     isBefore,
+                        //     //     message: "Date must be today or in the past"
+                        //     // }
+                        // }}
+                    />
                     <FormInputField
                         name="averagePower"
                         label="Average power"
@@ -113,13 +113,13 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
                         register={register}
                         errors={errors}
                     />
-                    {/*<FormInputField*/}
-                    {/*    name="timeRide"*/}
-                    {/*    label="Duration"*/}
-                    {/*    type="time"*/}
-                    {/*    register={register}*/}
-                    {/*    errors={errors}*/}
-                    {/*/>*/}
+                    <FormInputField
+                        name="timeRide"
+                        label="Duration"
+                        type="time"
+                        register={register}
+                        errors={errors}
+                    />
                     <FormInputSelect
                         name="bikeId"
                         label="Bike"
