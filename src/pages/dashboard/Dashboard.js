@@ -201,6 +201,8 @@ function Dashboard() {
 
     }
 
+    // TODO opschonen deze pagina en kijken of we bepaalde zaken niet beter als component kunnen doorgeven etc. Nu erg onoverzichtelijk geworden door alle modals.
+    // TODO putmapping ride toevoegen
     return (
         <>
             <main className='outer-container'>
