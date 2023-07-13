@@ -1,5 +1,5 @@
 .signin-button {
-    background-color: var(--color-primary-blue);
+    background-color: var(--color-primary-blue-before-hover);
     color: var(--color-primary-background);
     padding: 1rem 2rem;
     max-width: 200px;
@@ -8,7 +8,7 @@
 }
 
 .signin-button:hover{
-    background-color: var(--color-primary-blue-hover);
+    background-color: var(--color-primary-blue);
     color: var(--color-primary-background);
     border: 3px solid var(--color-primary-blue);
 }
@@ -29,7 +29,7 @@
     right: 0;
     background: none;
     border: none;
-    color: var(--color-primary-blue-hover);
+    color: var(--color-primary-blue-before-hover);
 }
 
 .icon-button-add:hover{

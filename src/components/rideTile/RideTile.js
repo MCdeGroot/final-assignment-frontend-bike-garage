@@ -6,19 +6,19 @@ import {DownloadSimple} from "@phosphor-icons/react";
 import {Export} from "@phosphor-icons/react";
 import {DotsThreeOutline} from "@phosphor-icons/react";
 import {convertTimeCode} from "../../helper/convertTimeCode";
+import {setBikeIcon} from "../../helper/setBikeIcon";
 
-
-function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, user, onClick}) {
+function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, bikeType, user, onClickReview, onClickEditRide}) {
     return (
         <>
             <div className="ridetile-outer-wrapper">
                 <section className="ridetile-top-styling">
-                    <img src="../../assets/roadbike.svg" alt=""/>
+                    {setBikeIcon({bikeType})}
                     <div>
                         <h5>{user} </h5>
                         <p>Date {date}</p>
                     </div>
-                    <Button className='icon-button'>
+                    <Button className='icon-button' type="submit" onClick={onClickEditRide}>
                         <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>
                     </Button>
                 </section>
@@ -40,7 +40,7 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                             </div>
                             <div className='ride-separation-line-middle'></div>
                             <div>
-                                <p>{convertTimeCode(timeRide)}</p>
+                                <p>{convertTimeCode({timeRide})}</p>
                                 <h4>Tijd</h4>
                             </div>
                             <div className='ride-separation-line-middle'></div>
@@ -59,7 +59,7 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                         <div className='ride-separation-line-bottom'></div>
                         <Button className='icon-button'><Export width='2rem' height='2rem'/></Button>
                         <div className='ride-separation-line-bottom'></div>
-                        <Button className='icon-button' type="submit" onClick={onClick}><ChatText width='2rem' height='2rem'/></Button>
+                        <Button className='icon-button' type="submit" onClick={onClickReview}><ChatText width='2rem' height='2rem'/></Button>
                     </div>
 
                 </section>
