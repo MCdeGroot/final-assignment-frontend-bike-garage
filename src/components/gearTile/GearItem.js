@@ -6,18 +6,19 @@ import {Icon} from '@iconify/react';
 import {ReactComponent as Chain} from "../../assets/chain.svg"
 import {ReactComponent as Brake} from "../../assets/break.svg"
 import {ReactComponent as Cassette} from "../../assets/cassette.svg"
-function GearItem({partType}) {
+import {ReactComponent as Tire} from "../../assets/cassette.svg";
+
+function GearItem({partType, distanceDriven, maxDistance}) {
     const [iconChangeEdit, toggleIconChangeEdit] = useState(true);
     const [iconChangeDelete, toggleIconChangeDelete] = useState(true);
     const [iconChangeReset, toggleIconChangeReset] = useState(true);
     const [currentDistanceDriven, setCurrentDistanceDriven] = useState(0);
+    const [partTypeString, setPartTypeString] = useState('');
     const [hoveredDistance, setHoveredDistance] = useState(null);
 
-const maxDistance = 5000;
     //voor nu even wat defaultwaarden berekenen dit wordt straks uit de database gehaald
     function fetchData() {
-        const randomDistance = Math.random() * maxDistance;
-        setCurrentDistanceDriven(randomDistance);
+        setCurrentDistanceDriven(distanceDriven);
     }
 
     useEffect(() => {
@@ -51,27 +52,47 @@ const maxDistance = 5000;
         toggleIconChangeReset(true);
     }
 
-    let icon;
-    switch (partType) {
-        case "CHAIN":
-            icon = <Chain/>;
-            break;
-        case "BRAKE":
-            icon = <Brake/>;
-            break;
-        case "CASSETTE":
-            icon = <Cassette/>;
-            break;
-        default:
-            icon = null;
+    function setIcon(partType) {
+        switch (partType) {
+            case "CHAIN":
+                return <Chain width='40'/>;
+                break;
+            case "FRONTBRAKEPAD":
+                return <Brake width='40'/>;
+                break;
+            case "REARBRAKEPAD":
+                return <Brake width='40'/>;
+                break;
+            case "CASSETTE":
+                return <Cassette width='40'/>;
+                break;
+            case "FRONTTIRE":
+                return <Tire width='40'/>;
+                break;
+            case "REARTIRE":
+                return <Tire width='40'/>;
+                break;
+            default:
+                return null;
+        }
+    }
+
+    function formatString(str) {
+        // Converteer alle letters naar kleine letters, behalve de eerste letter van elk woord
+        const formattedStr = str.toLowerCase().replace(/\b\w/g, (match) => match.toUpperCase());
+
+        // Standaard retourneer de geformatteerde string
+        return formattedStr;
     }
 
     return (
         <>
             <div className='gear-item-styling'>
-                <div className='gear-item-icon'>
-                    {icon}
-                    <h2>{partType}</h2>
+                <div className='gear-item-icon flex-row'>
+                    <div>
+                        {setIcon(partType)}
+                    </div>
+                    <h2>{formatString(partType)}</h2>
 
                 </div>
                 <div className='gear-item-separation-line'></div>
