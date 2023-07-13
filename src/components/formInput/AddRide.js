@@ -1,9 +1,24 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import FormInputField from "./FormInputField";
 import Button from "../button/Button";
 import FormInputSelect from "./FormInputSelect";
 
-function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
+function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditing, initialValue}) {
+
+    const [formValue, setFormValues] = useState(initialValue);
+
+    useEffect(() => {
+        console.log(formValue)
+        setFormValues(initialValue); // Update the form values when the initial value changes
+    }, [initialValue]);
+
+    function handleChange(e) {
+        const {name, value} = e.target;
+        setFormValues((previousValue) => ({
+            ...previousValue,
+            [name]: value,
+        }));
+    };
 
     const isBefore = (date) => {
         if (!date) {
@@ -29,6 +44,7 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
     return (
         <form className='modal-wrapper' onSubmit={onSubmit}>
             <article className='form-wrapper-modal'>
+
                 <div>
                     <FormInputField
                         name="titleRide"
@@ -37,14 +53,14 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
                         placeholder="Add a title"
                         register={register}
                         errors={errors}
-                        validationRules={
-                            {
-                                required: {
-                                    value: true,
-                                    message: "Title is required!"
-                                }
-                            }
-                        }
+                        value={formValue.titleRide}
+                        validationRules={{
+                            required: {
+                                value: true,
+                                message: "Title is required!",
+                            },
+                        }}
+                        onChange={handleChange}
                     />
                     <FormInputField
                         name="subTitleRide"
@@ -53,6 +69,8 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
                         placeholder="Add a description to your ride"
                         register={register}
                         errors={errors}
+                        value={formValue.subTitleRide}
+                        onChange={handleChange}
                     />
                     <FormInputField
                         name="distance"
@@ -61,14 +79,14 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
                         placeholder="0.0"
                         register={register}
                         errors={errors}
-                        validationRules={
-                            {
-                                required: {
-                                    value: true,
-                                    message: "Distance is required!"
-                                }
-                            }
-                        }
+                        value={formValue.distance}
+                        validationRules={{
+                            required: {
+                                value: true,
+                                message: "Distance is required!",
+                            },
+                        }}
+                        onChange={handleChange}
                     />
                     <FormInputField
                         name="date"
@@ -77,17 +95,9 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
                         placeholder=""
                         register={register}
                         errors={errors}
-                        // validationRules={{
-                        //     required: {
-                        //         value: true,
-                        //         message: "Date is required!"
-                        //     }
-                        //     // ,
-                        //     // validate: {
-                        //     //     isBefore,
-                        //     //     message: "Date must be today or in the past"
-                        //     // }
-                        // }}
+                        value={formValue.date}
+                        onChange={handleChange}
+                        // validationRules={...}
                     />
                     <FormInputField
                         name="averagePower"
@@ -96,14 +106,14 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
                         placeholder="0.0"
                         register={register}
                         errors={errors}
-                        validationRules={
-                            {
-                                required: {
-                                    value: true,
-                                    message: "Power input is required!"
-                                }
-                            }
-                        }
+                        value={formValue.averagePower}
+                        validationRules={{
+                            required: {
+                                value: true,
+                                message: "Power input is required!",
+                            },
+                        }}
+                        onChange={handleChange}
                     />
                     <FormInputField
                         name="normalizedPower"
@@ -112,6 +122,8 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
                         placeholder="0.0"
                         register={register}
                         errors={errors}
+                        value={formValue.normalizedPower}
+                        onChange={handleChange}
                     />
                     <FormInputField
                         name="timeRide"
@@ -119,22 +131,29 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData}) {
                         type="time"
                         register={register}
                         errors={errors}
+                        value={formValue.timeRide}
+                        onChange={handleChange}
                     />
                     <FormInputSelect
                         name="bikeId"
                         label="Bike"
                         options={options}
-                        defaultValue={undefined}
-                        placeholder = "choose your bike"
+                        placeholder="choose your bike"
                         register={register}
                     />
                 </div>
             </article>
-            <Button type="submit"
-                    className='signin-button'
-                    onClick={closeModal}>
-                Add ride!
-            </Button>
+            {isEditing ? (
+                <Button type="submit" className='signin-button' onClick={()=>{
+                    console.log(formValue);
+                }}>
+                    Edit ride!
+                </Button>
+            ) : (
+                <Button type="submit" className='signin-button' onClick={closeModal}>
+                    Add ride!
+                </Button>
+            )}
         </form>
 
     )
