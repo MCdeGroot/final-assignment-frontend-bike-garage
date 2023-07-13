@@ -225,6 +225,7 @@ function Dashboard() {
                                         averagePower={ride.averagePower}
                                         timeRide={ride.timeRide}
                                         bike={`${ride.bike.brand} ${ride.bike.model}`}
+                                        bikeType={ride.bike.bikeType}
                                         user={`${ride.user.firstName} ${ride.user.lastName}`}
                                         onClick={() => {
                                             if (ride.reviewRating === null) {

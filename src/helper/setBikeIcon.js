@@ -1,9 +1,10 @@
-import React from "react";
-import {ReactComponent as TimeTrialBike} from "../../assets/timetrial.svg"
-import {ReactComponent as RoadBike} from "../../assets/roadbike.svg"
-import {ReactComponent as MountainBike} from "../../assets/mtb.svg"
+
+import {ReactComponent as TimeTrialBike} from "../assets/timetrial.svg"
+import {ReactComponent as RoadBike} from "../assets/roadbike.svg"
+import {ReactComponent as MountainBike} from "../assets/mtb.svg"
 
 export function setBikeIcon ({bikeType}) {
+    console.log(bikeType)
     let bikeIcon;
     switch (bikeType) {
         case "TIMETRIAL":
@@ -16,7 +17,6 @@ export function setBikeIcon ({bikeType}) {
             bikeIcon = <MountainBike />;
             break;
     }
-
     return bikeIcon;
 
 }

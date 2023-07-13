@@ -6,14 +6,15 @@ import {DownloadSimple} from "@phosphor-icons/react";
 import {Export} from "@phosphor-icons/react";
 import {DotsThreeOutline} from "@phosphor-icons/react";
 import {convertTimeCode} from "../../helper/convertTimeCode";
+import {setBikeIcon} from "../../helper/setBikeIcon";
 
-
-function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, user, onClick}) {
+function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, bikeType, user, onClick}) {
+    console.log(bikeType)
     return (
         <>
             <div className="ridetile-outer-wrapper">
                 <section className="ridetile-top-styling">
-                    <img src="../../assets/roadbike.svg" alt=""/>
+                    {setBikeIcon({bikeType})}
                     <div>
                         <h5>{user} </h5>
                         <p>Date {date}</p>
