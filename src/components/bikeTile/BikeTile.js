@@ -21,7 +21,7 @@ function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHours
             bikeIcon = <MountainBike />;
             break;
     }
-
+80
     return (
         <>
             <div className="biketile-outer-wrapper">
