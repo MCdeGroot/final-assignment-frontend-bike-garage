@@ -4,7 +4,6 @@ import {ReactComponent as RoadBike} from "../assets/roadbike.svg"
 import {ReactComponent as MountainBike} from "../assets/mtb.svg"
 
 export function setBikeIcon ({bikeType}) {
-    console.log(bikeType)
     let bikeIcon;
     switch (bikeType) {
         case "TIMETRIAL":

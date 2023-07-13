@@ -15,7 +15,7 @@ import AddRide from "../../components/formInput/AddRide";
 function Dashboard() {
 
     const {user} = useContext(AuthContext);
-    const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
+    const {register, handleSubmit, formState: {errors}, reset} = useForm({mode: 'onTouched'});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [ridesData, setRidesData] = useState([]);
@@ -106,6 +106,8 @@ function Dashboard() {
     }
 
 
+
+
     async function handleFormSubmit(data) {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
@@ -132,17 +134,17 @@ function Dashboard() {
     }
 
     async function handleFormRideSubmit(data){
+        const urlData = data.bikeId;
         const storedToken = localStorage.getItem('token');
         setLoading(true)
         try {
-            const response = await axios.post(`http://localhost:8080/rides?${user.id}`, {
+            const response = await axios.post(`http://localhost:8080/rides?bikeId=${urlData}`, {
                 titleRide : data.titleRide,
                 subTitleRide : data.subTitleRide,
                 distance : data.distance,
-                timeRide : data.timeRide,
+                date : "2023-06-15T12:30:00",
                 averagePower : data.averagePower,
                 normalizedPower : data.normalizedPower,
-                bike : data.bike,
                 username : user.username
             }, {
                 headers: {

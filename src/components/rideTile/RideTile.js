@@ -9,7 +9,6 @@ import {convertTimeCode} from "../../helper/convertTimeCode";
 import {setBikeIcon} from "../../helper/setBikeIcon";
 
 function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, bikeType, user, onClick}) {
-    console.log(bikeType)
     return (
         <>
             <div className="ridetile-outer-wrapper">
@@ -41,7 +40,7 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                             </div>
                             <div className='ride-separation-line-middle'></div>
                             <div>
-                                <p>{convertTimeCode(timeRide)}</p>
+                                <p>{convertTimeCode({timeRide})}</p>
                                 <h4>Tijd</h4>
                             </div>
                             <div className='ride-separation-line-middle'></div>
