@@ -40,8 +40,10 @@ function GearTile({bike}) {
     }, [])
 
 
+
     return (
         <>
+
             <div className="geartile-outer-wrapper">
                 <section className="geartile-top-styling">
                     <h2>{bike.brand}</h2>
@@ -57,9 +59,10 @@ function GearTile({bike}) {
                     {gearData.map((bikePart) => {
                         return (
                             <GearItem
+                                key={bikePart.id}
                                 distanceDriven={bikePart.currentDistanceDriven}
                                 maxDistance={bikePart.maxDistance}
-                                partType={bikePart.partType}
+                                selected={bikePart}
                             >
                             </GearItem>
                         )
