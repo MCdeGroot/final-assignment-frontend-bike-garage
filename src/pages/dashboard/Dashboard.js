@@ -23,6 +23,7 @@ function Dashboard() {
     const [userBikesData, setUserBikesData] = useState([]);
     const [refresh, setRefresh] = useState(false);
     const [icon, toggleIcon] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
     // ...................MODAL
     const customStyles = {
@@ -46,7 +47,7 @@ function Dashboard() {
     const [modalRideIsOpen, setModalRideIsOpen] = React.useState(false);
     const [modalRideEditIsOpen, setModalRideEditIsOpen] = React.useState(false);
     const [modalRideDeleteIsOpen, setModalRideDeleteIsOpen] = React.useState(false);
-    const [selectedRide, setSelectedRide] = useState(null);
+    const [selectedRide, setSelectedRide] = useState([]);
 
     function openModalReview(ride) {
         setModalReviewIsOpen(true);
@@ -70,6 +71,8 @@ function Dashboard() {
         setModalRideIsOpen(false);
         setModalRideEditIsOpen(false);
         toggleIcon(false);
+        setSelectedRide([]);
+        setIsEditing(false);
         closeDeleteModal();
     }
 
@@ -153,28 +156,46 @@ function Dashboard() {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
         try {
-            const response = await axios.post(`http://localhost:8080/rides?bikeId=${urlData}`, {
-                titleRide : data.titleRide,
-                subTitleRide : data.subTitleRide,
-                distance : data.distance,
-                timeRide : convertTimeToString(data.timeRide),
-                date : data.date,
-                averagePower : data.averagePower,
-                normalizedPower : data.normalizedPower,
-                username : user.username
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${storedToken}`
-                }
-            });
-            console.log(response);
-
+            if (isEditing) {
+                const response = await axios.put(`http://localhost:8080/rides/${selectedRide.id}`, {
+                    titleRide: data.titleRide,
+                    subTitleRide: data.subTitleRide,
+                    distance: data.distance,
+                    timeRide: convertTimeToString(data.timeRide),
+                    date: data.date,
+                    averagePower: data.averagePower,
+                    normalizedPower: data.normalizedPower,
+                    username: user.username
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${storedToken}`
+                    }
+                });
+                console.log(response);
+            } else {
+                const response = await axios.post(`http://localhost:8080/rides?bikeId=${urlData}`, {
+                    titleRide: data.titleRide,
+                    subTitleRide: data.subTitleRide,
+                    distance: data.distance,
+                    timeRide: convertTimeToString(data.timeRide),
+                    date: data.date,
+                    averagePower: data.averagePower,
+                    normalizedPower: data.normalizedPower,
+                    username: user.username
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${storedToken}`
+                    }
+                });
+                console.log(response);
+            }
         } catch (error) {
             setError(true);
             console.error(error);
-
         }
+
         setLoading(false);
         setRefresh(!refresh);
         closeModal();
@@ -206,6 +227,12 @@ function Dashboard() {
     return (
         <>
             <main className='outer-container'>
+                <Button className="signin-button"
+                onClick={ ()=>{
+                    console.log(selectedRide)
+                    console.log(isEditing)
+                }}
+                ></Button>
                 <div className='inner-container'>
                     {user.authorities.includes('ROLE_TRAINER') &&
                         <div>
@@ -272,7 +299,11 @@ function Dashboard() {
                             <Button
                                 type="submit"
                                 className='signin-button'
-                                // onClick={openModalDeleteRide}
+                                onClick= {()=>{
+                                    console.log(selectedRide);
+                                    setIsEditing(true);
+                                    openModalRide();
+                                }}
                             >
                                 Edit Ride!
                             </Button>
@@ -351,6 +382,8 @@ function Dashboard() {
                                      errors={errors}
                                      onClick={closeModal}
                                      userBikesData={userBikesData}
+                                     initialValue={selectedRide}
+                                     isEditing={isEditing}
                             >
                             </AddRide>
                         </Modal>
@@ -363,7 +396,6 @@ function Dashboard() {
                                 openModalRide();
                                 getBikesData();
                                 toggleIcon(!icon);
-                                console.log(icon);
                             }}/>
                         </Button>
                     </div>
