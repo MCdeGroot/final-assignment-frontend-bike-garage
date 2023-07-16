@@ -137,8 +137,34 @@ function GearItem({partType, distanceDriven, maxDistance, selected}) {
             console.error(error);
         }
         setLoading(false);
-
     }
+
+    async function resetPart(){
+        const storedToken = localStorage.getItem('token')
+        setLoading(true)
+        try {
+            const response = axios.delete(`http://localhost:8080/bikeparts/${selected.id}`,{
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`
+                }
+            });
+        } catch (error) {
+            setError(true);
+            console.error(error);
+        }
+        try{
+            const response = axios.post("http://localhost:8080/bikeparts", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`
+                }
+            })
+        } catch (error) {
+
+        }
+    }
+
 
     return (
         <>
