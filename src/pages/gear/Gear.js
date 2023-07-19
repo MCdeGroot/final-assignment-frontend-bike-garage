@@ -15,6 +15,7 @@ function Gear() {
     //data ophalen van de bikes
     useEffect(() => {
         const controller = new AbortController();
+
         async function fetchBikeData() {
             const storedToken = localStorage.getItem('token');
             setLoading(true)
@@ -45,7 +46,9 @@ function Gear() {
                     <h1>GEAR</h1>
                     {bikeData.map((bike) => {
                         return (
-                            <GearTile bike={bike}>
+                            <GearTile
+                                key={bike.id}
+                                bike={bike}>
                             </GearTile>
                         )
                     })

@@ -119,3 +119,7 @@
     width: 0;
     transition: width 0.3s ease-in-out;
 }
+
+.progress.red-progress {
+    background-color: var(--color-primary-delete);
+}

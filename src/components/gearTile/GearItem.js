@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./GearTile.css";
 
 import Button from "../button/Button";
@@ -7,16 +7,22 @@ import {ReactComponent as Chain} from "../../assets/chain.svg"
 import {ReactComponent as Brake} from "../../assets/break.svg"
 import {ReactComponent as Cassette} from "../../assets/cassette.svg"
 import {ReactComponent as Tire} from "../../assets/cassette.svg";
+import Modal from "react-modal";
+import {X} from "@phosphor-icons/react";
+import axios from "axios";
+import {AuthContext} from "../../context/AuthContext";
 
-function GearItem({partType, distanceDriven, maxDistance}) {
+function GearItem({partType, distanceDriven, maxDistance, selected}) {
+    const {user} = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const [iconChangeEdit, toggleIconChangeEdit] = useState(true);
     const [iconChangeDelete, toggleIconChangeDelete] = useState(true);
+    const [removePart, setRemovePart] = useState(false);
     const [iconChangeReset, toggleIconChangeReset] = useState(true);
     const [currentDistanceDriven, setCurrentDistanceDriven] = useState(0);
-    const [partTypeString, setPartTypeString] = useState('');
     const [hoveredDistance, setHoveredDistance] = useState(null);
 
-    //voor nu even wat defaultwaarden berekenen dit wordt straks uit de database gehaald
     function fetchData() {
         setCurrentDistanceDriven(distanceDriven);
     }
@@ -38,10 +44,13 @@ function GearItem({partType, distanceDriven, maxDistance}) {
 
     function handleMouseDownDelete() {
         toggleIconChangeDelete(false);
+
     }
 
     function handleMouseUpDelete() {
         toggleIconChangeDelete(true);
+        console.log("klik");
+        openModalDeleteRide();
     }
 
     function handleMouseDownReset() {
@@ -85,14 +94,118 @@ function GearItem({partType, distanceDriven, maxDistance}) {
         return formattedStr;
     }
 
+    // ...................MODAL
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            background: "#FBF7F4FF",
+            border: "solid 3px #1989AC",
+        },
+    };
+
+    //TODO below seems to be unneccesary?
+    Modal.setAppElement('#root');
+
+    const [modalRideDeleteIsOpen, setModalRideDeleteIsOpen] = React.useState(false);
+    function openModalDeleteRide(){
+        setModalRideDeleteIsOpen(true);
+        console.log(modalRideDeleteIsOpen)
+    }
+    function closeDeleteModal(){
+        setModalRideDeleteIsOpen(false);
+    }
+
+    async function deletePart(){
+        const storedToken = localStorage.getItem('token');
+        setLoading(true)
+        try {
+            await axios.delete(`http://localhost:8080/bikeparts/${selected.id}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${storedToken}`
+                    }
+                });
+            closeDeleteModal();
+        }catch (error) {
+            setError(true);
+            console.error(error);
+        }
+        setLoading(false);
+    }
+
+    async function resetPart(){
+        const storedToken = localStorage.getItem('token')
+        setLoading(true)
+        try {
+            const response = axios.delete(`http://localhost:8080/bikeparts/${selected.id}`,{
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`
+                }
+            });
+        } catch (error) {
+            setError(true);
+            console.error(error);
+        }
+        try{
+            const response = axios.post("http://localhost:8080/bikeparts", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`
+                }
+            })
+        } catch (error) {
+
+        }
+    }
+
+
     return (
         <>
+
+            <Modal
+                isOpen={modalRideDeleteIsOpen} //if modal is open
+                onRequestClose={closeDeleteModal} //what to do after modal close
+                style={customStyles}
+                contentLabel=""
+            >
+                <Button
+                    className="icon-button-modal"
+                    onClick={closeDeleteModal}
+                ><X color="#1989AC" width='2rem' height='2rem'/>
+                </Button>
+                <h4>You are sure you want to delete this part?</h4>
+                <Button
+                    onClick={deletePart}
+                >
+                    Yes
+                </Button>
+                <Button
+                    onClick={closeDeleteModal}>
+                    No
+                </Button>
+
+            </Modal>
+
+            {/*TODO check of dit goed gaat met selected. Dat ik het Part gewoon doorgeef aan deze component*/}
+
             <div className='gear-item-styling'>
                 <div className='gear-item-icon flex-row'>
+                    <Button className="signin-button"
+                            onClick={ ()=>{
+                                console.log(selected)
+                            }}
+                    ></Button>
                     <div>
-                        {setIcon(partType)}
+                        {setIcon(selected.partType)}
                     </div>
-                    <h2>{formatString(partType)}</h2>
+                    <h2>{formatString(selected.partType)}</h2>
 
                 </div>
                 <div className='gear-item-separation-line'></div>
@@ -106,7 +219,7 @@ function GearItem({partType, distanceDriven, maxDistance}) {
                         setHoveredDistance(null)
                     }}
                 >
-                    <div className='progress' style={{width: `${progress}%`}}></div>
+                    <div className={`progress ${progress >= 80 ? 'red-progress' : ''}`} style={{width: `${progress}%`}}></div>
                     {hoveredDistance !== null && (
                         <>
                             <div>{`${hoveredDistance.toFixed(
@@ -132,6 +245,7 @@ function GearItem({partType, distanceDriven, maxDistance}) {
                         )}
                     </Button>
                     <Button
+                        type = 'button'
                         className='gear-icon-button-red'
                         onMouseDown={handleMouseDownDelete}
                         onMouseUp={handleMouseUpDelete}

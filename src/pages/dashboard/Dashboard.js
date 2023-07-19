@@ -227,12 +227,7 @@ function Dashboard() {
     return (
         <>
             <main className='outer-container'>
-                <Button className="signin-button"
-                onClick={ ()=>{
-                    console.log(selectedRide)
-                    console.log(isEditing)
-                }}
-                ></Button>
+
                 <div className='inner-container'>
                     {user.authorities.includes('ROLE_TRAINER') &&
                         <div>
