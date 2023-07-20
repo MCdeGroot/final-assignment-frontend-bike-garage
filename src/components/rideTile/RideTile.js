@@ -14,16 +14,18 @@ import {useForm} from "react-hook-form";
 
 // TODO 20-07-2023 uitzoeken hoe ik mijn afbeelding weer kan geven.
 
-function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, bikeType, image,user, onClickReview, onClickEditRide, selectedRide}) {
+function RideTile({bikeType, selectedRide, image, onClickReview, onClickEditRide}) {
     const [uploadFile, setUploadFile] = useState(false);
+
+
     return (
         <>
             <div className="ridetile-outer-wrapper">
                 <section className="ridetile-top-styling">
                     {setBikeIcon({bikeType})}
                     <div>
-                        <h5>{user} </h5>
-                        <p>Date {date}</p>
+                        <h5>{`${selectedRide.user.firstName} ${selectedRide.user.lastName}`}</h5>
+                        <p>Date {selectedRide.date}</p>
                     </div>
                     <Button className='icon-button' type="submit" onClick={onClickEditRide}>
                         <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>
@@ -36,23 +38,23 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                     <div className='ride-data'>
                         <div>
 
-                            <h4>{titleRide}</h4>
-                            <p>{subTitleRide}</p>
+                            <h4>{selectedRide.titleRide}</h4>
+                            <p>{selectedRide.subTitleRide}</p>
                         </div>
                         <div className='ride-data-items'>
 
                             <div>
-                                <p>{distance} km</p>
+                                <p>{selectedRide.distance} km</p>
                                 <h4>Afstand</h4>
                             </div>
                             <div className='ride-separation-line-middle'></div>
                             <div>
-                                <p>{convertTimeCode({timeRide})}</p>
+                                <p>{convertTimeCode(selectedRide.timeRide)}</p>
                                 <h4>Tijd</h4>
                             </div>
                             <div className='ride-separation-line-middle'></div>
                             <div>
-                                <p>{averagePower} Watt</p>
+                                <p>{selectedRide.averagePower} Watt</p>
                                 <h4>Gem. Vermogen</h4>
                             </div>
                         </div>
@@ -62,7 +64,7 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                     }
                 </section>
                 <section className='ridetile-bottom-styling flex-row'>
-                    <h2>{bike}</h2>
+                    <h2>{`${selectedRide.bike.brand} ${selectedRide.bike.model}`}</h2>
                     <div className='flex-row'>
                         <Button className='icon-button'
                                 onClick={()=>{

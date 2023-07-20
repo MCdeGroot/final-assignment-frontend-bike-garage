@@ -7,13 +7,13 @@ export function setBikeIcon ({bikeType}) {
     let bikeIcon;
     switch (bikeType) {
         case "TIMETRIAL":
-            bikeIcon = <TimeTrialBike />;
+            bikeIcon = <TimeTrialBike/>;
             break;
         case "ROAD":
             bikeIcon = <RoadBike/>;
             break;
         case "MOUNTAIN":
-            bikeIcon = <MountainBike />;
+            bikeIcon = <MountainBike/>;
             break;
     }
     return bikeIcon;
