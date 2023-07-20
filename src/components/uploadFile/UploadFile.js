@@ -60,6 +60,7 @@ function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
             transform: 'translate(-50%, -50%)',
             background: "#FBF7F4FF",
             border: "solid 3px #1989AC",
+            borderRadius: "10px",
         },
     }
 
