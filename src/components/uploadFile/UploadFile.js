@@ -99,7 +99,6 @@ function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
                             Preview:
                             <img src={previewUrl} alt="Chosen file" className="image-preview"/>
                         </div>}
-
                     <Button type="submit" className='signin-button' >
                         Add File!
                     </Button>
