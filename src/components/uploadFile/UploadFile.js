@@ -85,7 +85,7 @@ function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
                 <Button
                     className="icon-button-modal"
                     onClick={closeModal}><X color="#1989AC" width='2rem' height='2rem'/></Button>
-                <form onSubmit={sendImage} className= "flex-column">
+                <form onSubmit={sendImage} className= "modal-wrapper">
                     <FormInputField
                         name="file"
                         label="Add file"
@@ -104,10 +104,6 @@ function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
                         Add File!
                     </Button>
                 </form>
-                <Button onClick={()=>{
-                    console.log(selectedItem)}}>
-                    check
-                </Button>
             </Modal>
             <Button onClick={openModal}>
                 Add File!
