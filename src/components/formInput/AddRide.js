@@ -142,7 +142,6 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
                         placeholder="choose your bike"
                         register={register}
                     />
-                    <UploadFile></UploadFile>
                 </div>
             </article>
             {isEditing ? (
