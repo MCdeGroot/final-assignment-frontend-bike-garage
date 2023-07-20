@@ -333,16 +333,8 @@ function Dashboard() {
                                 <div key={ride.id} className="ride-tile-wrapper">
                                     {/*TODO hier nog gewwon aalleen de selectedride doorgeven. Overige waarde pas in tile benoemen*/}
                                     <RideTile
-                                        titleRide={ride.titleRide}
-                                        subTitleRide={ride.subTitleRide}
-                                        distance={ride.distance}
-                                        date={ride.date}
-                                        averagePower={ride.averagePower}
-                                        timeRide={ride.timeRide}
-                                        bike={`${ride.bike.brand} ${ride.bike.model}`}
-                                        bikeType={ride.bike.bikeType}
-                                        user={`${ride.user.firstName} ${ride.user.lastName}`}
                                         selectedRide={ride}
+                                        bikeType={ride.bike.bikeType}
                                         image={ride.url}
                                         onClickReview={() => {
                                             if (ride.reviewRating === null && ride.user.username != user.username) {
