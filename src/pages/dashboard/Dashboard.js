@@ -36,6 +36,7 @@ function Dashboard() {
             transform: 'translate(-50%, -50%)',
             background: "#FBF7F4FF",
             border: "solid 3px #1989AC",
+            borderRadius: "10px",
         },
     };
 
@@ -62,7 +63,8 @@ function Dashboard() {
         setModalRideEditIsOpen(true);
         setSelectedRide(ride);
     }
-    function openModalDeleteRide(){
+
+    function openModalDeleteRide() {
         setModalRideDeleteIsOpen(true);
     }
 
@@ -76,7 +78,7 @@ function Dashboard() {
         closeDeleteModal();
     }
 
-    function closeDeleteModal(){
+    function closeDeleteModal() {
         setModalRideDeleteIsOpen(false);
     }
 
@@ -103,10 +105,11 @@ function Dashboard() {
                 console.error(error)
             }
         }
+
         fetchRideData();
     }, [refresh])
 
-    async function getBikesData(){
+    async function getBikesData() {
         const storedToken = localStorage.getItem('token');
         setLoading(true);
         try {
@@ -150,8 +153,7 @@ function Dashboard() {
     }
 
 
-
-    async function handleFormRideSubmit(data){
+    async function handleFormRideSubmit(data) {
         const urlData = data.bikeId;
         const storedToken = localStorage.getItem('token');
         setLoading(true)
@@ -201,7 +203,7 @@ function Dashboard() {
         closeModal();
     }
 
-    async function deleteRide(){
+    async function deleteRide() {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
         try {
@@ -214,7 +216,7 @@ function Dashboard() {
                 });
             setRefresh(!refresh);
             closeModal();
-        }catch (error) {
+        } catch (error) {
             setError(true);
             console.error(error);
         }
@@ -271,30 +273,33 @@ function Dashboard() {
                             </Modal>
                         </div>}
 
-                        <Modal
-                            isOpen={modalRideEditIsOpen} //if modal is open
-                            onRequestClose={closeModal} //what to do after modal close
-                            style={customStyles}
-                            contentLabel=""
-                        ><Button
-                            className="icon-button-modal"
-                            onClick={closeModal}
-                        ><X color="#1989AC" width='2rem' height='2rem'/></Button>
+                    <Modal
+                        isOpen={modalRideEditIsOpen} //if modal is open
+                        onRequestClose={closeModal} //what to do after modal close
+                        style={customStyles}
+                        contentLabel=""
+                    >
+
+                            <Button
+                                className="icon-button-modal"
+                                onClick={closeModal}
+                            ><X color="#1989AC" width='2rem' height='2rem'/></Button>
+                        <div className='form-wrapper-modal flex-row'>
                             <Button
                                 type="submit"
                                 className='signin-button'
-                                onClick={()=>{
+                                onClick={() => {
                                     console.log(selectedRide);
                                     setModalRideDeleteIsOpen(true);
                                 }
-                            }
+                                }
                             >
                                 Delete Ride!
                             </Button>
                             <Button
                                 type="submit"
                                 className='signin-button'
-                                onClick= {()=>{
+                                onClick={() => {
                                     console.log(selectedRide);
                                     setIsEditing(true);
                                     openModalRide();
@@ -302,7 +307,8 @@ function Dashboard() {
                             >
                                 Edit Ride!
                             </Button>
-                        </Modal>
+                        </div>
+                    </Modal>
                     <Modal
                         isOpen={modalRideDeleteIsOpen} //if modal is open
                         onRequestClose={closeDeleteModal} //what to do after modal close
@@ -314,15 +320,18 @@ function Dashboard() {
                             onClick={closeDeleteModal}
                         ><X color="#1989AC" width='2rem' height='2rem'/>
                         </Button>
+                        <div className='form-wrapper-modal flex-row'>
+
                         <h4>You are sure you want to delete this ride?</h4>
-                        <Button
-                        onClick={deleteRide}>
+                        <Button className="signin-button"
+                            onClick={deleteRide}>
                             Yes
                         </Button>
-                        <Button
-                        onClick={closeDeleteModal}>
+                        <Button className="signin-button"
+                            onClick={closeDeleteModal}>
                             No
                         </Button>
+                        </div>
 
                     </Modal>
                     <h1>Hier is het Dashboard</h1>
@@ -342,7 +351,7 @@ function Dashboard() {
                                             }
                                         }}
                                         onClickEditRide={() => {
-                                            if ( ride.user.username === user.username) {
+                                            if (ride.user.username === user.username) {
                                                 openModalRideEdit(ride);
                                             }
                                         }}
