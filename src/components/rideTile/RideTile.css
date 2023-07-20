@@ -1,4 +1,4 @@
-.ridetile-outer-wrapper{
+.ridetile-outer-wrapper {
     background-color: var(--color-primary-background);
     border: 3px solid var(--color-primary-blue);
     border-radius: 10px;
@@ -9,7 +9,7 @@
     width: 100%;
 }
 
-.ridetile-bottom-styling{
+.ridetile-bottom-styling {
     background-color: var(--color-primary-blue);
     display: flex;
     flex-direction: row;
@@ -20,6 +20,7 @@
     flex-basis: 50px;
     width: 100%;
 }
+
 .ridetile-top-styling {
     display: flex;
     flex-direction: row;
@@ -32,7 +33,7 @@
 }
 
 
-.ridetile-top-styling > img{
+.ridetile-top-styling > img {
     height: 50px;
     width: 50px;
 }
@@ -47,6 +48,7 @@
     flex-basis: calc(150px + 2rem);
     width: 100%;
 }
+
 .ridetile-middle-styling > img {
     height: 150px;
     width: 150px;
@@ -71,19 +73,19 @@
 
 }
 
-.icon-button{
+.icon-button {
     background: none;
     border: none;
     color: var(--color-primary-background);
 }
 
-.ride-separation-line-top{
+.ride-separation-line-top {
     border: 1px solid var(--color-primary-blue);
     width: 550px;
     height: 0px;
 }
 
-.ride-separation-line-middle{
+.ride-separation-line-middle {
     border: 1px solid var(--color-black);
     width: 0px;
     height: 45px;
@@ -91,10 +93,17 @@
     margin-left: 12px;
 }
 
-.ride-separation-line-bottom{
+.ride-separation-line-bottom {
     border: 1px solid var(--color-primary-background);
     width: 0px;
     height: 1.25rem;
     margin-right: 12px;
     margin-left: 12px;
+}
+
+.image-wrapper {
+    border-radius: 5px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
 }
