@@ -12,7 +12,7 @@ import {X} from "@phosphor-icons/react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 
-function GearItem({partType, distanceDriven, maxDistance, selected}) {
+function GearItem({partType, distanceDriven, maxDistance, selected, changeRefreshState}) {
     const {user} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -22,6 +22,7 @@ function GearItem({partType, distanceDriven, maxDistance, selected}) {
     const [iconChangeReset, toggleIconChangeReset] = useState(true);
     const [currentDistanceDriven, setCurrentDistanceDriven] = useState(0);
     const [hoveredDistance, setHoveredDistance] = useState(null);
+    const [refresh, setRefresh] = useState(false)
 
     function fetchData() {
         setCurrentDistanceDriven(distanceDriven);
@@ -137,6 +138,8 @@ function GearItem({partType, distanceDriven, maxDistance, selected}) {
             console.error(error);
         }
         setLoading(false);
+        setRefresh(!refresh)
+        changeRefreshState(refresh);
     }
 
     async function resetPart(){
