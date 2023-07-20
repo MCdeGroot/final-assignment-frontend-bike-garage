@@ -331,9 +331,8 @@ function Dashboard() {
                         .map((ride) => {
                             return (
                                 <div key={ride.id} className="ride-tile-wrapper">
-
+                                    {/*TODO hier nog gewwon aalleen de selectedride doorgeven. Overige waarde pas in tile benoemen*/}
                                     <RideTile
-
                                         titleRide={ride.titleRide}
                                         subTitleRide={ride.subTitleRide}
                                         distance={ride.distance}
@@ -343,6 +342,8 @@ function Dashboard() {
                                         bike={`${ride.bike.brand} ${ride.bike.model}`}
                                         bikeType={ride.bike.bikeType}
                                         user={`${ride.user.firstName} ${ride.user.lastName}`}
+                                        selectedRide={ride}
+                                        image={ride.url}
                                         onClickReview={() => {
                                             if (ride.reviewRating === null && ride.user.username != user.username) {
                                                 openModalReview(ride);

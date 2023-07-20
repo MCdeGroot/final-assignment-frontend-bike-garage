@@ -1,14 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import Button from "../button/Button";
 import "./RideTile.css"
-import {ChatText} from "@phosphor-icons/react";
+import {ChatText, UploadSimple} from "@phosphor-icons/react";
 import {DownloadSimple} from "@phosphor-icons/react";
 import {Export} from "@phosphor-icons/react";
 import {DotsThreeOutline} from "@phosphor-icons/react";
 import {convertTimeCode} from "../../helper/convertTimeCode";
 import {setBikeIcon} from "../../helper/setBikeIcon";
+import UploadFile from "../uploadFile/UploadFile";
+import Modal from "react-modal";
+import FormInputField from "../formInput/FormInputField";
+import {useForm} from "react-hook-form";
 
-function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, bikeType, user, onClickReview, onClickEditRide}) {
+// TODO 20-07-2023 uitzoeken hoe ik mijn afbeelding weer kan geven.
+
+function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRide, bike, bikeType, image,user, onClickReview, onClickEditRide, selectedRide}) {
+    const [uploadFile, setUploadFile] = useState(false);
     return (
         <>
             <div className="ridetile-outer-wrapper">
@@ -50,14 +57,22 @@ function RideTile({titleRide, subTitleRide, distance, date, averagePower, timeRi
                             </div>
                         </div>
                     </div>
-                    <img src="../../assets/foto-test.jpg" alt="foto" width="150px" heigth="150px"/>
+                    {image &&
+                    <img src={image} alt="Chosen file" className="image-wrapper"/>
+                    }
                 </section>
                 <section className='ridetile-bottom-styling flex-row'>
                     <h2>{bike}</h2>
                     <div className='flex-row'>
-                        <Button className='icon-button'><DownloadSimple width='2rem' height='2rem'/></Button>
+                        <Button className='icon-button'
+                                onClick={()=>{
+                                    setUploadFile(!uploadFile)
+                                    console.log(uploadFile)
+                                }}
+                        ><UploadSimple width='2rem' height='2rem'/></Button>
+                        {uploadFile && <UploadFile openModalOnClick={true} changeUploadState = {setUploadFile} selectedItem={selectedRide}/>}
                         <div className='ride-separation-line-bottom'></div>
-                        <Button className='icon-button'><Export width='2rem' height='2rem'/></Button>
+                        <Button className='icon-button'><DownloadSimple width='2rem' height='2rem'/></Button>
                         <div className='ride-separation-line-bottom'></div>
                         <Button className='icon-button' type="submit" onClick={onClickReview}><ChatText width='2rem' height='2rem'/></Button>
                     </div>
