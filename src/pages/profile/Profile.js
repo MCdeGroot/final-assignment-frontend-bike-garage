@@ -21,6 +21,7 @@ function Profile() {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
+    const {register: registerTrainer, handleSubmit : handleSubmitTrainer}=useForm({mode: 'onTouched'});
 
 
     useEffect(() => {
@@ -73,24 +74,21 @@ function Profile() {
     async function assignTrainer(dataTrainer) {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
-        console.log(dataTrainer)
         try {
             setError(false);
-            const response = await axios.post(`http://localhost:8080/users/assign-trainer/${user.username}`, {
-                trainerUsername: dataTrainer.username
+            const response = await axios.put(`http://localhost:8080/users/assign-trainer/${user.username}`, {
+                trainerUsername: dataTrainer.trainerUsername
             }, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${storedToken}`
                 }
             })
-
-            setUsernames(response.data);
-            console.log(response.data) /// dit nog weghalen
         } catch (error) {
             console.error(error)
         }
         setLoading(false)
+        closeModal();
     }
 
     async function handleFormSubmit(data) {
@@ -172,7 +170,7 @@ function Profile() {
         <>
             <main className='outer-container'>
                 <div className='inner-container'>
-                    <h1>Zie hier! Uw profiel pagina!</h1>
+                    <h1>My Profile:</h1>
                     <div>
                         <Modal
                             isOpen={modalIsOpen} //if modal is open
@@ -186,13 +184,13 @@ function Profile() {
                             ><X color="#1989AC" width='2rem' height='2rem'/>
                             </Button>
                             {/*TODO hij submit mijn ander handlesubmit als ik op deze knop druk*/}
-                            <form className='modal-wrapper' onSubmit={handleSubmit(assignTrainer)}>
+                            <form className='modal-wrapper' onSubmit={handleSubmitTrainer(assignTrainer)}>
                                 <div>
                                     <FormInputSelect
-                                        name="username"
+                                        name="trainerUsername"
                                         label="Select trainer"
                                         options={options}
-                                        register={register}
+                                        register={registerTrainer}
                                     />
                                 </div>
                                 <Button type="submit"
