@@ -12,13 +12,13 @@ import {X} from "@phosphor-icons/react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 
-function GearItem({partType, distanceDriven, maxDistance, selected, changeRefreshState}) {
+function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
     const {user} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [iconChangeEdit, toggleIconChangeEdit] = useState(true);
     const [iconChangeDelete, toggleIconChangeDelete] = useState(true);
-    const [removePart, setRemovePart] = useState(false);
+    const [removedPart, setRemovedPart] = useState(false);
     const [iconChangeReset, toggleIconChangeReset] = useState(true);
     const [currentDistanceDriven, setCurrentDistanceDriven] = useState(0);
     const [hoveredDistance, setHoveredDistance] = useState(null);
@@ -60,27 +60,29 @@ function GearItem({partType, distanceDriven, maxDistance, selected, changeRefres
 
     function handleMouseUpReset() {
         toggleIconChangeReset(true);
+        console.log("klik");
+        openModalResetPart();
     }
 
     function setIcon(partType) {
         switch (partType) {
             case "CHAIN":
-                return <Chain width='40'/>;
+                return <Chain width='40' height='40'/>;
                 break;
             case "FRONTBRAKEPAD":
-                return <Brake width='40'/>;
+                return <Brake width='40' height='40'/>;
                 break;
             case "REARBRAKEPAD":
-                return <Brake width='40'/>;
+                return <Brake width='40' height='40'/>;
                 break;
             case "CASSETTE":
-                return <Cassette width='40'/>;
+                return <Cassette width='40' height='40'/>;
                 break;
             case "FRONTTIRE":
-                return <Tire width='40'/>;
+                return <Tire width='40' height='40'/>;
                 break;
             case "REARTIRE":
-                return <Tire width='40'/>;
+                return <Tire width='40' height='40'/>;
                 break;
             default:
                 return null;
@@ -113,14 +115,23 @@ function GearItem({partType, distanceDriven, maxDistance, selected, changeRefres
     Modal.setAppElement('#root');
 
     const [modalRideDeleteIsOpen, setModalRideDeleteIsOpen] = React.useState(false);
+    const [modalResetIsOpen, setModalResetIsOpen] = React.useState(false);
     function openModalDeleteRide(){
         setModalRideDeleteIsOpen(true);
-        console.log(modalRideDeleteIsOpen)
     }
+
+    function openModalResetPart(){
+        setModalResetIsOpen(true);
+    }
+
     function closeDeleteModal(){
         setModalRideDeleteIsOpen(false);
     }
+    function closeResetModal(){
+        setModalResetIsOpen(false);
+    }
 
+    // TODO de state moet nog gerefresehd worden en helemaal terug gegeven worden om useeffect te triggerren
     async function deletePart(){
         const storedToken = localStorage.getItem('token');
         setLoading(true)
@@ -144,30 +155,39 @@ function GearItem({partType, distanceDriven, maxDistance, selected, changeRefres
 
     async function resetPart(){
         const storedToken = localStorage.getItem('token')
-        setLoading(true)
+        setLoading(true);
+
         try {
-            const response = axios.delete(`http://localhost:8080/bikeparts/${selected.id}`,{
+            await axios.delete(`http://localhost:8080/bikeparts/${selected.id}`,{
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${storedToken}`
                 }
             });
+            console.log("succesfully deleted")
         } catch (error) {
             setError(true);
             console.error(error);
         }
         try{
-            const response = axios.post("http://localhost:8080/bikeparts", {
+            const today = new Date();
+            const response = await axios.post(`http://localhost:8080/bikeparts?bikeId=${selected.bike.id}`, {
+                partType: selected.partType,
+                maxDistance: selected.maxDistance,
+                installationDate: today.toISOString()
+            }, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${storedToken}`
                 }
-            })
+            });
+            setRemovedPart(true);
+            console.log(response);
         } catch (error) {
-
+            setError(true);
+            console.error(error);
         }
     }
-
 
     return (
         <>
@@ -196,20 +216,37 @@ function GearItem({partType, distanceDriven, maxDistance, selected, changeRefres
 
             </Modal>
 
+            <Modal
+                isOpen={modalResetIsOpen} //if modal is open
+                onRequestClose={closeResetModal} //what to do after modal close
+                style={customStyles}
+                contentLabel="">
+                <Button
+                    className="icon-button-modal"
+                    onClick={closeResetModal}
+                ><X color="#1989AC" width='2rem' height='2rem'/>
+                </Button>
+                <h4>You are sure you want to reset this part?</h4>
+                <Button
+                    onClick={resetPart}
+                >
+                    Yes
+                </Button>
+                <Button
+                    onClick={closeResetModal}>
+                    No
+                </Button>
+
+            </Modal>
+
             {/*TODO check of dit goed gaat met selected. Dat ik het Part gewoon doorgeef aan deze component*/}
 
             <div className='gear-item-styling'>
                 <div className='gear-item-icon flex-row'>
-                    <Button className="signin-button"
-                            onClick={ ()=>{
-                                console.log(selected)
-                            }}
-                    ></Button>
                     <div>
                         {setIcon(selected.partType)}
                     </div>
                     <h2>{formatString(selected.partType)}</h2>
-
                 </div>
                 <div className='gear-item-separation-line'></div>
                 <div

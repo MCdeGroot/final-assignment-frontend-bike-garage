@@ -183,7 +183,6 @@ function Profile() {
                                 onClick={closeModal}
                             ><X color="#1989AC" width='2rem' height='2rem'/>
                             </Button>
-                            {/*TODO hij submit mijn ander handlesubmit als ik op deze knop druk*/}
                             <form className='modal-wrapper' onSubmit={handleSubmitTrainer(assignTrainer)}>
                                 <div>
                                     <FormInputSelect

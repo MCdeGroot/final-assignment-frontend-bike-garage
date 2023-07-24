@@ -43,7 +43,6 @@ function GearTile({bike}) {
                     }
                 })
                 setGearData(response.data);
-                console.log(response.data) /// dit nog weghalen
             } catch (error) {
                 console.error(error)
             }
