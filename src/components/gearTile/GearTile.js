@@ -23,6 +23,7 @@ function GearTile({bike}) {
     const [gearData, setGearData] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [selectedBikePart, setSelectedBikePart] = useState('');
+    const [refresh, setRefresh] = useState(false);
 
 
     //data ophalen van de bikes
@@ -42,14 +43,13 @@ function GearTile({bike}) {
                     }
                 })
                 setGearData(response.data);
-                console.log(response.data) /// dit nog weghalen
             } catch (error) {
                 console.error(error)
             }
         }
 
         fetchGearData();
-    }, [])
+    }, [refresh])
 
     async function handleFormBikePartSubmit(data) {
         const storedToken = localStorage.getItem('token');
@@ -70,6 +70,7 @@ function GearTile({bike}) {
         } catch (error) {
             console.error(error);
         }
+        setRefresh(!refresh);
         closeModal();
     }
 
@@ -148,6 +149,7 @@ function GearTile({bike}) {
                                 distanceDriven={bikePart.currentDistanceDriven}
                                 maxDistance={bikePart.maxDistance}
                                 selected={bikePart}
+                                changeRefreshState = {setRefresh}
                             >
                             </GearItem>
                         )

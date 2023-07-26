@@ -48,7 +48,8 @@ function Gear() {
                         return (
                             <GearTile
                                 key={bike.id}
-                                bike={bike}>
+                                bike={bike}
+                            >
                             </GearTile>
                         )
                     })
