@@ -3,7 +3,6 @@ import GearTile from "../../components/gearTile/GearTile";
 import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
-import GearItem from "../../components/gearTile/GearItem";
 
 
 function Gear() {
@@ -43,7 +42,6 @@ function Gear() {
         <>
             <main className='outer-container'>
                 <div className='inner-container'>
-                    <h1>GEAR</h1>
                     {bikeData.map((bike) => {
                         return (
                             <GearTile

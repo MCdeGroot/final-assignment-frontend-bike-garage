@@ -14,7 +14,7 @@ import {AuthContext} from "../../context/AuthContext";
 import {useForm} from "react-hook-form";
 import FormInputField from "../formInput/FormInputField";
 
-function GearItem({distanceDriven, maxDistance, selected, changeRefreshState, setIsEditing, setModalPartIsOpen, setSelectedBikePart}) {
+function GearItem({distanceDriven, maxDistance, selected, setRefresh, setIsEditing, setModalPartIsOpen, setSelectedBikePart}) {
     const {user} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -24,7 +24,6 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState, se
     const [iconChangeReset, toggleIconChangeReset] = useState(true);
     const [currentDistanceDriven, setCurrentDistanceDriven] = useState(0);
     const [hoveredDistance, setHoveredDistance] = useState(null);
-    const [refresh, setRefresh] = useState(false)
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
 
     function fetchData() {
@@ -160,8 +159,7 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState, se
             console.error(error);
         }
         setLoading(false);
-        setRefresh(!refresh)
-        changeRefreshState(refresh);
+        setRefresh(true);
     }
 
     async function resetPart(data) {
@@ -198,6 +196,7 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState, se
             setError(true);
             console.error(error);
         }
+        setRefresh(true);
     }
 
     return (

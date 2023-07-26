@@ -15,8 +15,7 @@ import {configure} from "@testing-library/react";
 /*TODO mijn plaatjes laden niet*/
 function GearTile({bike}) {
 
-    const {user} = useContext(AuthContext);
-    const {register, handleSubmit, formState: {errors}, reset} = useForm({mode: 'onTouched'});
+    const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [icon, toggleIcon] = useState(false);
@@ -49,6 +48,7 @@ function GearTile({bike}) {
         }
 
         fetchGearData();
+        setRefresh(false);
     }, [refresh])
 
     async function handleFormBikePartSubmit(data) {
@@ -124,6 +124,7 @@ function GearTile({bike}) {
     function closeModal() {
         setModalPartIsOpen(false);
         setIsEditing(false);
+        toggleIcon(false);
     }
 
 
@@ -150,12 +151,13 @@ function GearTile({bike}) {
                                   onClick={closeModal}
                                   initialValue={selectedBikePart}
                                   isEditing={isEditing}
+                                  setRefresh = {setRefresh}
                         >
                         </GearForm>
                     </Modal>
                 </div>
                 <section className="geartile-top-styling">
-                    <h2>{bike.brand}</h2>
+                    <h2>{bike.brand} {bike.model}</h2>
                     <img src="../../assets/roadbike.svg" alt=""/>
                 </section>
                 <section className='geartile-middle-styling'>
@@ -172,10 +174,10 @@ function GearTile({bike}) {
                                 distanceDriven={bikePart.currentDistanceDriven}
                                 maxDistance={bikePart.maxDistance}
                                 selected={bikePart}
-                                changeRefreshState = {setRefresh}
                                 setIsEditing = {setIsEditing}
                                 setModalPartIsOpen = {setModalPartIsOpen}
                                 setSelectedBikePart = {setSelectedBikePart}
+                                setRefresh = {setRefresh}
                             >
                             </GearItem>
                         )
@@ -185,7 +187,7 @@ function GearTile({bike}) {
                         <Button
                             type="button"
                             className='icon-button-add'>
-                            <PlusCircle size="4rem" weight={icon ? "fill" : "regular"} onClick={() => {
+                            <PlusCircle size="2rem" weight={icon ? "fill" : "regular"} onClick={() => {
                                 openModalPart();
                                 console.log(bike);
                                 toggleIcon(!icon);

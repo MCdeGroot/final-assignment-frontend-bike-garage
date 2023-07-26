@@ -14,7 +14,7 @@ function NavBar() {
             <div className='outer-container navbar'>    {/*outercontainer*/}
                 <nav className='inner-container navbar-items'>
                     <div className='navbar-logo'>
-                        <NavLink to="/dashboard"><img className='logo' src={logo} alt=""/></NavLink>
+                        <NavLink to="/rides"><img className='logo' src={logo} alt=""/></NavLink>
                         <h1>BikeGarage</h1>
                     </div>
                     {isAuth &&
