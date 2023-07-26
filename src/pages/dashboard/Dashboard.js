@@ -63,11 +63,6 @@ function Dashboard() {
         setModalRideEditIsOpen(true);
         setSelectedRide(ride);
     }
-
-    function openModalDeleteRide() {
-        setModalRideDeleteIsOpen(true);
-    }
-
     function closeModal() {
         setModalReviewIsOpen(false);
         setModalRideIsOpen(false);
