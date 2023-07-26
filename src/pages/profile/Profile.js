@@ -93,8 +93,10 @@ function Profile() {
 
     async function handleFormSubmit(data) {
         setLoading(true)
+        console.log(data);
         try {
             const response = await axios.put(`http://localhost:8080/users/${userData.username}`, {
+                username: user.username,
                 email: data.email,
                 firstName: data.firstName,
                 lastName: data.lastName,
@@ -106,6 +108,7 @@ function Profile() {
                 }
             });
             console.log(response);
+            setEditProfile(false);
 
         } catch (error) {
             setError(true);
@@ -354,9 +357,7 @@ function Profile() {
 
                                 </div>
                             }
-                            {editProfile && <Button className="signin-button" type="submit" onClick={() => {
-                                setEditProfile(false)
-                            }}> Save changes </Button>}
+                            {editProfile && <Button className="signin-button" type="submit"> Save changes </Button>}
                             {error && <p>{error}</p>}
                         </form>
                     </div>
