@@ -8,6 +8,8 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .navbar-logo {
@@ -19,7 +21,7 @@
 
 }
 .logo {
-    width: 75px;
+    width: 50px;
 }
 
 .separation-line {
