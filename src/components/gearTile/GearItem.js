@@ -11,8 +11,10 @@ import Modal from "react-modal";
 import {X} from "@phosphor-icons/react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
+import {useForm} from "react-hook-form";
+import FormInputField from "../formInput/FormInputField";
 
-function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
+function GearItem({distanceDriven, maxDistance, selected, changeRefreshState, setIsEditing, setModalPartIsOpen, setSelectedBikePart}) {
     const {user} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -23,6 +25,7 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
     const [currentDistanceDriven, setCurrentDistanceDriven] = useState(0);
     const [hoveredDistance, setHoveredDistance] = useState(null);
     const [refresh, setRefresh] = useState(false)
+    const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
 
     function fetchData() {
         setCurrentDistanceDriven(distanceDriven);
@@ -41,6 +44,10 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
 
     function handleMouseUpEdit() {
         toggleIconChangeEdit(true);
+        console.log("klik");
+        setIsEditing(true);
+        setModalPartIsOpen(true);
+        setSelectedBikePart(selected);
     }
 
     function handleMouseDownDelete() {
@@ -116,23 +123,27 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
 
     const [modalRideDeleteIsOpen, setModalRideDeleteIsOpen] = React.useState(false);
     const [modalResetIsOpen, setModalResetIsOpen] = React.useState(false);
-    function openModalDeleteRide(){
+    const [modalInstallationDate, setModalInstallationDate] = React.useState(false);
+
+    function openModalDeleteRide() {
         setModalRideDeleteIsOpen(true);
     }
 
-    function openModalResetPart(){
+    function openModalResetPart() {
         setModalResetIsOpen(true);
     }
 
-    function closeDeleteModal(){
+    function closeDeleteModal() {
         setModalRideDeleteIsOpen(false);
     }
-    function closeResetModal(){
+
+    function closeResetModal() {
         setModalResetIsOpen(false);
+        setModalInstallationDate(false);
     }
 
     // TODO de state moet nog gerefresehd worden en helemaal terug gegeven worden om useeffect te triggerren
-    async function deletePart(){
+    async function deletePart() {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
         try {
@@ -144,7 +155,7 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
                     }
                 });
             closeDeleteModal();
-        }catch (error) {
+        } catch (error) {
             setError(true);
             console.error(error);
         }
@@ -153,12 +164,12 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
         changeRefreshState(refresh);
     }
 
-    async function resetPart(){
+    async function resetPart(data) {
         const storedToken = localStorage.getItem('token')
         setLoading(true);
 
         try {
-            await axios.delete(`http://localhost:8080/bikeparts/${selected.id}`,{
+            await axios.delete(`http://localhost:8080/bikeparts/${selected.id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${storedToken}`
@@ -169,12 +180,11 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
             setError(true);
             console.error(error);
         }
-        try{
-            const today = new Date();
+        try {
             const response = await axios.post(`http://localhost:8080/bikeparts?bikeId=${selected.bike.id}`, {
                 partType: selected.partType,
                 maxDistance: selected.maxDistance,
-                installationDate: today.toISOString()
+                installationDate: data.installationDate
             }, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -183,6 +193,7 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
             });
             setRemovedPart(true);
             console.log(response);
+            closeResetModal();
         } catch (error) {
             setError(true);
             console.error(error);
@@ -228,7 +239,9 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
                 </Button>
                 <h4>You are sure you want to reset this part?</h4>
                 <Button
-                    onClick={resetPart}
+                    onClick={() => {
+                        setModalInstallationDate(true)
+                    }}
                 >
                     Yes
                 </Button>
@@ -236,6 +249,44 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
                     onClick={closeResetModal}>
                     No
                 </Button>
+
+            </Modal>
+
+            <Modal
+                isOpen={modalInstallationDate} //if modal is open
+                onRequestClose={() => {
+                    setModalInstallationDate(false)
+                }} //what to do after modal close
+                style={customStyles}
+                contentLabel=""
+            >
+                <Button
+                    className="icon-button-modal"
+                    onClick={() => {
+                        setModalInstallationDate(false)
+                    }}
+                ><X color="#1989AC" width='2rem' height='2rem'/>
+                </Button>
+                <h4>When did you put this bike part on your bike?</h4>
+                <form className='modal-wrapper' onSubmit={handleSubmit(resetPart)}>
+                    <FormInputField
+                        name="installationDate"
+                        label="Installation date"
+                        type="datetime-local"
+                        placeholder=""
+                        register={register}
+                        errors={errors}
+                        validationRules={{
+                            required: {
+                                value: true,
+                                message: "Installation date is required!",
+                            }
+                        }}
+                    />
+                    <Button className="signin-button">
+                        RESET!
+                    </Button>
+                </form>
 
             </Modal>
 
@@ -259,7 +310,8 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
                         setHoveredDistance(null)
                     }}
                 >
-                    <div className={`progress ${progress >= 80 ? 'red-progress' : ''}`} style={{width: `${progress}%`}}></div>
+                    <div className={`progress ${progress >= 80 ? 'red-progress' : ''}`}
+                         style={{width: `${progress}%`}}></div>
                     {hoveredDistance !== null && (
                         <>
                             <div>{`${hoveredDistance.toFixed(
@@ -285,7 +337,7 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
                         )}
                     </Button>
                     <Button
-                        type = 'button'
+                        type='button'
                         className='gear-icon-button-red'
                         onMouseDown={handleMouseDownDelete}
                         onMouseUp={handleMouseUpDelete}

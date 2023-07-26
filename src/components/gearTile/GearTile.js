@@ -55,6 +55,9 @@ function GearTile({bike}) {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
         console.log(data)
+        if (isEditing === false){
+
+
         try {
             const response = await axios.post(`http://localhost:8080/bikeparts?bikeId=${bike.id}`, {
                 partType: data.partType,
@@ -72,6 +75,25 @@ function GearTile({bike}) {
         }
         setRefresh(!refresh);
         closeModal();
+        } else {
+            try {
+                const response = await axios.put(`http://localhost:8080/bikeparts/${selectedBikePart.id}`, {
+                    partType: selectedBikePart.partType,
+                    maxDistance: data.maxDistance,
+                    installationDate: data.installationDate
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${storedToken}`
+                    }
+                });
+                console.log(response);
+            } catch (error) {
+                console.error(error);
+            }
+            setRefresh(!refresh);
+            closeModal();
+        }
     }
 
     // ...................MODAL
@@ -101,6 +123,7 @@ function GearTile({bike}) {
 
     function closeModal() {
         setModalPartIsOpen(false);
+        setIsEditing(false);
     }
 
 
@@ -150,6 +173,9 @@ function GearTile({bike}) {
                                 maxDistance={bikePart.maxDistance}
                                 selected={bikePart}
                                 changeRefreshState = {setRefresh}
+                                setIsEditing = {setIsEditing}
+                                setModalPartIsOpen = {setModalPartIsOpen}
+                                setSelectedBikePart = {setSelectedBikePart}
                             >
                             </GearItem>
                         )

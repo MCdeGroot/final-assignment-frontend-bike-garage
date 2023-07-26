@@ -36,6 +36,7 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
             <article className='form-wrapper-modal'>
 
                 <div>
+                    {isEditing === false &&
                     <FormInputSelect
                         name="partType"
                         label="Part type"
@@ -43,6 +44,7 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
                         placeholder="choose your type of bike part"
                         register={register}
                     />
+                    }
                     <FormInputField
                         name="maxDistance"
                         label="Bike part durability"

@@ -143,9 +143,7 @@ function Profile() {
         },
     };
 
-    //TODO below seems to be unneccesary?
     Modal.setAppElement('#root');
-
 
     const [modalIsOpen, setModalIsOpen] = React.useState(false);
 
