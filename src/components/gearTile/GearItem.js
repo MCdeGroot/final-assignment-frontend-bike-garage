@@ -11,11 +11,10 @@ import Modal from "react-modal";
 import {X} from "@phosphor-icons/react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
-import FormInputSelect from "../formInput/FormInputSelect";
 import {useForm} from "react-hook-form";
 import FormInputField from "../formInput/FormInputField";
 
-function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
+function GearItem({distanceDriven, maxDistance, selected, changeRefreshState, setIsEditing, setModalPartIsOpen, setSelectedBikePart}) {
     const {user} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -45,6 +44,10 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
 
     function handleMouseUpEdit() {
         toggleIconChangeEdit(true);
+        console.log("klik");
+        setIsEditing(true);
+        setModalPartIsOpen(true);
+        setSelectedBikePart(selected);
     }
 
     function handleMouseDownDelete() {
@@ -286,7 +289,6 @@ function GearItem({distanceDriven, maxDistance, selected, changeRefreshState}) {
                 </form>
 
             </Modal>
-
 
             {/*TODO check of dit goed gaat met selected. Dat ik het Part gewoon doorgeef aan deze component*/}
 
