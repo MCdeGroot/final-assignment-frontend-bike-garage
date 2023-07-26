@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import BikeTile from "../../components/bikeTile/BikeTile";
+import "./Bikes.css"
 import axios from "axios";
 import Button from "../../components/button/Button";
 import {NavLink} from "react-router-dom";
@@ -20,7 +21,7 @@ function Bikes() {
             setLoading(true)
             try {
                 setError(false);
-                const response = await axios.get('http://localhost:8080/bikes', {
+                const response = await axios.get(`http://localhost:8080/bikes/${user.username}`, {
                     signal: controller.signal,
                     headers: {
                         'Content-Type': 'application/json',
@@ -41,8 +42,7 @@ function Bikes() {
     return (
         <>
             <main className='outer-container'>
-                <div className='inner-container-bikes'>
-                    <h1>Hier zijn de bikes</h1>
+                <div className='inner-container bike-main-styling'>
                     {bikes.map((bike) => {
                         return (
                             <BikeTile
@@ -52,6 +52,7 @@ function Bikes() {
                                 model={bike.model}
                                 name={bike.name}
                                 totalDistanceDriven={bike.totalDistanceDriven}
+                                totalHoursDriven={bike.totalHoursDriven}
                             ></BikeTile>
                         )
                     })
