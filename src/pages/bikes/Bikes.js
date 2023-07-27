@@ -12,6 +12,7 @@ function Bikes() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [bikes, setBikes] = useState([]);
+    const [icon, toggleIcon] = useState(false);
 
     //data ophalen van de bikes
     useEffect(() => {
@@ -43,28 +44,38 @@ function Bikes() {
     return (
         <>
             <main className='outer-container'>
-                <div className='inner-container bike-main-styling'>
-                    {bikes.map((bike) => {
-                        return (
-                            <BikeTile
-                                key={bike.id}
-                                bikeType={bike.bikeType}
-                                brand={bike.brand}
-                                model={bike.model}
-                                name={bike.name}
-                                totalDistanceDriven={bike.totalDistanceDriven}
-                                totalHoursDriven={bike.totalHoursDriven}
-                                groupSet={bike.groupSet}
-                                gearData={bike.bikeParts}
-                            ></BikeTile>
-                        )
-                    })
-                    }
-                    <NavLink to="/bikes/add">
-                        <Button>
-                            <PlusCircle size="2rem" color="#5f558c"/>
-                        </Button>
-                    </NavLink>
+                <div className='inner-container'>
+                    <div className='bike-main-styling'>
+
+                        {bikes.map((bike) => {
+                            return (
+                                <BikeTile
+                                    key={bike.id}
+                                    bikeType={bike.bikeType}
+                                    brand={bike.brand}
+                                    model={bike.model}
+                                    name={bike.name}
+                                    totalDistanceDriven={bike.totalDistanceDriven}
+                                    totalHoursDriven={bike.totalHoursDriven}
+                                    groupSet={bike.groupSet}
+                                    gearData={bike.bikeParts}
+                                ></BikeTile>
+                            )
+                        })
+                        }
+                    </div>
+                    <div>
+
+                        <NavLink to="/bikes/add">
+                            <Button
+                                type="button"
+                                className='icon-button-add'>
+                                <PlusCircle size="4rem" weight={icon ? "fill" : "regular"} onMouseUp={() => {
+                                    toggleIcon(!icon);
+                                }}/>
+                            </Button>
+                        </NavLink>
+                    </div>
                 </div>
             </main>
         </>

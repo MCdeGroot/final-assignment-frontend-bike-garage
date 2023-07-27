@@ -16,7 +16,7 @@
 .signin-button:active{
     background-color: var(--color-primary-blue);
     color: var(--color-primary-background);
-    box-shadow: 0px 0px 0px 5px rgba(0, 143, 140, 0.25);
+    box-shadow: 0 0 0 5px rgba(0, 143, 140, 0.25);
 }
 
 .add-button {
@@ -36,8 +36,4 @@
     color: var(--color-primary-blue);
 }
 
-.icon-button-add:active{
-    weight: "fill";
-    color: var(--color-primary-blue);
-}
 
