@@ -129,7 +129,7 @@ function AddBike() {
                             </div>
                         </article>
                         <Button type="submit"
-                                className='submit-button'>
+                                className='signin-button'>
                             Add Bike!
                         </Button>
                     </form>

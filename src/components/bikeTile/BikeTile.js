@@ -83,8 +83,9 @@ function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHours
                         {/*    scheidingslijn*/}
                     </div>
                     <div className='gear-data'>
-                        {/*TODO gearData toeveogen als props. evven kijken wat nu handig is. Kan ik pas testen als de kopeling er is.*/}
+                        {groupSet &&
                         <p>Groupset : {groupSet} </p>
+                        }
                         {gearData.map((bikePart) => {
                             return (<p key={bikePart.partType}>
                                     {bikePartOutput(bikePart.partType)} : {bikePart.currentDistanceDriven}/{bikePart.maxDistance} km
