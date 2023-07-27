@@ -329,7 +329,6 @@ function Dashboard() {
                         </div>
 
                     </Modal>
-                    <h1>Hier is het Dashboard</h1>
                     {ridesData
                         .sort((a, b) => new Date(b.date) - new Date(a.date))
                         .map((ride) => {

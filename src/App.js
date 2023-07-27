@@ -21,6 +21,7 @@ function App() {
             <NavBar isAuth={isAuth}></NavBar>
             <Routes>
                 <Route path="/" element={<Login/>}/>
+                <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/passwordchange" element={<PasswordChange/>}/>
                 <Route path="/profile" element={isAuth ? <Profile/> : <Navigate to="/login"/>}/>
