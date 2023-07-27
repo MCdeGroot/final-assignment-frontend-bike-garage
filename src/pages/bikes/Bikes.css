@@ -1,3 +1,7 @@
+.justify-content {
+    justify-content: center;
+}
+
 .bike-main-styling {
     display: flex;
     position: relative;

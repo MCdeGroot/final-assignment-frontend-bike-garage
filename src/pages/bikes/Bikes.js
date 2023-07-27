@@ -44,7 +44,7 @@ function Bikes() {
     return (
         <>
             <main className='outer-container'>
-                <div className='inner-container'>
+                <div className='inner-container justify-content'>
                     <div className='bike-main-styling'>
 
                         {bikes.map((bike) => {

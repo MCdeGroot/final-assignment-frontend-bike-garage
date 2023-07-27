@@ -10,6 +10,7 @@ import {convertTimeCode} from "../../helper/convertTimeCode";
 
 function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHoursDriven, groupSet, gearData}) {
 
+
     let bikeIcon;
     switch (bikeType) {
         case "TIMETRIAL":
