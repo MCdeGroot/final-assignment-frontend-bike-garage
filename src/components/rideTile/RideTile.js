@@ -3,16 +3,11 @@ import Button from "../button/Button";
 import "./RideTile.css"
 import {ChatText, UploadSimple} from "@phosphor-icons/react";
 import {DownloadSimple} from "@phosphor-icons/react";
-import {Export} from "@phosphor-icons/react";
 import {DotsThreeOutline} from "@phosphor-icons/react";
 import {convertTimeCode} from "../../helper/convertTimeCode";
 import {setBikeIcon} from "../../helper/setBikeIcon";
 import UploadFile from "../uploadFile/UploadFile";
-import Modal from "react-modal";
-import FormInputField from "../formInput/FormInputField";
-import {useForm} from "react-hook-form";
 
-// TODO 20-07-2023 uitzoeken hoe ik mijn afbeelding weer kan geven.
 
 function RideTile({bikeType, selectedRide, image, onClickReview, onClickEditRide}) {
     const [uploadFile, setUploadFile] = useState(false);
@@ -25,7 +20,7 @@ function RideTile({bikeType, selectedRide, image, onClickReview, onClickEditRide
                     {setBikeIcon({bikeType})}
                     <div>
                         <h5>{`${selectedRide.user.firstName} ${selectedRide.user.lastName}`}</h5>
-                        <p>Date {selectedRide.date}</p>
+                        <p>Date {selectedRide.date.split("T")[0]}</p>
                     </div>
                     <Button className='icon-button' type="submit" onClick={onClickEditRide}>
                         <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>

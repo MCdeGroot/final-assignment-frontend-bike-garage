@@ -5,6 +5,7 @@ import Button from "../button/Button";
 import {ReactComponent as TimeTrialBike} from "../../assets/timetrial.svg"
 import {ReactComponent as RoadBike} from "../../assets/roadbike.svg"
 import {ReactComponent as MountainBike} from "../../assets/mtb.svg"
+import {convertTimeCode} from "../../helper/convertTimeCode";
 
 
 function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHoursDriven, groupSet, gearData}) {
@@ -12,15 +13,47 @@ function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHours
     let bikeIcon;
     switch (bikeType) {
         case "TIMETRIAL":
-            bikeIcon = <TimeTrialBike />;
+            bikeIcon = <TimeTrialBike width={50} height={50}/>;
             break;
         case "ROAD":
-            bikeIcon = <RoadBike/>;
+            bikeIcon = <RoadBike width={50} height={50}/>;
             break;
         case "MOUNTAIN":
-            bikeIcon = <MountainBike />;
+            bikeIcon = <MountainBike width={50} height={50}/>;
             break;
     }
+
+    gearData.sort((a, b) => {
+        const partTypeOrder = [
+            "CHAIN",
+            "CASSETTE",
+            "FRONTTIRE",
+            "REARTIRE",
+            "FRONTBRAKEPAD",
+            "REARBRAKEPAD",
+        ];
+        return partTypeOrder.indexOf(a.partType) - partTypeOrder.indexOf(b.partType);
+    });
+
+    function bikePartOutput(bikePart) {
+        switch (bikePart) {
+            case "CHAIN":
+                return "Chain";
+            case "CASSETTE":
+                return "Cassette";
+            case "FRONTTIRE":
+                return "Front Tire";
+            case "REARTIRE":
+                return "Rear Tire";
+            case "FRONTBRAKEPAD":
+                return "Brake Pad front";
+            case "REARBRAKEPAD":
+                return "Brake Pad rear";
+            default:
+                return "Unknown part";
+        }
+    }
+
 
     return (
         <>
@@ -29,9 +62,9 @@ function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHours
                     <div className='biketile-top-name'>
                         {bikeIcon}
                         <h2>{brand} {model}</h2>
-                    <Button className='icon-button-bike'>
-                        <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>
-                    </Button>
+                        <Button className='icon-button-bike'>
+                            <DotsThreeOutline color="#1989AC" width='2rem' height='2rem'/>
+                        </Button>
                     </div>
                     <div className='separation-line-top'>
                         {/*    scheidingslijn*/}
@@ -40,8 +73,8 @@ function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHours
                         <p>Brand : {brand}</p>
                         <p>Model : {model}</p>
                         <p>Nickname : {name}</p>
-                        <p>Total distance driven : {totalDistanceDriven}</p>
-                        <p>Hours driven : {totalHoursDriven}</p>
+                        <p>Total distance driven : {Math.round(totalDistanceDriven)} km</p>
+                        <p>Hours driven : {convertTimeCode(totalHoursDriven)}</p>
                     </div>
                 </section>
                 <section className='biketile-bottom-styling'>
@@ -51,12 +84,13 @@ function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHours
                     </div>
                     <div className='gear-data'>
                         {/*TODO gearData toeveogen als props. evven kijken wat nu handig is. Kan ik pas testen als de kopeling er is.*/}
-                        <p>Groupset : </p>
-                        <p>Chain : </p>
-                        <p>Cassette : </p>
-                        <p>Front Tire : </p>
-                        <p>Rear Tire : </p>
-                        <p>Brakes : </p>
+                        <p>Groupset : {groupSet} </p>
+                        {gearData.map((bikePart) => {
+                            return (<p key={bikePart.partType}>
+                                    {bikePartOutput(bikePart.partType)} : {bikePart.currentDistanceDriven}/{bikePart.maxDistance} km
+                                </p>
+                            )
+                        })}
                     </div>
 
                 </section>

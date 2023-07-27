@@ -16,6 +16,7 @@ function Bikes() {
     //data ophalen van de bikes
     useEffect(() => {
         const controller = new AbortController();
+
         async function fetchData() {
             const storedToken = localStorage.getItem('token');
             setLoading(true)
@@ -53,16 +54,17 @@ function Bikes() {
                                 name={bike.name}
                                 totalDistanceDriven={bike.totalDistanceDriven}
                                 totalHoursDriven={bike.totalHoursDriven}
+                                groupSet={bike.groupSet}
+                                gearData={bike.bikeParts}
                             ></BikeTile>
                         )
                     })
                     }
                     <NavLink to="/bikes/add">
                         <Button>
-                            <PlusCircle size="2rem" color="#5f558c" />
+                            <PlusCircle size="2rem" color="#5f558c"/>
                         </Button>
                     </NavLink>
-
                 </div>
             </main>
         </>

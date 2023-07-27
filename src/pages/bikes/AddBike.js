@@ -2,13 +2,14 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useForm} from "react-hook-form";
 import FormInputField from "../../components/formInput/FormInputField";
-import Button from "../../components/button/Button";
 import FormInputSelect from "../../components/formInput/FormInputSelect";
+import Button from "../../components/button/Button";
 
 function AddBike() {
-    const {register, handleSubmit} = useForm();
-    async function handleFormSubmit(data){
-        console.log(data)
+    const {register, handleSubmit, formState: {errors}} = useForm();
+
+    async function handleFormSubmit(data) {
+
     }
 
     const options = [
@@ -33,6 +34,7 @@ function AddBike() {
                                     type="text"
                                     placeholder="Tell me which beautiful brand this bike is from"
                                     register={register}
+                                    errors={errors}
                                 />
                                 <FormInputField
                                     name="model"
@@ -40,6 +42,7 @@ function AddBike() {
                                     type="text"
                                     placeholder="Which model you bought?"
                                     register={register}
+                                    errors={errors}
                                 />
                                 <FormInputField
                                     name="name"
@@ -47,15 +50,23 @@ function AddBike() {
                                     type="text"
                                     placeholder="How do you want to call your beautiful ride?"
                                     register={register}
+                                    errors={errors}
                                 />
+                                <FormInputField
+                                    name="groupSet"
+                                    label="Group set"
+                                    type="text"
+                                    placeholder="So what is  it gonna be Shimano, SRAM or Campagnolo"
+                                    register={register}
+                                    errors={errors}
+                                />
+
                                 <FormInputSelect
                                     name="bikeType"
                                     label="Bike type"
                                     options={options}
                                     register={register}
                                 />
-
-
                             </div>
                         </article>
                         <Button type="submit"
