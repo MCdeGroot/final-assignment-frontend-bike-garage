@@ -158,7 +158,6 @@ function GearTile({bike}) {
                 </div>
                 <section className="geartile-top-styling">
                     <h2>{bike.brand} {bike.model}</h2>
-                    <img src="../../assets/roadbike.svg" alt=""/>
                 </section>
                 <section className='geartile-middle-styling'>
                     <h2>Bike parts</h2>
@@ -174,6 +173,7 @@ function GearTile({bike}) {
                                 distanceDriven={bikePart.currentDistanceDriven}
                                 maxDistance={bikePart.maxDistance}
                                 selected={bikePart}
+                                partType={bikePart.partType}
                                 setIsEditing = {setIsEditing}
                                 setModalPartIsOpen = {setModalPartIsOpen}
                                 setSelectedBikePart = {setSelectedBikePart}

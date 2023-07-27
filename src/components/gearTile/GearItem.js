@@ -14,13 +14,11 @@ import {AuthContext} from "../../context/AuthContext";
 import {useForm} from "react-hook-form";
 import FormInputField from "../formInput/FormInputField";
 
-function GearItem({distanceDriven, maxDistance, selected, setRefresh, setIsEditing, setModalPartIsOpen, setSelectedBikePart}) {
-    const {user} = useContext(AuthContext);
+function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,setIsEditing, setModalPartIsOpen, setSelectedBikePart}) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [iconChangeEdit, toggleIconChangeEdit] = useState(true);
     const [iconChangeDelete, toggleIconChangeDelete] = useState(true);
-    const [removedPart, setRemovedPart] = useState(false);
     const [iconChangeReset, toggleIconChangeReset] = useState(true);
     const [currentDistanceDriven, setCurrentDistanceDriven] = useState(0);
     const [hoveredDistance, setHoveredDistance] = useState(null);
@@ -70,26 +68,26 @@ function GearItem({distanceDriven, maxDistance, selected, setRefresh, setIsEditi
         openModalResetPart();
     }
 
-    function setIcon(partType) {
-        switch (partType) {
+    function selectedIcon(input) {
+        switch (input) {
             case "CHAIN":
                 return <Chain width='40' height='40'/>;
-                break;
+
             case "FRONTBRAKEPAD":
                 return <Brake width='40' height='40'/>;
-                break;
+
             case "REARBRAKEPAD":
                 return <Brake width='40' height='40'/>;
-                break;
+
             case "CASSETTE":
                 return <Cassette width='40' height='40'/>;
-                break;
+
             case "FRONTTIRE":
                 return <Tire width='40' height='40'/>;
-                break;
+
             case "REARTIRE":
                 return <Tire width='40' height='40'/>;
-                break;
+
             default:
                 return null;
         }
@@ -189,7 +187,6 @@ function GearItem({distanceDriven, maxDistance, selected, setRefresh, setIsEditi
                     Authorization: `Bearer ${storedToken}`
                 }
             });
-            setRemovedPart(true);
             console.log(response);
             closeResetModal();
         } catch (error) {
@@ -215,11 +212,13 @@ function GearItem({distanceDriven, maxDistance, selected, setRefresh, setIsEditi
                 </Button>
                 <h4>You are sure you want to delete this part?</h4>
                 <Button
+                    className="signin-button"
                     onClick={deletePart}
                 >
                     Yes
                 </Button>
                 <Button
+                    className="signin-button"
                     onClick={closeDeleteModal}>
                     No
                 </Button>
@@ -294,9 +293,9 @@ function GearItem({distanceDriven, maxDistance, selected, setRefresh, setIsEditi
             <div className='gear-item-styling'>
                 <div className='gear-item-icon flex-row'>
                     <div>
-                        {setIcon(selected.partType)}
+                        {selectedIcon(partType)}
                     </div>
-                    <h2>{formatString(selected.partType)}</h2>
+                    <h2>{formatString(partType)}</h2>
                 </div>
                 <div className='gear-item-separation-line'></div>
                 <div

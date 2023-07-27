@@ -1,8 +1,13 @@
+.justify-content {
+    justify-content: center;
+}
+
 .bike-main-styling {
     display: flex;
     position: relative;
     flex-direction: row;
     align-items: center;
+    width: 100%;
     gap: 1rem;
 
 }
