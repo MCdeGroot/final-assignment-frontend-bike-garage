@@ -3,3 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.profile-wrapper {
+    width: 100%;
+}

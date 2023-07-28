@@ -202,12 +202,11 @@ function Profile() {
 
                         </Modal>
                     </div>
-                    <div>
+                    <div className='profile-wrapper'>
 
                         <form className='form-input-items' onSubmit={handleSubmit(handleFormSubmit)}>
                             {userData &&
-                                <div>
-
+                                <>
                                     <FormInputField
                                         name="username"
                                         label="Username"
@@ -325,7 +324,7 @@ function Profile() {
                                     />
                                     <FormInputField
                                         name="totalDistanceDriven"
-                                        label="Total distance driven"
+                                        label="Distance driven"
                                         type="text"
                                         placeholder="0 km"
                                         validationRules={
@@ -351,9 +350,7 @@ function Profile() {
                                         errors={errors}
                                         value={userData.bikes.length}
                                     />
-
-
-                                </div>
+                                </>
                             }
                             {editProfile && <Button className="signin-button" type="submit"> Save changes </Button>}
                             {error && <p>{error}</p>}
