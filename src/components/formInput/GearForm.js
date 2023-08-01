@@ -35,7 +35,7 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
         <form className='modal-wrapper' onSubmit={onSubmit}>
             <article className='form-wrapper-modal'>
 
-                <div>
+                <>
                     {isEditing === false &&
                     <FormInputSelect
                         name="partType"
@@ -78,7 +78,7 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
                             }
                         }}
                     />
-                </div>
+                </>
             </article>
             {isEditing ? (
                 <Button type="submit" className='signin-button' onClick={()=>{

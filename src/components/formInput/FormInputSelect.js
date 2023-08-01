@@ -4,7 +4,7 @@ import "./FormInput.css"
 function FormInputSelect({name, label, value, register, validationRules, options, defaultValue, placeholder}) {
     return (
         <>
-            <div>
+            <div className='input-wrapper'>
                 <label className='label' htmlFor={`${name}-field`}>{label}</label>
                 <select className='input-field'
                         name={name}
