@@ -11,6 +11,8 @@ import FormInputField from "../../components/formInput/FormInputField";
 import {useForm} from "react-hook-form";
 import AddRide from "../../components/formInput/AddRide";
 import {convertTimeToString} from "../../helper/convertTimeCode";
+import {errorHandler} from "../../helper/errorHandler";
+import MessageModal from "../../components/modal/MessageModal";
 
 
 function Dashboard() {
@@ -19,6 +21,7 @@ function Dashboard() {
     const {register, handleSubmit, formState: {errors}, reset} = useForm({mode: 'onTouched'});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [ridesData, setRidesData] = useState([]);
     const [userBikesData, setUserBikesData] = useState([]);
     const [refresh, setRefresh] = useState(false);
@@ -81,12 +84,10 @@ function Dashboard() {
 
     useEffect(() => {
         const controller = new AbortController;
-
         async function fetchRideData() {
             const storedToken = localStorage.getItem('token');
             setLoading(true);
             try {
-                setError(false);
                 const response = await axios.get(`http://localhost:8080/rides/${user.username}`, {
                     signal: controller.signal,
                     headers: {
@@ -96,11 +97,12 @@ function Dashboard() {
                 })
                 setRidesData(response.data);
                 console.log(response.data);
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
+                setErrorMessage(errorHandler(e))
+                setError(true)
+                console.error(e)
             }
         }
-
         fetchRideData();
     }, [refresh])
 
@@ -108,7 +110,6 @@ function Dashboard() {
         const storedToken = localStorage.getItem('token');
         setLoading(true);
         try {
-            setError(false);
             const response = await axios.get(`http://localhost:8080/bikes/${user.username}`, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -117,8 +118,10 @@ function Dashboard() {
             })
             setUserBikesData(response.data);
             console.log(response.data);
-        } catch (error) {
-            console.error(error)
+        } catch (e) {
+            setErrorMessage(errorHandler(e))
+            setError(true)
+            console.error(e)
         }
     }
 
@@ -137,10 +140,10 @@ function Dashboard() {
             });
             console.log(response);
 
-        } catch (error) {
-            setError(true);
-            console.error(error);
-
+        } catch (e) {
+            setErrorMessage(errorHandler(e))
+            setError(true)
+            console.error(e)
         }
         setLoading(false);
         setRefresh(!refresh);
@@ -188,9 +191,10 @@ function Dashboard() {
                 });
                 console.log(response);
             }
-        } catch (error) {
-            setError(true);
-            console.error(error);
+        } catch (e) {
+            setErrorMessage(errorHandler(e))
+            console.error(e)
+            setError(true)
         }
 
         setLoading(false);
@@ -211,21 +215,20 @@ function Dashboard() {
                 });
             setRefresh(!refresh);
             closeModal();
-        } catch (error) {
-            setError(true);
-            console.error(error);
+        } catch (e) {
+            setErrorMessage(errorHandler(e))
+            setError(true)
+            console.error(e)
         }
         setLoading(false);
-
     }
 
-    // TODO opschonen deze pagina en kijken of we bepaalde zaken niet beter als component kunnen doorgeven etc. Nu erg onoverzichtelijk geworden door alle modals.
-    // TODO putmapping ride toevoegen
     return (
         <>
             <main className='outer-container'>
 
                 <div className='inner-container'>
+                    {error && <MessageModal message={errorMessage} setError={setError}/>}
                     {user.authorities.includes('ROLE_TRAINER') &&
                         <div>
                             <Modal
@@ -329,6 +332,7 @@ function Dashboard() {
                         </div>
 
                     </Modal>
+                    {error && errorMessage}
                     {ridesData
                         .sort((a, b) => new Date(b.date) - new Date(a.date))
                         .map((ride) => {
