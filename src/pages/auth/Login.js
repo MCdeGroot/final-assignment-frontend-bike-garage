@@ -26,7 +26,6 @@ async function handleFormSubmit(data) {
             console.log(data.username, data.password)
         }
     }
-
     return (
         <>
             <main className='outer-container'>
