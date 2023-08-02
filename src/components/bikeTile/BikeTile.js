@@ -94,9 +94,7 @@ function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHours
                             )
                         })}
                     </div>
-
                 </section>
-
             </div>
         </>
     )
