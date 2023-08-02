@@ -10,6 +10,7 @@ import Modal from "react-modal";
 import {X} from "@phosphor-icons/react";
 import GearForm from "../../components/formInput/GearForm";
 import FormInputSelect from "../../components/formInput/FormInputSelect";
+import {errorHandler} from "../../helper/errorHandler";
 
 
 function Profile() {
@@ -19,6 +20,7 @@ function Profile() {
     const [usernames, setUsernames] = useState([]);
     const [editProfile, setEditProfile] = useState(false);
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
     const {register: registerTrainer, handleSubmit : handleSubmitTrainer}=useForm({mode: 'onTouched'});
@@ -43,14 +45,15 @@ function Profile() {
                 setUserData(response.data);
                 console.log(userData);
                 setLoading(false);
-            } catch (error) {
-                setError(true);
-                console.error(error);
+            } catch (e) {
+                setErrorMessage(errorHandler(e))
+                setError(true)
+                console.error(e)
             }
         }
 
         fetchUserData();
-    }, []) //TODO dit gaf Webstorm aan, maar in mijn geval hoeft dit toch helemaal niet?
+    }, [])
 
     async function getUsernames() {
         const storedToken = localStorage.getItem('token');
@@ -65,8 +68,10 @@ function Profile() {
             })
             setUsernames(response.data);
             console.log(response.data) /// dit nog weghalen
-        } catch (error) {
-            console.error(error)
+        } catch (e) {
+            setErrorMessage(errorHandler(e))
+            setError(true)
+            console.error(e)
         }
         setLoading(false)
     }
@@ -84,8 +89,10 @@ function Profile() {
                     Authorization: `Bearer ${storedToken}`
                 }
             })
-        } catch (error) {
-            console.error(error)
+        } catch (e) {
+            setErrorMessage(errorHandler(e))
+            setError(true)
+            console.error(e)
         }
         setLoading(false)
         closeModal();
@@ -110,10 +117,10 @@ function Profile() {
             console.log(response);
             setEditProfile(false);
 
-        } catch (error) {
-            setError(true);
-            console.error(error);
-
+        } catch (e) {
+            setErrorMessage(errorHandler(e))
+            setError(true)
+            console.error(e)
         }
         setLoading(false);
     }
@@ -353,7 +360,7 @@ function Profile() {
                                 </>
                             }
                             {editProfile && <Button className="signin-button" type="submit"> Save changes </Button>}
-                            {error && <p>{error}</p>}
+                            {error && errorMessage}
                         </form>
                     </div>
                     <div className="wrapper">
@@ -364,7 +371,7 @@ function Profile() {
                                 {loading ? "Loading" : "Edit profile!"}
                             </Button>
                         }
-                        {/*{!userData.trainerUsername && !editProfile &&*/}
+                        {/*{userData.trainerUsername === null  && !editProfile &&*/}
                         <Button className="signin-button" onClick={() =>
                             openModal()
                         }> Assign trainer!

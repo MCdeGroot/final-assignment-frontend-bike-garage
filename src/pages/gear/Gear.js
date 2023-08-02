@@ -3,18 +3,18 @@ import GearTile from "../../components/gearTile/GearTile";
 import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
-
+import {errorHandler} from "../../helper/errorHandler";
 
 function Gear() {
     const {user} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [bikeData, setBikeData] = useState([]);
 
     //data ophalen van de bikes
     useEffect(() => {
         const controller = new AbortController();
-
         async function fetchBikeData() {
             const storedToken = localStorage.getItem('token');
             setLoading(true)
@@ -28,9 +28,11 @@ function Gear() {
                     }
                 })
                 setBikeData(response.data);
-                console.log(response.data) /// dit nog weghalen
-            } catch (error) {
-                console.error(error)
+                setLoading(false);
+            } catch (e) {
+                setErrorMessage(errorHandler(e))
+                setError(true)
+                console.error(e)
             }
         }
 
@@ -42,6 +44,9 @@ function Gear() {
         <>
             <main className='outer-container'>
                 <div className='inner-container'>
+                    {loading && <p>Loading page...</p>}
+                    {error && errorMessage}
+
                     {bikeData.map((bike) => {
                         return (
                             <GearTile

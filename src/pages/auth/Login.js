@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import '../../App.css'
 import './AuthPages.css'
 import Button from '../../components/button/Button'
@@ -6,10 +6,13 @@ import {useForm} from "react-hook-form";
 import FormInputField from "../../components/formInput/FormInputField";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
+import {errorHandler} from "../../helper/errorHandler";
 
 function Login() {
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
     const {login} = useContext(AuthContext);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
 
 async function handleFormSubmit(data) {
@@ -19,14 +22,14 @@ async function handleFormSubmit(data) {
                 username: data.username,
                 password: data.password
             });
-            console.log(response);
             login(response.data.jwt, "/rides");
-        } catch (error){
-            console.error("Onjuist email en wachtwoord combinatie ⛔", error)
-            console.log(data.username, data.password)
+        }
+        catch (e) {
+            setErrorMessage(errorHandler(e))
+            setError(true)
+            console.error("Onjuist email en wachtwoord combinatie ⛔", e)
         }
     }
-
     return (
         <>
             <main className='outer-container'>
@@ -54,6 +57,7 @@ async function handleFormSubmit(data) {
                                     register={register}
                                     errors = {errors}
                                 />
+                                {error && <div className= "error"> {errorMessage} </div>}
                             </div>
                         </article>
                         <Button type="submit"

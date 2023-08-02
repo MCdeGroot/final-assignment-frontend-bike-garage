@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import "./GearTile.css"
 import GearItem from "./GearItem";
-import axios from "axios";
+import axios, {put} from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import BikeTile from "../bikeTile/BikeTile";
 import Button from "../button/Button";
@@ -11,6 +11,7 @@ import AddRide from "../formInput/AddRide";
 import {useForm} from "react-hook-form";
 import GearForm from "../formInput/GearForm";
 import {configure} from "@testing-library/react";
+import {errorHandler} from "../../helper/errorHandler";
 
 /*TODO mijn plaatjes laden niet*/
 function GearTile({bike}) {
@@ -18,6 +19,7 @@ function GearTile({bike}) {
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [icon, toggleIcon] = useState(false);
     const [gearData, setGearData] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
@@ -42,11 +44,12 @@ function GearTile({bike}) {
                     }
                 })
                 setGearData(response.data);
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
+                setErrorMessage(errorHandler(e))
+                setError(true)
+                console.error(e)
             }
         }
-
         fetchGearData();
         setRefresh(false);
     }, [refresh])
@@ -70,8 +73,10 @@ function GearTile({bike}) {
                 }
             });
             console.log(response);
-        } catch (error) {
-            console.error(error);
+        } catch (e) {
+            setErrorMessage(errorHandler(e))
+            setError(true)
+            console.error(e)
         }
         setRefresh(!refresh);
         closeModal();
@@ -88,8 +93,10 @@ function GearTile({bike}) {
                     }
                 });
                 console.log(response);
-            } catch (error) {
-                console.error(error);
+            } catch (e) {
+                setErrorMessage(errorHandler(e))
+                setError(true)
+                console.error(e)
             }
             setRefresh(!refresh);
             closeModal();
@@ -110,7 +117,6 @@ function GearTile({bike}) {
         },
     };
 
-    //TODO below seems to be unneccesary?
     Modal.setAppElement('#root');
 
 
@@ -132,7 +138,6 @@ function GearTile({bike}) {
         <>
 
             <div className="geartile-outer-wrapper">
-
                 <div>
                     <Modal
                         isOpen={modalPartIsOpen} //if modal is open
@@ -166,6 +171,7 @@ function GearTile({bike}) {
                     <div className='gear-separation-line-middle'></div>
                 </section>
                 <section className='geartile-bottom-styling'>
+                    {error && errorMessage}
                     {gearData.map((bikePart) => {
                         return (
                             <GearItem
@@ -199,5 +205,4 @@ function GearTile({bike}) {
         </>
     )
 }
-
 export default GearTile;

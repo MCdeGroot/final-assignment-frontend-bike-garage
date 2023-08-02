@@ -6,18 +6,19 @@ import Button from "../../components/button/Button";
 import {NavLink} from "react-router-dom";
 import {PlusCircle} from "@phosphor-icons/react";
 import {AuthContext} from "../../context/AuthContext";
+import {errorHandler} from "../../helper/errorHandler";
 
 function Bikes() {
     const {user} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [bikes, setBikes] = useState([]);
     const [icon, toggleIcon] = useState(false);
 
     //data ophalen van de bikes
     useEffect(() => {
         const controller = new AbortController();
-
         async function fetchData() {
             const storedToken = localStorage.getItem('token');
             setLoading(true)
@@ -32,11 +33,12 @@ function Bikes() {
                 })
                 setBikes(response.data);
                 console.log(response.data) /// dit nog weghalen
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
+                setErrorMessage(errorHandler(e))
+                setError(true)
+                console.error(e)
             }
         }
-
         fetchData();
     }, [])
 
@@ -46,7 +48,7 @@ function Bikes() {
             <main className='outer-container'>
                 <div className='inner-container justify-content'>
                     <div className='bike-main-styling'>
-
+                        {error && errorMessage}
                         {bikes.map((bike) => {
                             return (
                                 <BikeTile
