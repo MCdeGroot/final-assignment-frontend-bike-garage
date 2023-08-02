@@ -7,6 +7,7 @@ import FormInputField from "../../components/formInput/FormInputField";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import {errorHandler} from "../../helper/errorHandler";
+import {NavLink} from "react-router-dom";
 
 function Login() {
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
@@ -60,6 +61,12 @@ async function handleFormSubmit(data) {
                                 {error && <div className= "error"> {errorMessage} </div>}
                             </div>
                         </article>
+                        <div className="flex-row" ><p>
+                            Forgot password?
+                        </p>
+                            <NavLink
+                                to="/passwordchange"><p>Click here!</p>
+                            </NavLink></div>
                         <Button type="submit"
                                 className='signin-button'>
                             Log in!
