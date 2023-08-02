@@ -3,6 +3,7 @@ import FormInputField from "./FormInputField";
 import Button from "../button/Button";
 import FormInputSelect from "./FormInputSelect";
 import UploadFile from "../uploadFile/UploadFile";
+import {isBefore} from "../../helper/dateValidation";
 
 function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditing, initialValue}) {
 
@@ -19,17 +20,7 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
             ...previousValue,
             [name]: value,
         }));
-    };
-
-    const isBefore = (date) => {
-        if (!date) {
-            return false;
-        }
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        return date > today;
-    };
+    }
 
     function generateOptions() {
         return userBikesData.map((bike) => ({
@@ -86,6 +77,10 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
                                 value: true,
                                 message: "Distance is required!",
                             },
+                            min: {
+                                value: 0.01,
+                                message: "Distance must be greater than 0!",
+                            }
                         }}
                         onChange={handleChange}
                     />
@@ -97,6 +92,13 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
                         register={register}
                         errors={errors}
                         value={formValue.date}
+                        validationRules={{
+                            required: {
+                                value: true,
+                                message: "Date is required!",
+                            },
+                            validate: isBefore
+                        }}
                         onChange={handleChange}
                         // validationRules={...}
                     />
@@ -113,6 +115,10 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
                                 value: true,
                                 message: "Power input is required!",
                             },
+                            min: {
+                                value: 0.01, // De minimale waarde die groter moet zijn dan 0
+                                message: "Power input must be greater than 0!",
+                            }
                         }}
                         onChange={handleChange}
                     />
@@ -124,6 +130,12 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
                         register={register}
                         errors={errors}
                         value={formValue.normalizedPower}
+                        validationRules={{
+                            min: {
+                                value: 0.01, // De minimale waarde die groter moet zijn dan 0
+                                message: "Power input must be greater than 0!",
+                            }
+                        }}
                         onChange={handleChange}
                     />
                     <FormInputField
@@ -145,7 +157,7 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
                 </div>
             </article>
             {isEditing ? (
-                <Button type="submit" className='signin-button' onClick={()=>{
+                <Button type="submit" className='signin-button' onClick={() => {
                     console.log(formValue);
                 }}>
                     Edit ride!

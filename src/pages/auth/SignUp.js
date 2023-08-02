@@ -72,7 +72,10 @@ function SignUp() {
                                         {
                                             required: {
                                                 value: true,
-                                                message: "Username is required!"
+                                                message: "E-mail is required!"
+                                            }, pattern: {
+                                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}$/i,
+                                                message: "Please, fill in a valid e-mail address"
                                             }
                                         }
                                     }
