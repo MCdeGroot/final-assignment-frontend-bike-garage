@@ -7,13 +7,11 @@ import BikeTile from "../bikeTile/BikeTile";
 import Button from "../button/Button";
 import {PlusCircle, X} from "@phosphor-icons/react";
 import Modal from "react-modal";
-import AddRide from "../formInput/AddRide";
+
 import {useForm} from "react-hook-form";
 import GearForm from "../formInput/GearForm";
-import {configure} from "@testing-library/react";
 import {errorHandler} from "../../helper/errorHandler";
 
-/*TODO mijn plaatjes laden niet*/
 function GearTile({bike}) {
 
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
