@@ -48,6 +48,7 @@ function Bikes() {
             <main className='outer-container'>
                 <div className='inner-container justify-content'>
                     <div className='bike-main-styling'>
+                        {loading && <p>Loading page...</p>}
                         {error && errorMessage}
                         {bikes.map((bike) => {
                             return (

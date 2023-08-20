@@ -43,6 +43,8 @@ function SignUp() {
         <>
             <main className='outer-container'>
                 <div className='inner-container authorization'>
+                    {loading && <p>Loading page...</p>}
+                    {error && errorMessage}
                     <form className='form' onSubmit={handleSubmit(handleFormSubmit)}>
                         <article className='form-wrapper'>
                             <div className='form-title'>

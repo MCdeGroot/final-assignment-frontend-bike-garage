@@ -227,6 +227,7 @@ function Dashboard() {
             <main className='outer-container'>
 
                 <div className='inner-container'>
+                    {loading && <p>Loading page...</p>}
                     {error && <MessageModal message={errorMessage} setError={setError}/>}
                     {user.authorities.includes('ROLE_TRAINER') &&
                         <div>
