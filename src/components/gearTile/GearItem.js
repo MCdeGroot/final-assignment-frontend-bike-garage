@@ -115,7 +115,6 @@ function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,se
         },
     };
 
-    //TODO below seems to be unneccesary?
     Modal.setAppElement('#root');
 
     const [modalRideDeleteIsOpen, setModalRideDeleteIsOpen] = React.useState(false);
@@ -139,7 +138,6 @@ function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,se
         setModalInstallationDate(false);
     }
 
-    // TODO de state moet nog gerefresehd worden en helemaal terug gegeven worden om useeffect te triggerren
     async function deletePart() {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
@@ -288,7 +286,6 @@ function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,se
 
             </Modal>
 
-            {/*TODO check of dit goed gaat met selected. Dat ik het Part gewoon doorgeef aan deze component*/}
 
             <div className='gear-item-styling'>
                 <div className='gear-item-icon flex-row'>

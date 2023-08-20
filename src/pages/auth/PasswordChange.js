@@ -6,7 +6,6 @@ import {useForm} from "react-hook-form";
 import FormInputField from "../../components/formInput/FormInputField";
 import axios from "axios";
 
-// TODO reset function HookForm uitzoeken
 function PasswordChange(){
     const {register, handleSubmit, formState: {errors}} = useForm();
 

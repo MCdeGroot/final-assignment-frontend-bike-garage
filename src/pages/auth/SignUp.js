@@ -142,7 +142,7 @@ function SignUp() {
                                     register={register}
                                     errors={errors}
                                 />
-                                {/*TODO een functie schrijven dat deze per se moet worden ingevoerd bij registreren*/}
+
                                 <FormInputField
                                     name="password-confirm"
                                     label="Confirm password"

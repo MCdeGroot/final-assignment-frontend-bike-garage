@@ -31,8 +31,6 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
 
     const options = generateOptions();
 
-    //TODO mijn velden worden niet gereset als ik post of onclose druk
-
     return (
         <form className='modal-wrapper' onSubmit={onSubmit}>
             <article className='form-wrapper-modal'>

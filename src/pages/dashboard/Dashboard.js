@@ -43,7 +43,7 @@ function Dashboard() {
         },
     };
 
-    //TODO below seems to be unneccesary?
+
     Modal.setAppElement('#root');
 
 
@@ -80,7 +80,6 @@ function Dashboard() {
         setModalRideDeleteIsOpen(false);
     }
 
-    //TODO deze handlesubmit nog goed zetten, want nu doet ie niet updateen na een review
 
     useEffect(() => {
         const controller = new AbortController;
@@ -338,7 +337,6 @@ function Dashboard() {
                         .map((ride) => {
                             return (
                                 <div key={ride.id} className="ride-tile-wrapper">
-                                    {/*TODO hier nog gewwon aalleen de selectedride doorgeven. Overige waarde pas in tile benoemen*/}
                                     <RideTile
                                         selectedRide={ride}
                                         bikeType={ride.bike.bikeType}
