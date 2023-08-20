@@ -5,13 +5,15 @@ import './AuthPages.css'
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {errorHandler} from "../../helper/errorHandler";
 
 
 function SignUp() {
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onTouched'});
 
     // state voor functionaliteit
-    const [error, toggleError] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -29,9 +31,10 @@ function SignUp() {
             console.log("user signed up!");
             navigate("/login");
 
-        } catch (error) {
-            console.error(error);
-            toggleError(true);
+        } catch (e) {
+            setErrorMessage(errorHandler(e))
+            setError(true)
+            console.error(e)
         }
         toggleLoading(false);
     }
@@ -72,7 +75,10 @@ function SignUp() {
                                         {
                                             required: {
                                                 value: true,
-                                                message: "Username is required!"
+                                                message: "E-mail is required!"
+                                            }, pattern: {
+                                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}$/i,
+                                                message: "Please, fill in a valid e-mail address"
                                             }
                                         }
                                     }

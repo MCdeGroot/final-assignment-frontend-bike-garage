@@ -8,7 +8,7 @@ import axios from "axios";
 
 // TODO reset function HookForm uitzoeken
 function PasswordChange(){
-    const {register, handleSubmit, reset} = useForm();
+    const {register, handleSubmit, formState: {errors}} = useForm();
 
     async function handleFormSubmit(data){
         const storedToken = localStorage.getItem('token');
@@ -46,6 +46,7 @@ function PasswordChange(){
                                     type="text"
                                     placeholder="Fill in your username"
                                     register={register}
+                                    errors={errors}
                                 />
 
                                 <FormInputField
@@ -53,7 +54,26 @@ function PasswordChange(){
                                     label="New Password"
                                     type="password"
                                     placeholder="Enter new password"
+                                    validationRules={
+                                        {
+                                            required: {
+                                                value: true,
+                                                message: "Password is required!"
+                                            }, pattern: {
+                                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*?[\\!\\#\\@\\$\\%\\&\\/\\(\\)\\=\\?\\*\\-\\+\\_\\.\\:\\;\\,\\{\\}\\^])[A-Za-z0-9!#@$%&/()=?*+-_.:;,{}].+$/,
+                                                message: "Invalid password! Password must meet the following requirements: At least 1 lowercase letter, at least 1 uppercase letter, at least 1 number and at least 1 symbol!"
+                                            },
+                                            minLength: {
+                                                value: 8,
+                                                message: "Password must be at least 8 characters!"
+                                            }, maxLength: {
+                                                value: 20,
+                                                message: "Password cannot be more than 20 characters long!"
+                                            }
+                                        }
+                                    }
                                     register={register}
+                                    errors={errors}
                                 />
                             </div>
                         </article>

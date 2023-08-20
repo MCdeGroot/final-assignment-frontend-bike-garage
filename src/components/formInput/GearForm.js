@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import FormInputField from "./FormInputField";
 import Button from "../button/Button";
 import FormInputSelect from "./FormInputSelect";
+import {isBefore} from "../../helper/dateValidation";
 
 function GearForm({onSubmit, register, errors, closeModal, isEditing, initialValue}) {
 
@@ -28,8 +29,6 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
         { label: "Front Brake Pad", value: "FRONTBRAKEPAD" },
         { label: "Rear Brake Pad", value: "REARBRAKEPAD" }
     ];
-
-    //TODO mijn velden worden niet gereset als ik post of onclose druk
 
     return (
         <form className='modal-wrapper' onSubmit={onSubmit}>
@@ -75,7 +74,8 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
                             required: {
                                 value: true,
                                 message: "Installation date is required!",
-                            }
+                            },
+                            validate: isBefore
                         }}
                     />
                 </>
