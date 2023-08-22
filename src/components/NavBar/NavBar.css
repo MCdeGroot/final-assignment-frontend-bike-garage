@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
     background-color: var(--color-primary-background);
     height: 10vh;
 }
@@ -20,6 +20,7 @@
     justify-content: space-between;
 
 }
+
 .logo {
     width: 50px;
 }
@@ -53,7 +54,8 @@ a:hover {
 .active-nav-link {
     text-decoration: none;
 }
-.active-nav-link h4{
+
+.active-nav-link h4 {
     text-decoration: none;
     color: var(--color-primary-blue);
     font-style: normal;

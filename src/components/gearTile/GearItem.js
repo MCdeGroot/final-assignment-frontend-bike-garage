@@ -14,7 +14,16 @@ import {AuthContext} from "../../context/AuthContext";
 import {useForm} from "react-hook-form";
 import FormInputField from "../formInput/FormInputField";
 
-function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,setIsEditing, setModalPartIsOpen, setSelectedBikePart}) {
+function GearItem({
+                      distanceDriven,
+                      maxDistance,
+                      selected,
+                      partType,
+                      setRefresh,
+                      setIsEditing,
+                      setModalPartIsOpen,
+                      setSelectedBikePart
+                  }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [iconChangeEdit, toggleIconChangeEdit] = useState(true);
@@ -161,7 +170,6 @@ function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,se
     async function resetPart(data) {
         const storedToken = localStorage.getItem('token')
         setLoading(true);
-
         try {
             await axios.delete(`http://localhost:8080/bikeparts/${selected.id}`, {
                 headers: {
@@ -196,7 +204,6 @@ function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,se
 
     return (
         <>
-
             <Modal
                 isOpen={modalRideDeleteIsOpen} //if modal is open
                 onRequestClose={closeDeleteModal} //what to do after modal close
@@ -220,9 +227,7 @@ function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,se
                     onClick={closeDeleteModal}>
                     No
                 </Button>
-
             </Modal>
-
             <Modal
                 isOpen={modalResetIsOpen} //if modal is open
                 onRequestClose={closeResetModal} //what to do after modal close
@@ -245,9 +250,7 @@ function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,se
                     onClick={closeResetModal}>
                     No
                 </Button>
-
             </Modal>
-
             <Modal
                 isOpen={modalInstallationDate} //if modal is open
                 onRequestClose={() => {
@@ -283,10 +286,7 @@ function GearItem({distanceDriven, maxDistance, selected, partType,setRefresh,se
                         RESET!
                     </Button>
                 </form>
-
             </Modal>
-
-
             <div className='gear-item-styling'>
                 <div className='gear-item-icon flex-row'>
                     <div>

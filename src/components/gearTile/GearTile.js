@@ -48,6 +48,7 @@ function GearTile({bike}) {
                 console.error(e)
             }
         }
+
         fetchGearData();
         setRefresh(false);
     }, [refresh])
@@ -56,28 +57,28 @@ function GearTile({bike}) {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
         console.log(data)
-        if (isEditing === false){
+        if (isEditing === false) {
 
 
-        try {
-            const response = await axios.post(`http://localhost:8080/bikeparts?bikeId=${bike.id}`, {
-                partType: data.partType,
-                maxDistance: data.maxDistance,
-                installationDate: data.installationDate
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${storedToken}`
-                }
-            });
-            console.log(response);
-        } catch (e) {
-            setErrorMessage(errorHandler(e))
-            setError(true)
-            console.error(e)
-        }
-        setRefresh(!refresh);
-        closeModal();
+            try {
+                const response = await axios.post(`http://localhost:8080/bikeparts?bikeId=${bike.id}`, {
+                    partType: data.partType,
+                    maxDistance: data.maxDistance,
+                    installationDate: data.installationDate
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${storedToken}`
+                    }
+                });
+                console.log(response);
+            } catch (e) {
+                setErrorMessage(errorHandler(e))
+                setError(true)
+                console.error(e)
+            }
+            setRefresh(!refresh);
+            closeModal();
         } else {
             try {
                 const response = await axios.put(`http://localhost:8080/bikeparts/${selectedBikePart.id}`, {
@@ -134,7 +135,6 @@ function GearTile({bike}) {
 
     return (
         <>
-
             <div className="geartile-outer-wrapper">
                 <div>
                     <Modal
@@ -154,7 +154,7 @@ function GearTile({bike}) {
                                   onClick={closeModal}
                                   initialValue={selectedBikePart}
                                   isEditing={isEditing}
-                                  setRefresh = {setRefresh}
+                                  setRefresh={setRefresh}
                         >
                         </GearForm>
                     </Modal>
@@ -178,10 +178,10 @@ function GearTile({bike}) {
                                 maxDistance={bikePart.maxDistance}
                                 selected={bikePart}
                                 partType={bikePart.partType}
-                                setIsEditing = {setIsEditing}
-                                setModalPartIsOpen = {setModalPartIsOpen}
-                                setSelectedBikePart = {setSelectedBikePart}
-                                setRefresh = {setRefresh}
+                                setIsEditing={setIsEditing}
+                                setModalPartIsOpen={setModalPartIsOpen}
+                                setSelectedBikePart={setSelectedBikePart}
+                                setRefresh={setRefresh}
                             >
                             </GearItem>
                         )
@@ -203,4 +203,5 @@ function GearTile({bike}) {
         </>
     )
 }
+
 export default GearTile;

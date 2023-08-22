@@ -9,7 +9,7 @@ import {X} from "@phosphor-icons/react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
-function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
+function UploadFile({openModalOnClick, changeUploadState, selectedItem}) {
 
 
     const {user} = useContext(AuthContext);
@@ -27,9 +27,8 @@ function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
         setPreviewUrl(URL.createObjectURL(uploadedFile));
     }
 
-    // TODO redirect doet het niet. gooit me niet naar dashboard
     async function sendImage() {
-       // data.preventDefault();
+        // data.preventDefault();
         const storedToken = localStorage.getItem('token');
         setLoading(true)
         const formData = new FormData();
@@ -65,14 +64,15 @@ function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
     }
 
     const [modalIsOpen, setModalIsOpen] = React.useState(openModalOnClick);
-    function openModal(){
+
+    function openModal() {
         setModalIsOpen(true);
     }
+
     function closeModal() {
         setModalIsOpen(false);
         changeUploadState(false);
     }
-
 
     return (
         <div>
@@ -85,7 +85,7 @@ function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
                 <Button
                     className="icon-button-modal"
                     onClick={closeModal}><X color="#1989AC" width='2rem' height='2rem'/></Button>
-                <form onSubmit={sendImage} className= "modal-wrapper">
+                <form onSubmit={sendImage} className="modal-wrapper">
                     <FormInputField
                         name="file"
                         label="Add file"
@@ -95,11 +95,11 @@ function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
                         onChange={handleImageChange}
                     />
                     {previewUrl &&
-                        <div className= "flex-column">
+                        <div className="flex-column">
                             Preview:
                             <img src={previewUrl} alt="Chosen file" className="image-preview"/>
                         </div>}
-                    <Button type="submit" className='signin-button' >
+                    <Button type="submit" className='signin-button'>
                         Add File!
                     </Button>
                 </form>
@@ -107,9 +107,7 @@ function UploadFile( {openModalOnClick, changeUploadState, selectedItem} ) {
             <Button onClick={openModal}>
                 Add File!
             </Button>
-
         </div>
-
     )
 }
 

@@ -55,23 +55,25 @@ function RideTile({bikeType, selectedRide, image, onClickReview, onClickEditRide
                         </div>
                     </div>
                     {image &&
-                    <img src={image} alt="Chosen file" className="image-wrapper"/>
+                        <img src={image} alt="Chosen file" className="image-wrapper"/>
                     }
                 </section>
                 <section className='ridetile-bottom-styling flex-row'>
                     <h2>{`${selectedRide.bike.brand} ${selectedRide.bike.model}`}</h2>
                     <div className='flex-row'>
                         <Button className='icon-button'
-                                onClick={()=>{
+                                onClick={() => {
                                     setUploadFile(!uploadFile)
                                     console.log(uploadFile)
                                 }}
                         ><UploadSimple width='2rem' height='2rem'/></Button>
-                        {uploadFile && <UploadFile openModalOnClick={true} changeUploadState = {setUploadFile} selectedItem={selectedRide}/>}
+                        {uploadFile && <UploadFile openModalOnClick={true} changeUploadState={setUploadFile}
+                                                   selectedItem={selectedRide}/>}
                         <div className='ride-separation-line-bottom'></div>
                         <Button className='icon-button'><DownloadSimple width='2rem' height='2rem'/></Button>
                         <div className='ride-separation-line-bottom'></div>
-                        <Button className='icon-button' type="submit" onClick={onClickReview}><ChatText width='2rem' height='2rem'/></Button>
+                        <Button className='icon-button' type="submit" onClick={onClickReview}><ChatText width='2rem'
+                                                                                                        height='2rem'/></Button>
                     </div>
 
                 </section>

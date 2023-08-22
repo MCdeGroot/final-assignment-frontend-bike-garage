@@ -22,12 +22,12 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
     };
 
     const bikePartOptions = [
-        { label: "Chain", value: "CHAIN" },
-        { label: "Cassette", value: "CASSETTE" },
-        { label: "Front Tire", value: "FRONTTIRE" },
-        { label: "Rear Tire", value: "REARTIRE" },
-        { label: "Front Brake Pad", value: "FRONTBRAKEPAD" },
-        { label: "Rear Brake Pad", value: "REARBRAKEPAD" }
+        {label: "Chain", value: "CHAIN"},
+        {label: "Cassette", value: "CASSETTE"},
+        {label: "Front Tire", value: "FRONTTIRE"},
+        {label: "Rear Tire", value: "REARTIRE"},
+        {label: "Front Brake Pad", value: "FRONTBRAKEPAD"},
+        {label: "Rear Brake Pad", value: "REARBRAKEPAD"}
     ];
 
     return (
@@ -36,13 +36,13 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
 
                 <>
                     {isEditing === false &&
-                    <FormInputSelect
-                        name="partType"
-                        label="Part type"
-                        options={bikePartOptions}
-                        placeholder="choose your type of bike part"
-                        register={register}
-                    />
+                        <FormInputSelect
+                            name="partType"
+                            label="Part type"
+                            options={bikePartOptions}
+                            placeholder="choose your type of bike part"
+                            register={register}
+                        />
                     }
                     <FormInputField
                         name="maxDistance"
@@ -60,7 +60,6 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
                         }}
                         onChange={handleChange}
                     />
-
                     <FormInputField
                         name="installationDate"
                         label="Installation date"
@@ -81,7 +80,7 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
                 </>
             </article>
             {isEditing ? (
-                <Button type="submit" className='signin-button' onClick={()=>{
+                <Button type="submit" className='signin-button' onClick={() => {
                     console.log(formValue);
                 }}>
                     Edit bike part!

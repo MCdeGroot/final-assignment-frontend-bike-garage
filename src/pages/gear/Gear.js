@@ -46,7 +46,6 @@ function Gear() {
                 <div className='inner-container'>
                     {loading && <p>Loading page...</p>}
                     {error && errorMessage}
-
                     {bikeData.map((bike) => {
                         return (
                             <GearTile
@@ -59,8 +58,6 @@ function Gear() {
                     }
                 </div>
             </main>
-
-
         </>
     );
 }

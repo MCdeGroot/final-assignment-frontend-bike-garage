@@ -29,10 +29,8 @@ function Profile() {
     useEffect(() => {
         const controller = new AbortController();
 
-
         async function fetchUserData() {
             setLoading(true)
-
             try {
                 setError(false);
                 const response = await axios.get(`http://localhost:8080/users/${user.username}`, {
@@ -43,7 +41,6 @@ function Profile() {
                     }
                 })
                 setUserData(response.data);
-                console.log(userData);
                 setLoading(false);
             } catch (e) {
                 setErrorMessage(errorHandler(e))
@@ -51,7 +48,6 @@ function Profile() {
                 console.error(e)
             }
         }
-
         fetchUserData();
     }, [])
 
@@ -100,7 +96,6 @@ function Profile() {
 
     async function handleFormSubmit(data) {
         setLoading(true)
-        console.log(data);
         try {
             const response = await axios.put(`http://localhost:8080/users/${userData.username}`, {
                 username: user.username,
@@ -114,9 +109,7 @@ function Profile() {
                     Authorization: `Bearer ${storedToken}`
                 }
             });
-            console.log(response);
             setEditProfile(false);
-
         } catch (e) {
             setErrorMessage(errorHandler(e))
             setError(true)

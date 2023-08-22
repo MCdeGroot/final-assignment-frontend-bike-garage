@@ -85,7 +85,7 @@ function BikeTile({bikeType, brand, model, name, totalDistanceDriven, totalHours
                     </div>
                     <div className='gear-data'>
                         {groupSet &&
-                        <p>Groupset : {groupSet} </p>
+                            <p>Groupset : {groupSet} </p>
                         }
                         {gearData.map((bikePart) => {
                             return (<p key={bikePart.partType}>

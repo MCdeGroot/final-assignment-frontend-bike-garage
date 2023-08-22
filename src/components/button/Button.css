@@ -7,13 +7,13 @@
     border-radius: 1.5rem;
 }
 
-.signin-button:hover{
+.signin-button:hover {
     background-color: var(--color-primary-blue);
     color: var(--color-primary-background);
     border: 3px solid var(--color-primary-blue);
 }
 
-.signin-button:active{
+.signin-button:active {
     background-color: var(--color-primary-blue);
     color: var(--color-primary-background);
     box-shadow: 0 0 0 5px rgba(0, 143, 140, 0.25);
@@ -23,6 +23,7 @@
     fill: var(--color-black);
     /*filter: invert(68%) sepia(56%) saturate(5092%) hue-rotate(2deg) brightness(99%) contrast(103%);*/
 }
+
 .icon-button-add {
     position: sticky;
     bottom: 2rem;
@@ -32,7 +33,7 @@
     color: var(--color-primary-blue-before-hover);
 }
 
-.icon-button-add:hover{
+.icon-button-add:hover {
     color: var(--color-primary-blue);
 }
 
