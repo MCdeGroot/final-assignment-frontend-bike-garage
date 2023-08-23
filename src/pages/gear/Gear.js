@@ -15,6 +15,7 @@ function Gear() {
     //data ophalen van de bikes
     useEffect(() => {
         const controller = new AbortController();
+
         async function fetchBikeData() {
             const storedToken = localStorage.getItem('token');
             setLoading(true)

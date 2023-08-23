@@ -44,6 +44,7 @@ h2 {
     font-style: normal;
     font-weight: 400;
 }
+
 h3 {
     font-size: 1.5rem;
     text-align: center;
@@ -95,6 +96,7 @@ main {
     scrollbar-width: thin;
     scrollbar-color: var(--color-primary-blue);
 }
+
 .inner-container::-webkit-scrollbar-thumb {
     background-color: var(--color-primary-blue);
     border-radius: 5px; /* Optioneel: voeg afgeronde hoeken toe aan de thumb */
