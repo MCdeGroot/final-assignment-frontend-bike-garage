@@ -10,7 +10,6 @@ import {ReactComponent as Tire} from "../../assets/cassette.svg";
 import Modal from "react-modal";
 import {X} from "@phosphor-icons/react";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
 import {useForm} from "react-hook-form";
 import FormInputField from "../formInput/FormInputField";
 

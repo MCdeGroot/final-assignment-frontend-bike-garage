@@ -1,9 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import "./GearTile.css"
 import GearItem from "./GearItem";
-import axios, {put} from "axios";
-import {AuthContext} from "../../context/AuthContext";
-import BikeTile from "../bikeTile/BikeTile";
+import axios from "axios";
 import Button from "../button/Button";
 import {PlusCircle, X} from "@phosphor-icons/react";
 import Modal from "react-modal";

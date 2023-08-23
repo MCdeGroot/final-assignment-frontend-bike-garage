@@ -12,7 +12,6 @@ import {useNavigate} from "react-router-dom";
 function UploadFile({openModalOnClick, changeUploadState, selectedItem}) {
 
 
-    const {user} = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}, reset} = useForm({mode: 'onTouched'});
     const [file, setFile] = useState([]);
     const [previewUrl, setPreviewUrl] = useState('');
@@ -41,6 +40,7 @@ function UploadFile({openModalOnClick, changeUploadState, selectedItem}) {
                     Authorization: `Bearer ${storedToken}`
                 }
             })
+            console.log(response)
         } catch (error) {
             console.error(error)
         }
