@@ -75,9 +75,7 @@ function RideTile({bikeType, selectedRide, image, onClickReview, onClickEditRide
                         <Button className='icon-button' type="submit" onClick={onClickReview}><ChatText width='2rem'
                                                                                                         height='2rem'/></Button>
                     </div>
-
                 </section>
-
             </div>
         </>
     )
