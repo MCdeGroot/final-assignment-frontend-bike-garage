@@ -32,7 +32,7 @@ function Bikes() {
                     }
                 })
                 setBikes(response.data);
-                console.log(response.data) /// dit nog weghalen
+                setLoading(false);
             } catch (e) {
                 setErrorMessage(errorHandler(e))
                 setError(true)

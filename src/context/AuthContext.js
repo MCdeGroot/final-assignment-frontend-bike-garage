@@ -36,9 +36,9 @@ function AuthContextProvider({children}) {
         }
     }, [])
 
-    useEffect( ()=>{
+    useEffect(() => {
         console.log(authState);
-    },[authState])
+    }, [authState])
 
     async function login(jwt_token, redirect) {
         console.log(jwt_token);
@@ -72,7 +72,6 @@ function AuthContextProvider({children}) {
 
     }
 
-
     function logout() {
         localStorage.removeItem('token');
         setAuthState({
@@ -98,6 +97,7 @@ function AuthContextProvider({children}) {
         </AuthContext.Provider>
     );
 }
+
 export default AuthContextProvider;
 
 

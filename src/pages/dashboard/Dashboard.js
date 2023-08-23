@@ -95,7 +95,7 @@ function Dashboard() {
                     }
                 })
                 setRidesData(response.data);
-                console.log(response.data);
+                setLoading(false);
             } catch (e) {
                 setErrorMessage(errorHandler(e))
                 setError(true)
@@ -116,7 +116,7 @@ function Dashboard() {
                 }
             })
             setUserBikesData(response.data);
-            console.log(response.data);
+            setLoading(false);
         } catch (e) {
             setErrorMessage(errorHandler(e))
             setError(true)
@@ -137,8 +137,6 @@ function Dashboard() {
                     Authorization: `Bearer ${storedToken}`
                 }
             });
-            console.log(response);
-
         } catch (e) {
             setErrorMessage(errorHandler(e))
             setError(true)
@@ -225,7 +223,6 @@ function Dashboard() {
     return (
         <>
             <main className='outer-container'>
-
                 <div className='inner-container'>
                     {loading && <p>Loading page...</p>}
                     {error && <MessageModal message={errorMessage} setError={setError}/>}
@@ -237,7 +234,6 @@ function Dashboard() {
                                 style={customStyles}
                                 contentLabel="Add review"
                             >
-
                                 <Button
                                     className="icon-button-modal"
                                     onClick={closeModal}><X color="#1989AC" width='2rem' height='2rem'/></Button>
@@ -252,7 +248,6 @@ function Dashboard() {
                                                 register={register}
                                                 errors={errors}
                                             />
-
                                             <FormInputField
                                                 name="commentDecription"
                                                 label="Comment"
@@ -270,14 +265,12 @@ function Dashboard() {
                                 </form>
                             </Modal>
                         </div>}
-
                     <Modal
                         isOpen={modalRideEditIsOpen} //if modal is open
                         onRequestClose={closeModal} //what to do after modal close
                         style={customStyles}
                         contentLabel=""
                     >
-
                             <Button
                                 className="icon-button-modal"
                                 onClick={closeModal}
@@ -352,9 +345,7 @@ function Dashboard() {
                                                 openModalRideEdit(ride);
                                             }
                                         }}
-
                                     /> {ride.reviewRating &&
-
                                     <RideReview review={ride.reviewRating}/>
                                 }
                                 </div>
