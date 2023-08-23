@@ -169,7 +169,6 @@ function Dashboard() {
                         Authorization: `Bearer ${storedToken}`
                     }
                 });
-                console.log(response);
             } else {
                 const response = await axios.post(`http://localhost:8080/rides?bikeId=${urlData}`, {
                     titleRide: data.titleRide,
@@ -186,7 +185,6 @@ function Dashboard() {
                         Authorization: `Bearer ${storedToken}`
                     }
                 });
-                console.log(response);
             }
         } catch (e) {
             setErrorMessage(errorHandler(e))
@@ -280,7 +278,6 @@ function Dashboard() {
                                 type="submit"
                                 className='signin-button'
                                 onClick={() => {
-                                    console.log(selectedRide);
                                     setModalRideDeleteIsOpen(true);
                                 }
                                 }
@@ -291,7 +288,6 @@ function Dashboard() {
                                 type="submit"
                                 className='signin-button'
                                 onClick={() => {
-                                    console.log(selectedRide);
                                     setIsEditing(true);
                                     openModalRide();
                                 }}

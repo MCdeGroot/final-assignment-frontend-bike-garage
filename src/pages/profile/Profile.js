@@ -63,7 +63,6 @@ function Profile() {
                 }
             })
             setUsernames(response.data);
-            console.log(response.data) /// dit nog weghalen
         } catch (e) {
             setErrorMessage(errorHandler(e))
             setError(true)

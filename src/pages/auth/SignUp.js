@@ -18,7 +18,6 @@ function SignUp() {
     const navigate = useNavigate();
 
     async function handleFormSubmit(data) {
-        console.log(data)
         try {
             const response = await axios.post('http://localhost:8080/users', {
                 username: data.username,
@@ -27,7 +26,7 @@ function SignUp() {
                 firstName: data.firstName,
                 lastName: data.lastName
             });
-            console.log(response);
+/*            console.log(response);*/
             console.log("user signed up!");
             navigate("/login");
 

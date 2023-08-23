@@ -50,7 +50,6 @@ function GearItem({
 
     function handleMouseUpEdit() {
         toggleIconChangeEdit(true);
-        console.log("klik");
         setIsEditing(true);
         setModalPartIsOpen(true);
         setSelectedBikePart(selected);
@@ -63,7 +62,6 @@ function GearItem({
 
     function handleMouseUpDelete() {
         toggleIconChangeDelete(true);
-        console.log("klik");
         openModalDeleteRide();
     }
 
@@ -73,7 +71,6 @@ function GearItem({
 
     function handleMouseUpReset() {
         toggleIconChangeReset(true);
-        console.log("klik");
         openModalResetPart();
     }
 
@@ -193,7 +190,6 @@ function GearItem({
                     Authorization: `Bearer ${storedToken}`
                 }
             });
-            console.log(response);
             closeResetModal();
         } catch (error) {
             setError(true);

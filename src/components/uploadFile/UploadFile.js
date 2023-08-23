@@ -33,7 +33,7 @@ function UploadFile({openModalOnClick, changeUploadState, selectedItem}) {
         setLoading(true)
         const formData = new FormData();
         formData.append("file", file);
-        console.log(formData)
+        // console.log(formData)
         try {
             const response = await axios.post(`http://localhost:8080/rides/${selectedItem.id}/photo`, formData, {
                 headers: {
@@ -41,7 +41,6 @@ function UploadFile({openModalOnClick, changeUploadState, selectedItem}) {
                     Authorization: `Bearer ${storedToken}`
                 }
             })
-            console.log(response.data)
         } catch (error) {
             console.error(error)
         }
