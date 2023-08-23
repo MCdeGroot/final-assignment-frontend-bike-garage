@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import FormInputField from "./FormInputField";
 import Button from "../button/Button";
 import FormInputSelect from "./FormInputSelect";
-import UploadFile from "../uploadFile/UploadFile";
 import {isBefore} from "../../helper/dateValidation";
 
 function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditing, initialValue}) {
@@ -10,7 +9,6 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
     const [formValue, setFormValues] = useState(initialValue);
 
     useEffect(() => {
-        console.log(formValue)
         setFormValues(initialValue); // Update the form values when the initial value changes
     }, [initialValue]);
 
@@ -155,9 +153,7 @@ function AddRide({onSubmit, register, errors, closeModal, userBikesData, isEditi
                 </div>
             </article>
             {isEditing ? (
-                <Button type="submit" className='signin-button' onClick={() => {
-                    console.log(formValue);
-                }}>
+                <Button type="submit" className='signin-button'>
                     Edit ride!
                 </Button>
             ) : (

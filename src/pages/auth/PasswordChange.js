@@ -11,8 +11,6 @@ function PasswordChange(){
 
     async function handleFormSubmit(data){
         const storedToken = localStorage.getItem('token');
-        console.log(storedToken);
-        console.log(data);
         try {
             const response = await axios.put(`http://localhost:8080/users/updatepassword/${data.username}`, {
                 newPassword: data.newPassword
@@ -23,7 +21,6 @@ function PasswordChange(){
                 }
 
             });
-            console.log(response);
         } catch (error) {
             console.error(error)
         }

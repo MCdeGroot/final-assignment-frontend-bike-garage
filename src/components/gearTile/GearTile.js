@@ -56,7 +56,6 @@ function GearTile({bike}) {
     async function handleFormBikePartSubmit(data) {
         const storedToken = localStorage.getItem('token');
         setLoading(true)
-        console.log(data)
         if (isEditing === false) {
 
 
@@ -71,7 +70,7 @@ function GearTile({bike}) {
                         Authorization: `Bearer ${storedToken}`
                     }
                 });
-                console.log(response);
+                // console.log(response);
             } catch (e) {
                 setErrorMessage(errorHandler(e))
                 setError(true)
@@ -91,7 +90,7 @@ function GearTile({bike}) {
                         Authorization: `Bearer ${storedToken}`
                     }
                 });
-                console.log(response);
+                // console.log(response);
             } catch (e) {
                 setErrorMessage(errorHandler(e))
                 setError(true)
@@ -193,7 +192,6 @@ function GearTile({bike}) {
                             className='icon-button-add'>
                             <PlusCircle size="2rem" weight={icon ? "fill" : "regular"} onClick={() => {
                                 openModalPart();
-                                console.log(bike);
                                 toggleIcon(!icon);
                             }}/>
                         </Button>

@@ -33,7 +33,6 @@ function AddBike() {
                     Authorization: `Bearer ${storedToken}`
                 }
             });
-            console.log(response);
             navigate("/bikes")
         } catch (error) {
             setError(true);

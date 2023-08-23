@@ -9,7 +9,6 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
     const [formValue, setFormValues] = useState(initialValue);
 
     useEffect(() => {
-        console.log(formValue)
         setFormValues(initialValue); // Update the form values when the initial value changes
     }, [initialValue]);
 
@@ -80,9 +79,7 @@ function GearForm({onSubmit, register, errors, closeModal, isEditing, initialVal
                 </>
             </article>
             {isEditing ? (
-                <Button type="submit" className='signin-button' onClick={() => {
-                    console.log(formValue);
-                }}>
+                <Button type="submit" className='signin-button'>
                     Edit bike part!
                 </Button>
             ) : (

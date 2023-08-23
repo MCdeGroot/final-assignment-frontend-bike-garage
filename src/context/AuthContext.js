@@ -14,14 +14,6 @@ function AuthContextProvider({children}) {
     });
     const navigate = useNavigate();
 
-    // Stap 1: Gebruik useEffect om te checken of er een token in de localstorage zit
-    // Stap 2: Als er een token in de localstorage zit, check dan of deze nog geldig is (checkTokenValidity)
-    // Stap 3: Als de token nog geldig is, log de gebruiker in
-    // Stap 4: Als de token niet meer geldig is, log de gebruiker uit
-    // Stap 7: Haal de user data op uit de database en sla deze op in de state
-    // Stap 8: Geef een redirect mee (optioneel)
-
-
     useEffect(() => {
         // check of er nog een token in Local Storage staat en of deze nog geldig is
         const storedToken = localStorage.getItem('token');
@@ -37,7 +29,6 @@ function AuthContextProvider({children}) {
     }, [])
 
     useEffect(() => {
-        console.log(authState);
     }, [authState])
 
     async function login(jwt_token, redirect) {
@@ -81,7 +72,6 @@ function AuthContextProvider({children}) {
             status: "done"
         })
         console.log('De gebruiker is uitgelogd 🔒')
-        console.log(authState)
         navigate('/login')
     }
 
